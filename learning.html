@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Leadership & Entrepreneurship — Elite Mini Course</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --navy:       #0e1628;
+  --navy2:      #141e35;
+  --navy3:      #1a2740;
+  --gold:       #c9a84c;
+  --gold-light: #e8c97a;
+  --gold-dim:   rgba(201,168,76,0.15);
+  --cream:      #f0ead8;
+  --muted:      #8888aa;
+  --faint:      rgba(255,255,255,0.05);
+  --border:     rgba(201,168,76,0.12);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--navy);
+  color: var(--cream);
+  min-height: 100vh;
+  overflow-x: hidden;
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+/* ─── STICKY PROGRESS DOCK ─── */
+#progress-dock {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 200;
+  background: rgba(14,22,40,0.96);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  height: 52px;
+}
+.dock-label {
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--muted);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.dock-bar-wrap {
+  flex: 1;
+  height: 3px;
+  background: var(--faint);
+  border-radius: 2px;
+  overflow: hidden;
+  max-width: 360px;
+}
+.dock-bar-fill {
+  height: 100%;
+  background: linear-gradient(to right, var(--gold), var(--gold-light));
+  border-radius: 2px;
+  width: 0%;
+  transition: width 0.5s ease;
+}
+.dock-pct {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--gold-light);
+  min-width: 38px;
+}
+.dock-modules { display: flex; gap: 6px; margin-left: auto; }
+.dock-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--faint);
+  border: 1px solid rgba(201,168,76,0.2);
+  transition: all 0.3s;
+  cursor: pointer;
+  position: relative;
+  flex-shrink: 0;
+}
+.dock-dot.done { background: var(--gold); border-color: var(--gold); }
+.dock-dot.partial { background: rgba(201,168,76,0.4); border-color: var(--gold); }
+.dock-dot:hover::after {
+  content: attr(data-tip);
+  position: absolute;
+  bottom: 14px; left: 50%;
+  transform: translateX(-50%);
+  background: var(--navy2);
+  border: 1px solid var(--border);
+  color: var(--cream);
+  font-size: 10px;
+  white-space: nowrap;
+  padding: 4px 10px;
+  pointer-events: none;
+  z-index: 300;
+}
+
+/* ─── HERO ─── */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 80px 24px 100px;
+  overflow: hidden;
+  margin-top: 52px;
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 80% 55% at 50% 25%, rgba(201,168,76,0.1) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 40% at 15% 85%, rgba(201,168,76,0.05) 0%, transparent 60%);
+  pointer-events: none;
+}
+.hero-line { width: 1px; height: 64px; background: linear-gradient(to bottom, transparent, var(--gold)); margin: 0 auto 28px; opacity: 0.6; }
+.hero-eyebrow { font-size: 10px; font-weight: 500; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold); margin-bottom: 22px; }
+.hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(3rem, 7vw, 5.8rem); font-weight: 600; line-height: 1.05; max-width: 800px; color: var(--cream); margin-bottom: 10px; }
+.hero h1 em { font-style: italic; color: var(--gold-light); }
+.hero-sub { font-size: 0.95rem; font-weight: 300; color: #9090b0; max-width: 460px; line-height: 1.8; margin: 18px auto 0; }
+.hero-rule { width: 72px; height: 1px; background: linear-gradient(to right, transparent, var(--gold), transparent); margin: 36px auto; }
+.stats { display: flex; gap: 52px; justify-content: center; flex-wrap: wrap; }
+.stat-num { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; font-weight: 700; color: var(--gold-light); line-height: 1; }
+.stat-lbl { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-top: 6px; }
+.cta {
+  margin-top: 52px; display: inline-flex; align-items: center; gap: 10px;
+  font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--gold); border: 1px solid rgba(201,168,76,0.25); padding: 13px 28px;
+  transition: all 0.3s; text-decoration: none; cursor: pointer;
+}
+.cta:hover { background: var(--gold-dim); border-color: var(--gold); }
+.cta svg { transition: transform 0.3s; }
+.cta:hover svg { transform: translateY(3px); }
+
+/* ─── MODULE GRID ─── */
+#modules { background: var(--navy2); }
+#modules .inner { max-width: 1040px; margin: 0 auto; padding: 80px 24px; }
+.sec-label { font-size: 10px; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+.sec-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 600; line-height: 1.15; color: var(--cream); margin-bottom: 18px; }
+.sec-title em { font-style: italic; color: var(--gold-light); }
+.sec-intro { font-size: 0.9rem; font-weight: 300; color: var(--muted); max-width: 540px; line-height: 1.8; margin-bottom: 48px; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 2px; }
+.mod-card {
+  background: var(--navy); padding: 34px 30px; cursor: pointer;
+  transition: background 0.25s; position: relative; overflow: hidden; user-select: none;
+}
+.mod-card::before { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 0; background: var(--gold); transition: height 0.3s ease; }
+.mod-card:hover { background: #1a2440; }
+.mod-card:hover::before, .mod-card.active::before { height: 100%; }
+.mod-card.active { background: #1c2848; }
+.mod-num { font-family: 'Cormorant Garamond', serif; font-size: 2.8rem; font-weight: 700; color: rgba(201,168,76,0

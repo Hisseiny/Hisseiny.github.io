@@ -44,83 +44,35 @@ body {
   gap: 16px;
   height: 52px;
 }
-.dock-label {
-  font-size: 10px;
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-  color: var(--muted);
-  white-space: nowrap;
-  flex-shrink: 0;
-}
-.dock-bar-wrap {
-  flex: 1;
-  height: 3px;
-  background: var(--faint);
-  border-radius: 2px;
-  overflow: hidden;
-  max-width: 360px;
-}
-.dock-bar-fill {
-  height: 100%;
-  background: linear-gradient(to right, var(--gold), var(--gold-light));
-  border-radius: 2px;
-  width: 0%;
-  transition: width 0.5s ease;
-}
-.dock-pct {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: var(--gold-light);
-  min-width: 38px;
-}
+.dock-label { font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--muted); white-space: nowrap; flex-shrink: 0; }
+.dock-bar-wrap { flex: 1; height: 3px; background: var(--faint); border-radius: 2px; overflow: hidden; max-width: 360px; }
+.dock-bar-fill { height: 100%; background: linear-gradient(to right, var(--gold), var(--gold-light)); border-radius: 2px; width: 0%; transition: width 0.5s ease; }
+.dock-pct { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 700; color: var(--gold-light); min-width: 38px; }
 .dock-modules { display: flex; gap: 6px; margin-left: auto; }
 .dock-dot {
-  width: 8px; height: 8px;
-  border-radius: 50%;
-  background: var(--faint);
-  border: 1px solid rgba(201,168,76,0.2);
-  transition: all 0.3s;
-  cursor: pointer;
-  position: relative;
-  flex-shrink: 0;
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--faint); border: 1px solid rgba(201,168,76,0.2);
+  transition: all 0.3s; cursor: pointer; position: relative; flex-shrink: 0;
 }
 .dock-dot.done { background: var(--gold); border-color: var(--gold); }
 .dock-dot.partial { background: rgba(201,168,76,0.4); border-color: var(--gold); }
 .dock-dot:hover::after {
   content: attr(data-tip);
-  position: absolute;
-  bottom: 14px; left: 50%;
-  transform: translateX(-50%);
-  background: var(--navy2);
-  border: 1px solid var(--border);
-  color: var(--cream);
-  font-size: 10px;
-  white-space: nowrap;
-  padding: 4px 10px;
-  pointer-events: none;
-  z-index: 300;
+  position: absolute; bottom: 14px; left: 50%; transform: translateX(-50%);
+  background: var(--navy2); border: 1px solid var(--border); color: var(--cream);
+  font-size: 10px; white-space: nowrap; padding: 4px 10px; pointer-events: none; z-index: 300;
 }
 
 /* ─── HERO ─── */
 .hero {
-  position: relative;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  padding: 80px 24px 100px;
-  overflow: hidden;
-  margin-top: 52px;
+  position: relative; min-height: 100vh;
+  display: flex; flex-direction: column; justify-content: center; align-items: center;
+  text-align: center; padding: 80px 24px 100px; overflow: hidden; margin-top: 52px;
 }
 .hero::before {
-  content: '';
-  position: absolute; inset: 0;
-  background:
-    radial-gradient(ellipse 80% 55% at 50% 25%, rgba(201,168,76,0.1) 0%, transparent 70%),
-    radial-gradient(ellipse 50% 40% at 15% 85%, rgba(201,168,76,0.05) 0%, transparent 60%);
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse 80% 55% at 50% 25%, rgba(201,168,76,0.1) 0%, transparent 70%),
+              radial-gradient(ellipse 50% 40% at 15% 85%, rgba(201,168,76,0.05) 0%, transparent 60%);
   pointer-events: none;
 }
 .hero-line { width: 1px; height: 64px; background: linear-gradient(to bottom, transparent, var(--gold)); margin: 0 auto 28px; opacity: 0.6; }
@@ -134,9 +86,9 @@ body {
 .stat-lbl { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-top: 6px; }
 .cta {
   margin-top: 52px; display: inline-flex; align-items: center; gap: 10px;
-  font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
-  color: var(--gold); border: 1px solid rgba(201,168,76,0.25); padding: 13px 28px;
-  transition: all 0.3s; text-decoration: none; cursor: pointer;
+  font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold);
+  border: 1px solid rgba(201,168,76,0.25); padding: 13px 28px; transition: all 0.3s;
+  text-decoration: none; cursor: pointer;
 }
 .cta:hover { background: var(--gold-dim); border-color: var(--gold); }
 .cta svg { transition: transform 0.3s; }
@@ -158,4 +110,551 @@ body {
 .mod-card:hover { background: #1a2440; }
 .mod-card:hover::before, .mod-card.active::before { height: 100%; }
 .mod-card.active { background: #1c2848; }
-.mod-num { font-family: 'Cormorant Garamond', serif; font-size: 2.8rem; font-weight: 700; color: rgba(201,168,76,0
+.mod-num { font-family: 'Cormorant Garamond', serif; font-size: 2.8rem; font-weight: 700; color: rgba(201,168,76,0.14); line-height: 1; margin-bottom: 14px; }
+.mod-title { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 600; color: var(--cream); line-height: 1.3; margin-bottom: 8px; }
+.mod-tagline { font-size: 0.8rem; font-weight: 300; color: var(--muted); line-height: 1.6; margin-bottom: 18px; }
+.mod-meta { display: flex; align-items: center; justify-content: space-between; }
+.mod-dur { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); opacity: 0.6; }
+.mod-progress-mini { display: flex; gap: 4px; }
+.mini-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--faint); border: 1px solid rgba(255,255,255,0.1); transition: all 0.3s; }
+.mini-dot.done { background: var(--gold); border-color: var(--gold); }
+
+/* ─── LESSON PANEL ─── */
+#lesson-panel { display: none; background: var(--navy3); border-top: 1px solid var(--border); }
+#lesson-panel.open { display: block; }
+#lesson-panel .inner { max-width: 780px; margin: 0 auto; padding: 56px 24px 72px; }
+.lesson-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 32px; flex-wrap: wrap; gap: 12px; }
+.lesson-module-label { font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); opacity: 0.8; }
+.close-btn { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); cursor: pointer; border: 1px solid rgba(255,255,255,0.08); padding: 8px 16px; background: none; transition: all 0.2s; }
+.close-btn:hover { color: var(--cream); border-color: rgba(255,255,255,0.2); }
+.lesson-tabs { display: flex; gap: 0; flex-wrap: wrap; margin-bottom: 40px; border-bottom: 1px solid var(--border); }
+.lesson-tab {
+  font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted);
+  padding: 12px 16px; cursor: pointer; background: none; border: none;
+  border-bottom: 2px solid transparent; margin-bottom: -1px; transition: all 0.2s;
+  display: flex; align-items: center; gap: 7px;
+}
+.lesson-tab:hover { color: var(--cream); }
+.lesson-tab.active { color: var(--gold); border-bottom-color: var(--gold); }
+.tab-check { width: 14px; height: 14px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; font-size: 8px; flex-shrink: 0; transition: all 0.3s; }
+.lesson-tab.done .tab-check { background: var(--gold); border-color: var(--gold); color: #000; }
+
+/* ─── LESSON BODY ─── */
+.lesson-body { display: none; }
+.lesson-body.active { display: block; }
+.lesson-body h3 { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 600; color: var(--cream); line-height: 1.2; margin-bottom: 6px; }
+.lesson-intro-line { font-size: 1rem; font-weight: 400; color: var(--gold-light); margin-bottom: 26px; font-family: 'Cormorant Garamond', serif; font-style: italic; line-height: 1.5; display: block; }
+.lesson-body p { font-size: 0.95rem; font-weight: 300; color: #a8a8c8; line-height: 1.9; margin-bottom: 20px; max-width: 660px; }
+.lesson-body p strong { color: var(--cream); font-weight: 500; }
+.lesson-body p em { color: #c8c4d8; font-style: italic; }
+
+.quote-block { border-left: 2px solid var(--gold); padding: 18px 22px; background: rgba(201,168,76,0.04); margin: 28px 0; }
+.quote-block p { font-style: italic; color: #b0b0d0; margin: 0; font-size: 0.95rem; font-family: 'Cormorant Garamond', serif; }
+.quote-block cite { display: block; margin-top: 10px; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); opacity: 0.7; font-style: normal; font-family: 'DM Sans', sans-serif; }
+
+.key-ideas { background: rgba(201,168,76,0.04); border: 1px solid var(--border); padding: 24px 28px; margin: 28px 0; }
+.key-ideas h4 { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; }
+.key-ideas ul { list-style: none; padding: 0; }
+.key-ideas li { font-size: 0.88rem; color: #9898b8; padding: 7px 0 7px 18px; border-bottom: 1px solid var(--faint); position: relative; line-height: 1.6; }
+.key-ideas li:last-child { border-bottom: none; }
+.key-ideas li::before { content: '→'; position: absolute; left: 0; color: var(--gold); opacity: 0.5; font-size: 11px; top: 8px; }
+.key-ideas li strong { color: #c8c4d8; font-weight: 500; }
+
+/* ─── EXERCISE CARD ─── */
+.exercise {
+  background: linear-gradient(135deg, rgba(201,168,76,0.06) 0%, rgba(201,168,76,0.02) 100%);
+  border: 1px solid rgba(201,168,76,0.18); padding: 28px 30px; margin: 28px 0;
+}
+.exercise h4 { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
+.exercise .ex-sub { font-size: 0.8rem; color: var(--muted); margin-bottom: 16px; font-style: italic; }
+.exercise ol { list-style: none; padding: 0; counter-reset: ex; }
+.exercise ol li { font-size: 0.88rem; color: #9898b8; padding: 9px 0 9px 30px; border-bottom: 1px solid var(--faint); position: relative; line-height: 1.6; counter-increment: ex; }
+.exercise ol li:last-child { border-bottom: none; }
+.exercise ol li::before { content: counter(ex); position: absolute; left: 0; top: 9px; width: 18px; height: 18px; border-radius: 50%; background: rgba(201,168,76,0.15); color: var(--gold); font-size: 9px; font-weight: 600; display: flex; align-items: center; justify-content: center; }
+
+.tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 32px; }
+.tag { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); border: 1px solid rgba(255,255,255,0.07); padding: 5px 10px; }
+
+.lesson-nav-row { display: flex; justify-content: space-between; align-items: center; margin-top: 44px; padding-top: 28px; border-top: 1px solid var(--border); gap: 12px; flex-wrap: wrap; }
+.nav-btn { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); border: 1px solid rgba(255,255,255,0.08); padding: 12px 20px; background: none; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 8px; }
+.nav-btn:hover { color: var(--gold); border-color: var(--gold); }
+.nav-btn:disabled { opacity: 0.2; cursor: default; pointer-events: none; }
+.complete-btn { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--navy); background: var(--gold); border: 1px solid var(--gold); padding: 12px 22px; cursor: pointer; transition: all 0.2s; font-weight: 600; }
+.complete-btn:hover { background: var(--gold-light); }
+.complete-btn.done { background: transparent; color: var(--gold); cursor: default; }
+
+/* ─── PILLARS ─── */
+#framework { border-top: 1px solid var(--faint); }
+#framework .inner { max-width: 1040px; margin: 0 auto; padding: 80px 24px; }
+.pillars { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2px; background: var(--faint); margin-top: 48px; }
+.pillar { background: var(--navy); padding: 36px 24px; }
+.pillar-icon { font-size: 1.5rem; color: var(--gold); opacity: 0.6; margin-bottom: 12px; }
+.pillar-name { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-weight: 600; color: var(--cream); margin-bottom: 8px; }
+.pillar-desc { font-size: 0.8rem; color: var(--muted); line-height: 1.6; }
+
+/* ─── READING ─── */
+#reading { border-top: 1px solid var(--faint); }
+#reading .inner { max-width: 1040px; margin: 0 auto; padding: 80px 24px; }
+.books { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 2px; margin-top: 48px; }
+.book { background: var(--navy2); padding: 22px 24px; display: flex; gap: 14px; }
+.book-n { font-family: 'Cormorant Garamond', serif; font-size: 1rem; color: var(--gold); opacity: 0.4; min-width: 22px; flex-shrink: 0; padding-top: 2px; }
+.book-t { font-size: 0.88rem; font-weight: 500; color: var(--cream); margin-bottom: 4px; }
+.book-note { font-size: 0.78rem; color: var(--muted); line-height: 1.5; font-style: italic; }
+
+footer { border-top: 1px solid var(--border); padding: 48px 24px; text-align: center; }
+footer p { font-size: 0.78rem; color: #4a4a6a; line-height: 1.8; max-width: 500px; margin: 0 auto; }
+footer strong { color: #7878a0; font-weight: 500; }
+
+@keyframes fadeUp { from { opacity:0; transform:translateY(18px); } to { opacity:1; transform:translateY(0); } }
+.hero > * { animation: fadeUp 0.7s ease both; }
+.hero-line{animation-delay:0s}.hero-eyebrow{animation-delay:.1s}.hero h1{animation-delay:.18s}.hero-sub{animation-delay:.26s}.hero-rule{animation-delay:.32s}.stats{animation-delay:.38s}.cta{animation-delay:.44s}
+
+@keyframes checkPop { 0%{transform:scale(0);opacity:0} 60%{transform:scale(1.3);opacity:1} 100%{transform:scale(1);opacity:1} }
+.check-pop { animation: checkPop 0.3s ease forwards; }
+@keyframes lessonFlash {
+  0%{box-shadow:0 0 0 0 rgba(201,168,76,0)}
+  30%{box-shadow:0 0 0 3px rgba(201,168,76,0.35)}
+  100%{box-shadow:0 0 0 0 rgba(201,168,76,0)}
+}
+.flash { animation: lessonFlash 0.9s ease forwards; }
+
+/* ─── MODULE COMPLETE CEREMONY ─── */
+#ceremony-overlay {
+  position: fixed; inset: 0; z-index: 500;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(6,10,20,0.82); backdrop-filter: blur(8px);
+  opacity: 0; pointer-events: none; transition: opacity 0.4s ease;
+}
+#ceremony-overlay.show { opacity: 1; pointer-events: all; }
+.ceremony-box {
+  text-align: center; padding: 56px 72px; border: 1px solid var(--border);
+  background: var(--navy2); position: relative; max-width: 460px; width: 90%;
+  transform: translateY(10px); transition: transform 0.4s ease;
+}
+#ceremony-overlay.show .ceremony-box { transform: translateY(0); }
+.ceremony-box::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(to right, transparent, var(--gold), transparent); }
+.ceremony-rule { width: 40px; height: 1px; background: linear-gradient(to right, transparent, var(--gold), transparent); margin: 18px auto; }
+.ceremony-lbl { font-size: 9px; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold); opacity: 0.8; margin-bottom: 14px; }
+.ceremony-title { font-family: 'Cormorant Garamond', serif; font-size: 1.7rem; font-weight: 600; color: var(--cream); line-height: 1.2; margin-bottom: 10px; }
+.ceremony-sub { font-size: 0.84rem; color: var(--muted); line-height: 1.7; margin-bottom: 26px; }
+.ceremony-next { background: var(--gold); border: none; color: #080500; font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; padding: 12px 26px; cursor: pointer; transition: background 0.2s; margin-right: 8px; }
+.ceremony-next:hover { background: var(--gold-light); }
+.ceremony-dismiss { background: none; border: 1px solid rgba(255,255,255,0.1); color: var(--muted); font-family: 'DM Sans', sans-serif; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; padding: 12px 20px; cursor: pointer; transition: all 0.2s; }
+.ceremony-dismiss:hover { color: var(--cream); border-color: rgba(255,255,255,0.2); }
+</style>
+</head>
+<body>
+
+<!-- CEREMONY -->
+<div id="ceremony-overlay">
+  <div class="ceremony-box">
+    <div class="ceremony-lbl">Module Complete</div>
+    <div class="ceremony-rule"></div>
+    <div class="ceremony-title" id="ceremonyTitle"></div>
+    <p class="ceremony-sub" id="ceremonySub"></p>
+    <div class="ceremony-rule"></div>
+    <button class="ceremony-next" id="ceremonyNext">Continue to next module</button>
+    <button class="ceremony-dismiss" onclick="closeCeremony()">Close</button>
+  </div>
+</div>
+
+<!-- STICKY PROGRESS DOCK -->
+<div id="progress-dock">
+  <span class="dock-label">Progress</span>
+  <div class="dock-bar-wrap"><div class="dock-bar-fill" id="dockFill"></div></div>
+  <span class="dock-pct" id="dockPct">0%</span>
+  <div class="dock-modules" id="dockDots"></div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-line"></div>
+  <div class="hero-eyebrow">Elite Self-Directed Programme · 8 Modules</div>
+  <h1>Leadership &amp;<br><em>Entrepreneurship</em></h1>
+  <p class="hero-sub">The intellectual substance of Oxford's professional development tradition — distilled into a rigorous programme you own completely.</p>
+  <div class="hero-rule"></div>
+  <div class="stats">
+    <div><div class="stat-num">8</div><div class="stat-lbl">Modules</div></div>
+    <div><div class="stat-num">27</div><div class="stat-lbl">Lessons</div></div>
+    <div><div class="stat-num">~12h</div><div class="stat-lbl">Study Time</div></div>
+    <div><div class="stat-num">24</div><div class="stat-lbl">Exercises</div></div>
+  </div>
+  <a class="cta" href="#modules">Begin the programme <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg></a>
+</div>
+
+<!-- MODULE GRID -->
+<div id="modules">
+  <div class="inner">
+    <div class="sec-label">Curriculum</div>
+    <h2 class="sec-title">Eight <em>Core</em> Modules</h2>
+    <p class="sec-intro">Each module is a deep study unit. Read, reflect, complete the exercise — then mark it done. Progress is tracked at the top of every page.</p>
+    <div class="grid" id="moduleGrid"></div>
+  </div>
+</div>
+
+<!-- LESSON PANEL -->
+<div id="lesson-panel">
+  <div class="inner">
+    <div class="lesson-header">
+      <span class="lesson-module-label" id="panelModLabel"></span>
+      <button class="close-btn" onclick="closePanel()">✕ Close module</button>
+    </div>
+    <div class="lesson-tabs" id="lessonTabs"></div>
+    <div id="lessonBody"></div>
+  </div>
+</div>
+
+<!-- FOUR PILLARS -->
+<div id="framework">
+  <div class="inner">
+    <div class="sec-label">The Framework</div>
+    <h2 class="sec-title">Four <em>Universal</em> Traits</h2>
+    <p class="sec-intro">Every exceptional leader Oxford has studied — across sport, military, arts, and commerce — shares these four qualities.</p>
+    <div class="pillars">
+      <div class="pillar"><div class="pillar-icon">◈</div><div class="pillar-name">Vision</div><div class="pillar-desc">Seeing what others cannot yet imagine. Articulating it so others choose to follow.</div></div>
+      <div class="pillar"><div class="pillar-icon">◇</div><div class="pillar-name">Authenticity</div><div class="pillar-desc">Consistency between values, words, and actions — under pressure as much as in comfort.</div></div>
+      <div class="pillar"><div class="pillar-icon">◆</div><div class="pillar-name">Resilience</div><div class="pillar-desc">Absorbing setbacks without losing direction. Performing sustainably, not just brilliantly once.</div></div>
+      <div class="pillar"><div class="pillar-icon">◉</div><div class="pillar-name">Impact</div><div class="pillar-desc">Creating change that outlasts your tenure. Results matter — and so does how you achieve them.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- READING LIST -->
+<div id="reading">
+  <div class="inner">
+    <div class="sec-label">Essential Reading</div>
+    <h2 class="sec-title">The <em>Canon</em></h2>
+    <p class="sec-intro">Ten texts that form the intellectual backbone of this programme — the books Oxford cites.</p>
+    <div class="books">
+      <div class="book"><div class="book-n">01</div><div><div class="book-t">On Becoming a Leader — Warren Bennis</div><div class="book-note">The foundational text on authentic leadership. Start here.</div></div></div>
+      <div class="book"><div class="book-n">02</div><div><div class="book-t">The Innovator's Dilemma — Christensen</div><div class="book-note">Why great firms fail and entrepreneurs exploit their blind spots.</div></div></div>
+      <div class="book"><div class="book-n">03</div><div><div class="book-t">Getting to Yes — Fisher, Ury &amp; Patton</div><div class="book-note">Harvard's definitive guide to principled negotiation.</div></div></div>
+      <div class="book"><div class="book-n">04</div><div><div class="book-t">Team of Teams — Gen. McChrystal</div><div class="book-note">How adaptability replaces hierarchy in complex environments.</div></div></div>
+      <div class="book"><div class="book-n">05</div><div><div class="book-t">Zero to One — Peter Thiel</div><div class="book-note">A contrarian philosophy of venture creation. Dense. Important.</div></div></div>
+      <div class="book"><div class="book-n">06</div><div><div class="book-t">The Righteous Mind — Jonathan Haidt</div><div class="book-note">Essential for ethical leadership. Why good people disagree.</div></div></div>
+      <div class="book"><div class="book-n">07</div><div><div class="book-t">Thinking, Fast and Slow — Kahneman</div><div class="book-note">The cognitive science every decision-maker must understand.</div></div></div>
+      <div class="book"><div class="book-n">08</div><div><div class="book-t">The Hard Thing About Hard Things</div><div class="book-note">Unvarnished entrepreneurial leadership. No platitudes.</div></div></div>
+      <div class="book"><div class="book-n">09</div><div><div class="book-t">Never Split the Difference — Voss</div><div class="book-note">FBI negotiation methods applied to business and leadership.</div></div></div>
+      <div class="book"><div class="book-n">10</div><div><div class="book-t">Executive Presence — Sylvia Ann Hewlett</div><div class="book-note">Research-backed guide to gravitas, communication, and presence.</div></div></div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>This programme was built as a <strong>self-directed equivalent</strong> to Oxford Lifelong Learning's Leadership &amp; Entrepreneurship course. Same frameworks, same canon. No credential — only the knowledge.</p>
+</footer>
+
+<script>
+const MODULES = [
+{num:"01",title:"The Blueprint of a Leader",tagline:"What separates leaders from managers — and vision from wishful thinking.",duration:"~90 min",
+lessons:[
+{title:"What Makes a Leader",intro:"Leadership is not a title. It is a sustained pattern of behaviour — most visible when it costs something.",
+body:`<p>Warren Bennis spent three decades studying leaders across every domain. His finding was disarmingly simple: <strong>leaders are made, not born.</strong> The qualities that distinguish them — self-knowledge, a clear sense of purpose, integrity under pressure — are learnable disciplines, not inherited traits.</p>
+<p>The most reliable marker of exceptional leaders is not charisma or intelligence. It is <strong>self-knowledge</strong>: a clear-eyed understanding of their own values, limitations, and the triggers that cause them to react rather than respond. A leader who does not know their own psychology is controlled by it.</p>
+<div class="quote-block"><p>"The first responsibility of a leader is to define reality. The last is to say thank you."</p><cite>— Max De Pree, Leadership Is an Art</cite></div>
+<p>This is not philosophical abstraction — it is strategic. The leader who has done the inner work operates with far greater consistency. And <strong>consistency is what earns trust at scale</strong>.</p>`,
+ex:{title:"The Leadership Autopsy",sub:"Two short reflections. Be honest — that is the entire point.",steps:["Write 3–4 sentences about a moment you led effectively. What conditions made it possible?","Write 3–4 sentences about a moment your leadership fell short. What was missing?","What is the single pattern connecting both answers? That is your starting point."]}
+,tags:["Self-Knowledge","Authenticity","Bennis"]},
+{title:"Vision to Reality",intro:"Having a vision is table stakes. Translating it into daily behaviour is the actual work.",
+body:`<p>The gap between a leader's stated vision and the organisation's actual behaviour is almost always the central problem. Not because the vision is wrong — but because the leader's daily actions, and the behaviours they reward, send a different signal entirely.</p>
+<p>Translation has three distinct stages. <strong>Articulation</strong>: express the vision specifically enough to direct action, openly enough to invite ownership. <strong>Embodiment</strong>: your daily behaviour must be congruent with what you say. <strong>Structural reinforcement</strong>: hiring decisions, metrics, and meeting agendas must all point in the same direction.</p>
+<div class="quote-block"><p>"A leader's job is to help others figure out how to do it themselves — and to succeed beyond what they thought possible."</p><cite>— Simon Sinek</cite></div>
+<p>When these three are aligned, culture becomes self-sustaining. When they are not, <strong>even the best strategy fails at execution</strong>.</p>`,
+ex:{title:"The Vision Audit",sub:"A quick diagnostic. Most leaders are surprised by what they find.",steps:["State your current leadership vision in one sentence.","List the five most significant decisions you made last month. Do they reflect that vision?","Name one structural change — a metric, a ritual, a question you ask — that would reinforce your vision in practice."]}
+,tags:["Vision","Execution","Alignment"]},
+{title:"Leadership Styles",intro:"Your default style worked once. Scaling requires adding styles — not perfecting one.",
+body:`<p>Most leaders default to one style because it produced early results. The problem: that style was calibrated to a specific context. As environments change — teams grow, stakes rise, cultures shift — the same style produces diminishing returns.</p>
+<div class="key-ideas"><h4>The four major styles</h4><ul><li><strong>Transformational:</strong> inspiring change through shared purpose and elevated expectation</li><li><strong>Transactional:</strong> motivating through clear exchange of effort for reward</li><li><strong>Servant:</strong> prioritising the growth and wellbeing of those being led</li><li><strong>Adaptive:</strong> reading the environment and shifting approach deliberately</li></ul></div>
+<p>The meta-skill is contextual fluency. The leader who can move between these styles deliberately — not reactively — consistently outperforms the one who has perfected only one.</p>`,
+ex:{title:"Style Mapping",sub:"Honest self-assessment takes ten minutes. The insight lasts longer.",steps:["Identify your dominant style. In what situation did you first rely on it?","Name a current context where that style consistently underperforms.","Identify one leader whose style differs significantly from yours. What one quality would you borrow — and in what specific situation would you deploy it?"]}
+,tags:["Transformational","Adaptive","Contextual Fluency"]}
+]},
+{num:"02",title:"Building Rapport & Common Ground",tagline:"Trust is not built in the boardroom. It is built in every small moment before it.",duration:"~90 min",
+lessons:[
+{title:"The Science of Rapport",intro:"Rapport is not charm. It is psychological safety at the interpersonal level — and it changes what people are capable of.",
+body:`<p>When people feel genuinely seen and heard by a leader, the cognitive resources normally consumed by social threat-monitoring become available for creative and collaborative work. This is measurable neuroscience: rapport suppresses amygdala activation and enables the prefrontal engagement that makes complex thinking possible.</p>
+<p>The practical implication is precise: a leader who listens carefully before speaking — even for thirty seconds — changes the biochemistry of a room. And <strong>rapport is not built in high-stakes moments</strong>. It is built in the small, unremarkable exchanges that precede them.</p>
+<div class="quote-block"><p>"People don't care how much you know until they know how much you care."</p><cite>— Theodore Roosevelt (attributed)</cite></div>`,
+ex:{title:"The Three-Minute Ritual",sub:"Simple. Consistent. Surprisingly powerful over time.",steps:["For one week, spend three genuine minutes with a different team member each day.","Ask one question about their experience of their work — not project status. Then listen without redirecting.","After seven days: has anything shifted in how they engage with you in formal settings?"]}
+,tags:["Psychological Safety","Active Listening","Neuroscience of Trust"]},
+{title:"Finding Common Ground",intro:"People who appear to disagree on method almost always share underlying goals. Surface the goal.",
+body:`<p>The most important skill in diverse organisations is identifying <strong>shared interest beneath differing positions</strong>. This is the core of Fisher and Ury's Harvard framework — and it applies as powerfully to team dynamics as it does to formal negotiation.</p>
+<div class="key-ideas"><h4>The key distinction</h4><ul><li><strong>Position:</strong> what someone says they want ("I need this delayed two weeks")</li><li><strong>Interest:</strong> why they want it ("I'm worried quality won't hold under this timeline")</li><li>Address the interest, not the position — and the position often becomes flexible</li></ul></div>
+<p>Positional disagreements feel irresolvable because each side is defending a stance. When a leader surfaces the underlying interests, apparent conflicts frequently dissolve.</p>`,
+ex:{title:"Common Ground Mapping",sub:"Pick a real, current tension. This only works on live material.",steps:["Identify an active conflict or tension in your team or organisation.","Write each party's stated position — what they say they want.","Beneath each, write what you believe their actual underlying interest to be.","Where do the interests overlap? That is your starting point."]}
+,tags:["Interests vs Positions","Conflict Resolution","Fisher & Ury"]},
+{title:"Coaching as Leadership",intro:"The shift from telling to asking is one of the highest-leverage moves a leader can make.",
+body:`<p>The coaching leader replaces directives with questions. Not because questions are softer — but because questions that transfer agency build long-term capability, while instructions that bypass agency create dependency.</p>
+<p>The GROW model provides a practical structure for coaching conversations: <strong>Goal → Reality → Options → Will</strong>. It works in ten minutes or ninety. The discipline is staying in the question. The moment you offer the answer, you have taken the learning back.</p>
+<div class="quote-block"><p>"Coaching creates a culture where people feel trusted, capable, and invested in outcomes. Command-and-control creates compliance — which is the minimum possible contribution."</p><cite>— Oxford SELP Programme Notes</cite></div>`,
+ex:{title:"GROW in Practice",sub:"Use this framework in your next one-to-one conversation.",steps:["<strong>Goal:</strong> What do you want to achieve from this conversation? Let them define it.","<strong>Reality:</strong> What is the current situation, honestly? What have you tried?","<strong>Options:</strong> What are all the possible paths — including the uncomfortable ones?","<strong>Will:</strong> What specific action will you commit to, and by exactly when?"]}
+,tags:["GROW Model","Coaching","Empowerment"]}
+]},
+{num:"03",title:"Communication & Influence",tagline:"Data changes minds. Stories change behaviour. Clarity changes organisations.",duration:"~90 min",
+lessons:[
+{title:"The Architecture of Persuasion",intro:"Aristotle's three modes of persuasion are 2,400 years old and still more accurate than most modern frameworks.",
+body:`<p>Ethos (credibility), Pathos (emotional resonance), Logos (logical argument). Most business communication fails not because of poor logic — but insufficient ethos. If your audience does not believe you have standing to make the argument, the logical content barely registers.</p>
+<p>The sequence matters: <strong>establish credibility first, connect emotionally second, make the argument third.</strong> Most presenters reverse this entirely — leading with data before they have earned the audience's trust.</p>
+<div class="key-ideas"><h4>Where most communicators go wrong</h4><ul><li>Leading with data before establishing why they should be trusted with it</li><li>Ignoring what the audience actually cares about in favour of what they find compelling</li><li>Treating persuasion as a one-time event rather than a relationship built over time</li></ul></div>`,
+ex:{title:"The Persuasion Audit",sub:"Pick one recent communication that did not land as expected.",steps:["Score it 1–10 on each dimension separately: Ethos, Pathos, Logos.","Which scored lowest? That was the failure point.","Redesign the opening 60 seconds, leading with the weakest dimension."]}
+,tags:["Ethos Pathos Logos","Aristotle","Influence"]},
+{title:"Storytelling for Leaders",intro:"The most powerful thing you can do in a boardroom is tell a true story, told well.",
+body:`<p>Narrative activates more regions of the brain than factual presentation — including motor and sensory cortices. Stories are remembered and acted upon when statistics are forgotten. The most effective executive communicators do not lead with their point. They lead with a story that makes the point inevitable.</p>
+<p>The result: the audience reaches the conclusion themselves. That is far more durable than being told it. <strong>The audience you convince owns the conclusion</strong>. The audience you tell merely hears it.</p>
+<div class="quote-block"><p>"The most powerful person in the world is the storyteller. They set the vision, values, and agenda of an entire generation."</p><cite>— Steve Jobs</cite></div>`,
+ex:{title:"Build Your Story Bank",sub:"Three stories. Four to six sentences each. These become your most valuable professional assets.",steps:["A failure — and what it actually taught you. Not the polished version.","A moment someone genuinely changed your mind — what shifted and why.","A time your team achieved something that surprised even you — what made it possible?"]}
+,tags:["Narrative","Executive Communication","Neuroscience of Story"]},
+{title:"Deep Listening",intro:"Most leaders listen to reply. The rare ones listen to understand — and the difference is felt within seconds.",
+body:`<p>Otto Scharmer identified four levels of listening. <strong>Downloading</strong>: confirming what you already know. <strong>Factual</strong>: noticing genuinely new data. <strong>Empathic</strong>: sensing from the other person's frame of reference. <strong>Generative</strong>: listening from an open, emergent place — not filtering through existing assumptions.</p>
+<p>Most professional listening operates at levels one or two. Leaders who produce genuine transformation in their organisations have trained themselves to operate regularly at levels three and four. <strong>This is not mystical — it is a practised attention skill.</strong></p>`,
+ex:{title:"Listening Diagnostic",sub:"Run this across your next three substantive conversations.",steps:["Track: at what point did you begin forming your response while the other person was still speaking?","Count: how many times did you redirect the conversation to your own frame?","Test: at the end of each conversation, can you accurately state what mattered most to the other person?"]}
+,tags:["Deep Listening","Theory U","Presence"]}
+]},
+{num:"04",title:"Innovation & Entrepreneurial Thinking",tagline:"Innovation is not a creative act. It is a cultural discipline — and a leadership choice.",duration:"~90 min",
+lessons:[
+{title:"The Innovator's Mindset",intro:"Incumbents fail not because they stop innovating. They fail because they optimise for the wrong customers.",
+body:`<p>Christensen's disruption theory: established companies fail to see disruption not because they are poorly managed, but because they are well managed — optimising for their most profitable customers, who are almost never the entry point for new competition.</p>
+<p>Entrepreneurs exploit exactly this blind spot. They serve the overlooked, the overpriced, or the non-consumer — building simpler, more accessible products in markets incumbents do not consider worth defending.</p>
+<div class="quote-block"><p>"Disruptive technologies are typically first commercialised in emerging or insignificant markets."</p><cite>— Clayton Christensen, The Innovator's Dilemma</cite></div>`,
+ex:{title:"Disruption Mapping",sub:"Apply the framework to your own industry — honestly.",steps:["Name the dominant business model in your field. Who does it serve best?","Who is it serving poorly — overpriced, overcomplicated, or simply ignoring?","What simpler, more accessible alternative could serve that ignored group? That is your disruption entry point."]}
+,tags:["Christensen","Disruption Theory","Innovation"]},
+{title:"From Idea to Venture",intro:"The bottleneck is never ideas. It is the path from assumption to evidence.",
+body:`<p>The failure mode of most aspiring entrepreneurs is premature scaling — building a product based on an unverified assumption, then discovering the market does not want it. The lean methodology exists to solve this: <strong>the cheapest unit of learning is the experiment that disproves your assumption, not the launch that validates your hope.</strong></p>
+<div class="quote-block"><p>"What important truth do very few people agree with you on?"</p><cite>— Peter Thiel, Zero to One</cite></div>
+<p>Most businesses compete for existing demand. The exceptional ones occupy territory others have failed to imagine. Thiel's question is the right starting point for genuine venture creation.</p>`,
+ex:{title:"The Riskiest Assumption Test",sub:"Do this before writing a business plan, not after.",steps:["List the three assumptions your venture depends on to succeed.","For each: what is the cheapest, fastest experiment that would tell you if it is true?","Run the first experiment before building anything else. What you learn will change the plan."]}
+,tags:["Lean Startup","Peter Thiel","Assumption Testing"]},
+{title:"Financial Literacy for Leaders",intro:"Leaders who cannot read financial signals are permanently dependent on others for a critical dimension of reality.",
+body:`<p>Three statements. Three questions. The <strong>P&amp;L</strong>: are we generating value? The <strong>balance sheet</strong>: can we survive? The <strong>cash flow statement</strong>: can we pay our bills next month? A profitable business can fail — and frequently does — for lack of cash.</p>
+<div class="quote-block"><p>"Revenue is vanity, profit is sanity, cash is reality."</p><cite>— Business aphorism, widely attributed</cite></div>
+<p>This is not about becoming an accountant. It is about understanding the three questions that distinguish a solvent, sustainable business from one that looks healthy until it suddenly is not.</p>`,
+ex:{title:"Financial Fluency Check",sub:"Three questions. If you cannot answer them, that is the starting point.",steps:["Can you state your organisation's gross margin and name the two factors that most directly influence it?","Can you identify the single largest cost line — variable or fixed?","Do you know how many months of operating capital the organisation holds today?"]}
+,tags:["Financial Literacy","Cash Flow","P&L"]}
+]},
+{num:"05",title:"Negotiation & Team Architecture",tagline:"The design of your team determines the ceiling of your leadership.",duration:"~80 min",
+lessons:[
+{title:"Principled Negotiation",intro:"Positional bargaining feels like negotiation. Principled negotiation actually is.",
+body:`<p>Fisher and Ury's four principles: separate <strong>people from the problem</strong>; focus on <strong>interests not positions</strong>; generate <strong>options before committing</strong>; insist on <strong>objective criteria</strong>. Together, these consistently produce better agreements for both parties — because they surface the full landscape of available value.</p>
+<div class="key-ideas"><h4>The four principles — in practice</h4><ul><li><strong>Separate people from problem:</strong> be hard on the issue, soft on the relationship</li><li><strong>Interests not positions:</strong> ask "why" before responding to "what"</li><li><strong>Options before commitment:</strong> generate five possibilities before evaluating any</li><li><strong>Objective criteria:</strong> agree on the standard before applying it</li></ul></div>`,
+ex:{title:"BATNA Mapping",sub:"Do this before your next significant negotiation — not during it.",steps:["Identify your Best Alternative to a Negotiated Agreement. What is your realistic fallback?","Estimate the other party's BATNA as accurately as possible.","The zone of possible agreement lies between the two BATNAs. Design proposals that capture maximum value within that zone."]}
+,tags:["BATNA","Harvard Negotiation","Fisher & Ury"]},
+{title:"High-Performance Teams",intro:"Google studied 180 teams to find what made them exceptional. The answer was not talent.",
+body:`<p>Project Aristotle (Google, 2016): the single most important factor in team performance was <strong>psychological safety</strong> — the shared belief that the team is a safe environment for interpersonal risk. Not intelligence, experience, or composition.</p>
+<p>Oxford layers the GRPI model on this. High-performing teams share clarity on: <strong>Goals</strong> (what we are trying to achieve), <strong>Roles</strong> (who owns what), <strong>Processes</strong> (how we decide and resolve conflict), and <strong>Interpersonal norms</strong> (how we treat each other).</p>`,
+ex:{title:"GRPI Team Audit",sub:"Answer honestly. Vagueness in any area predicts underperformance.",steps:["<strong>Goals:</strong> Can every member state the team's top priority in one sentence — consistently?","<strong>Roles:</strong> Is there any responsibility with two owners, or none?","<strong>Processes:</strong> What actually happens when there is a genuine disagreement?","<strong>Interpersonal:</strong> When did someone last give candid feedback — and was it welcomed?"]}
+,tags:["GRPI Model","Psychological Safety","Project Aristotle"]},
+{title:"The Leader as Architect",intro:"In complex environments, the leader's job is not to control. It is to create conditions.",
+body:`<p>McChrystal's core insight: hierarchical command-and-control is failing not because leaders are bad, but because the speed and complexity of the modern environment exceeds the processing capacity of any hierarchy. Decisions need to be made faster, at the edges, by people with the best situational awareness.</p>
+<p>The solution: <strong>shared consciousness</strong> (everyone has the same information) combined with <strong>empowered execution</strong> (decision rights pushed to where the knowledge lives). The leader's role shifts from director to architect.</p>
+<div class="quote-block"><p>"A gardener doesn't make plants grow. A gardener creates conditions in which plants can flourish."</p><cite>— General Stanley McChrystal, Team of Teams</cite></div>`,
+ex:{title:"The Delegation Audit",sub:"Most leaders are surprised by how much they are still controlling.",steps:["List the last five decisions that came to you for approval. Which could have been made one level below?","For each: what information would that person need — and do they have it?","Identify one decision you will formally delegate this week, with full context transferred."]}
+,tags:["Distributed Leadership","McChrystal","Empowerment"]}
+]},
+{num:"06",title:"Ethics in Leadership",tagline:"The test of a leader's ethics is not what they do when it is easy — it is what they do when it costs something.",duration:"~80 min",
+lessons:[
+{title:"The Ethical Foundation",intro:"Most leadership failures are not failures of strategy. They are failures of character — built up in small, justified steps.",
+body:`<p>Oxford's ethics module opens with a provocation: Enron, Lehman Brothers, Theranos. Capable, intelligent people who gradually normalised behaviour they would have rejected at the outset. The pattern is consistent — small ethical compromises that accumulated, unchallenged, over time.</p>
+<p>Jonathan Haidt's moral foundations research shows that ethical intuitions are not universal. What feels obviously wrong to one person may feel obviously right to another, depending on which moral values they weight most heavily. The implication: <strong>ethical clarity requires deliberate construction, not just instinct.</strong></p>
+<div class="quote-block"><p>"The road to ethical failure is paved with small, seemingly justifiable compromises."</p><cite>— Oxford Centre for Ethics, Casebook</cite></div>`,
+ex:{title:"Values Under Pressure",sub:"The clearest view of your actual values is not what you say — it is what you do when it costs something.",steps:["Name three professional values you would say define you (e.g. honesty, fairness, courage).","For each: describe a recent situation where that value was tested. What did you do?","Where is there a gap between stated value and actual behaviour? That gap is the development work."]}
+,tags:["Moral Foundations","Haidt","Values"]},
+{title:"Ethical Decision-Making",intro:"Hard ethical decisions are hard because multiple legitimate values are in conflict. A framework makes that conflict visible.",
+body:`<p>Three classical frameworks, each capturing something the others miss. <strong>Consequentialism</strong>: the right action produces the best overall outcome. <strong>Deontology</strong>: some actions are right or wrong regardless of consequences — duties and rights matter intrinsically. <strong>Virtue ethics</strong>: the question is not "what should I do?" but "what would a person of good character do?"</p>
+<div class="key-ideas"><h4>The three lenses — applied</h4><ul><li><strong>Consequentialist:</strong> Who is affected? What are the likely outcomes for each?</li><li><strong>Deontological:</strong> Are any rights, duties, or principles at stake regardless of outcome?</li><li><strong>Virtue:</strong> What would a person of integrity — one you genuinely respect — do here?</li></ul></div>
+<p>Oxford's approach is pluralist: use all three as lenses. Where they agree, proceed with confidence. Where they diverge — that divergence is the important signal.</p>`,
+ex:{title:"The Three-Lens Audit",sub:"Apply to a real ethical dilemma you are currently facing.",steps:["Describe the decision in one paragraph — including what makes it genuinely difficult.","Apply each lens separately. One paragraph per lens.","Where do they agree? Where do they diverge? What does the divergence reveal?"]}
+,tags:["Consequentialism","Deontology","Virtue Ethics"]},
+{title:"Building an Ethical Culture",intro:"Individual integrity is necessary. It is not sufficient. Culture determines what is possible at scale.",
+body:`<p>Amy Edmondson's research on organisational error: teams with higher psychological safety report more mistakes — not because they make more, but because they are safe to surface them. The paradox: organisations that punish error create conditions in which errors multiply invisibly.</p>
+<p>The ethical leader does three things consistently: they <strong>model the behaviour they expect</strong> — especially when it is costly. They <strong>create structures</strong> that make ethical behaviour easy and unethical behaviour visible. And they <strong>respond to breaches</strong> with proportionality and transparency.</p>`,
+ex:{title:"Culture Signals Audit",sub:"What your organisation rewards tells a clearer story than what it says it values.",steps:["Name three recent decisions or behaviours that were publicly praised or rewarded.","Do these align with your stated values? If not — which values do they actually signal?","Identify one structural change that would make ethical behaviour the path of least resistance."]}
+,tags:["Ethical Culture","Edmondson","Transparency"]}
+]},
+{num:"07",title:"Global Strategy & Leadership",tagline:"The world is not a homogeneous market. Leaders who treat it as one consistently underperform.",duration:"~80 min",
+lessons:[
+{title:"Thinking Globally",intro:"Global strategy is not domestic strategy applied at larger scale. It requires fundamentally different thinking.",
+body:`<p>Pankaj Ghemawat's CAGE framework identifies four dimensions of distance that affect any cross-border strategy: <strong>Cultural</strong> (language, values, norms), <strong>Administrative</strong> (legal and political systems), <strong>Geographic</strong> (physical distance, logistics), and <strong>Economic</strong> (income levels, infrastructure). Most organisations systematically underestimate CAGE distance — and pay for it in failed expansions.</p>
+<div class="quote-block"><p>"The world is not flat. Distance still matters — it just manifests differently than it did fifty years ago."</p><cite>— Pankaj Ghemawat, The Laws of Globalization</cite></div>
+<p>The strategic question is not whether to go global. It is: <strong>which markets, in which sequence, with what degree of local adaptation?</strong></p>`,
+ex:{title:"CAGE Distance Analysis",sub:"Apply to a market your organisation is considering — or already operating in.",steps:["Score the target market against your home market on each CAGE dimension: Low / Medium / High distance.","Which dimension presents the highest risk — and is your team equipped to navigate it?","What would need to be true to succeed? What would need to be localised?"]}
+,tags:["CAGE Framework","Ghemawat","Global Strategy"]},
+{title:"Leading Across Cultures",intro:"Cultural differences are not an obstacle to global leadership. They are the terrain. Learn it.",
+body:`<p>Hofstede's research across 76 countries identified six axes on which cultures reliably differ: power distance, individualism vs collectivism, uncertainty avoidance, long vs short-term orientation, masculinity vs femininity, and indulgence vs restraint.</p>
+<div class="key-ideas"><h4>High-impact cultural intelligence practices</h4><ul><li>Learn the communication norms before assuming your defaults are universal</li><li>In high-context cultures, what is <em>not</em> said is as important as what is</li><li>Decision-making speed varies dramatically — do not mistake deliberation for indecision</li><li>Relationship-building precedes business conversation in most of the world</li></ul></div>`,
+ex:{title:"Cultural Intelligence Audit",sub:"Knowing where you are biased is the starting point for leading across difference.",steps:["Identify the cultural dimension where your home culture is most extreme (e.g. very high individualism).","Name a current working relationship across a cultural difference. Where has this created friction?","Design one specific behavioural adaptation for that relationship — one concrete thing to do differently."]}
+,tags:["Hofstede","Cultural Intelligence","Cross-Cultural Leadership"]},
+{title:"Strategy Under Uncertainty",intro:"The only certainty about the future is that your current model of it is wrong in at least one important way.",
+body:`<p>Scenario planning — developed at Shell in the 1970s — is not prediction. It is structured imagination. By building multiple plausible futures and testing strategy against each, leaders develop approaches that are robust across a range of outcomes rather than optimised for a single assumed future.</p>
+<p>The best strategic leaders hold two qualities simultaneously: <strong>conviction</strong> about direction — without it, organisations become paralysed — and <strong>humility</strong> about the path — without it, they stop reading the signals that require adaptation.</p>
+<div class="quote-block"><p>"Plans are useless. Planning is indispensable."</p><cite>— Dwight D. Eisenhower</cite></div>`,
+ex:{title:"Two-Scenario Test",sub:"Apply to your organisation's current strategy.",steps:["Name your strategy's core assumption about the external environment over the next three years.","Design a plausible scenario in which that assumption proves wrong. Be specific.","Which parts of your strategy remain valid in that scenario — and which need to change?"]}
+,tags:["Scenario Planning","Strategic Uncertainty","Shell Method"]}
+]},
+{num:"08",title:"Personal Brand & Executive Presence",tagline:"Your personal brand is not your reputation. It is the deliberate story you tell about your work and values.",duration:"~70 min",
+lessons:[
+{title:"What Is Personal Brand?",intro:"Every leader has a personal brand. The question is whether it is the one they intended.",
+body:`<p>Personal brand is the consistent, intentional signal you send about your values, expertise, and how you work. It is not marketing — it is the active management of the impression you make on the people who matter to your mission. Leaders who ignore this cede control of their narrative to whoever happens to be paying attention.</p>
+<div class="key-ideas"><h4>What a strong personal brand is not</h4><ul><li>Not self-promotion — it is making your work visible to people it can genuinely serve</li><li>Not a social media strategy — it is the underlying truth any strategy expresses</li><li>Not built quickly — it accumulates through consistent behaviour over years</li><li>Not separate from your organisation — it is either reinforcing its brand or in tension with it</li></ul></div>`,
+ex:{title:"Identity Audit",sub:"Start with the truth before you think about the narrative.",steps:["Write three sentences about your area of genuine expertise — not your title, but what you actually know that others do not.","Identify the one perspective you hold that is genuinely distinctive in your field. What do you see that others miss?","Ask three trusted colleagues: what would they say you are known for? Compare this to your own answers."]}
+,tags:["Personal Brand","Identity","Narrative"]},
+{title:"Executive Presence",intro:"Presence is not confidence. Confidence is internal. Presence is what you give to others when you are in the room.",
+body:`<p>Sylvia Ann Hewlett's research identifies three components: <strong>gravitas</strong> (being taken seriously — earned through judgment, not seniority), <strong>communication</strong> (clarity, conciseness, reading the room), and <strong>appearance</strong> (the signal your physical presentation sends before you speak). Gravitas accounts for 67% of executive presence perceptions.</p>
+<p>The crucial insight: executive presence is not performing confidence. It is being <strong>genuinely present</strong> — fully attentive, unhurried, committed to this interaction rather than the next one. In a world of perpetual distraction, this has become extraordinarily rare — and extraordinarily noticed.</p>
+<div class="quote-block"><p>"The foundation of gravitas is showing good judgment under pressure."</p><cite>— Sylvia Ann Hewlett, Executive Presence</cite></div>`,
+ex:{title:"Presence Diagnostic",sub:"This requires honest feedback from others — which is the point.",steps:["Ask two people who have seen you in high-stakes settings: 'When I am at my best, what do you notice?' and 'When I am not, what changes?'","Map their answers against the three components: gravitas, communication, appearance.","Identify one situation in the next two weeks where you will practise being fully present — phone away, questions prepared, unhurried."]}
+,tags:["Executive Presence","Hewlett","Gravitas"]},
+{title:"Influence Beyond Authority",intro:"The most powerful leaders operate well beyond the boundaries of their formal authority. This is a learnable skill.",
+body:`<p>Formal authority — directing others based on position — is the least interesting form of leadership power, and the most fragile. It evaporates when you change roles. Influence built on expertise, relationships, and reputation travels with you.</p>
+<p>Robert Cialdini's six influence principles — reciprocity, commitment, social proof, authority, liking, scarcity — describe the psychological levers through which people are moved to action. The ethical leader uses these not to manipulate, but to <strong>make it easier for people to do what is already in their interest to do.</strong></p>
+<div class="key-ideas"><h4>Building influence without authority</h4><ul><li>Give before you ask — reciprocity is the most reliable influence mechanism</li><li>Build a reputation as someone who delivers — reliability compounds over time</li><li>Develop genuine expertise that others need — knowledge is portable authority</li><li>Invest in relationships in good times, not only when you need something</li></ul></div>`,
+ex:{title:"Influence Map",sub:"Understand the network you have — then build the one you need.",steps:["Map your five most important professional relationships. For each: is it primarily transactional, or genuinely mutual?","Identify two people whose support would significantly advance your work — and with whom you have underinvested.","Design one specific, non-transactional action to invest in each relationship in the next 30 days."]}
+,tags:["Influence","Cialdini","Soft Power","Network"]}
+]}
+];
+
+/* ── STATE ── */
+const STATE = {
+  progress: MODULES.map(m => m.lessons.map(() => false)),
+  currentModule: -1, currentLesson: 0
+};
+const totalL = MODULES.reduce((s,m)=>s+m.lessons.length,0);
+const doneCount = () => STATE.progress.reduce((s,p)=>s+p.filter(Boolean).length,0);
+const modDone = mi => STATE.progress[mi].every(Boolean);
+const modPartial = mi => STATE.progress[mi].some(Boolean) && !modDone(mi);
+
+/* ── PROGRESS ── */
+function updateProgress() {
+  const pct = Math.round((doneCount()/totalL)*100);
+  document.getElementById('dockFill').style.width = pct+'%';
+  document.getElementById('dockPct').textContent = pct+'%';
+  document.getElementById('dockDots').innerHTML = MODULES.map((m,i) =>
+    `<div class="dock-dot ${modDone(i)?'done':modPartial(i)?'partial':''}" data-tip="${m.num} ${m.title}" onclick="openModule(${i})"></div>`
+  ).join('');
+  MODULES.forEach((_,mi) => {
+    const card = document.querySelector(`.mod-card[data-mi="${mi}"]`);
+    if (!card) return;
+    card.querySelectorAll('.mini-dot').forEach((d,li) => d.classList.toggle('done', STATE.progress[mi][li]));
+  });
+}
+
+/* ── GRID ── */
+function renderGrid() {
+  document.getElementById('moduleGrid').innerHTML = MODULES.map((m,mi) => `
+    <div class="mod-card" data-mi="${mi}" onclick="openModule(${mi})">
+      <div class="mod-num">${m.num}</div>
+      <div class="mod-title">${m.title}</div>
+      <div class="mod-tagline">${m.tagline}</div>
+      <div class="mod-meta">
+        <div class="mod-dur">${m.duration} · ${m.lessons.length} lessons</div>
+        <div class="mod-progress-mini">${m.lessons.map(()=>`<div class="mini-dot"></div>`).join('')}</div>
+      </div>
+    </div>`).join('');
+}
+
+/* ── OPEN MODULE ── */
+function openModule(mi) {
+  STATE.currentModule = mi; STATE.currentLesson = 0;
+  document.querySelectorAll('.mod-card').forEach((c,i) => c.classList.toggle('active', i===mi));
+  renderPanel(mi);
+  const panel = document.getElementById('lesson-panel');
+  panel.classList.add('open');
+  setTimeout(() => panel.scrollIntoView({ behavior: 'smooth', block: 'start' }), 60);
+}
+
+function closePanel() {
+  document.getElementById('lesson-panel').classList.remove('open');
+  document.querySelectorAll('.mod-card').forEach(c => c.classList.remove('active'));
+}
+
+/* ── RENDER PANEL ── */
+function renderPanel(mi) {
+  const mod = MODULES[mi];
+  document.getElementById('panelModLabel').textContent = `Module ${mod.num} — ${mod.title}`;
+  document.getElementById('lessonTabs').innerHTML = mod.lessons.map((l,li) => `
+    <button class="lesson-tab ${li===0?'active':''} ${STATE.progress[mi][li]?'done':''}" onclick="switchLesson(${li})" id="tab-${mi}-${li}">
+      <span class="tab-check">${STATE.progress[mi][li]?'✓':''}</span>${l.title}
+    </button>`).join('');
+  document.getElementById('lessonBody').innerHTML = mod.lessons.map((l,li) => `
+    <div class="lesson-body ${li===0?'active':''}" id="lb-${mi}-${li}">
+      <h3>${l.title}</h3>
+      <span class="lesson-intro-line">${l.intro}</span>
+      ${l.body}
+      <div class="exercise">
+        <h4>✦ Exercise</h4>
+        <p class="ex-sub">${l.ex.sub}</p>
+        <ol>${l.ex.steps.map(s=>`<li>${s}</li>`).join('')}</ol>
+      </div>
+      <div class="tags">${l.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
+      <div class="lesson-nav-row">
+        <button class="nav-btn" onclick="switchLesson(${li-1})" ${li===0?'disabled':''}>
+          <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>Previous
+        </button>
+        <button class="complete-btn ${STATE.progress[mi][li]?'done':''}" onclick="markDone(${mi},${li})" id="cbtn-${mi}-${li}">
+          ${STATE.progress[mi][li]?'✓ Completed':'Mark complete'}
+        </button>
+        <button class="nav-btn" onclick="switchLesson(${li+1})" ${li===mod.lessons.length-1?'disabled':''}>
+          Next<svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+    </div>`).join('');
+}
+
+/* ── SWITCH LESSON ── */
+function switchLesson(li) {
+  const mi = STATE.currentModule;
+  if (li < 0 || li >= MODULES[mi].lessons.length) return;
+  STATE.currentLesson = li;
+  document.querySelectorAll('.lesson-tab').forEach((t,i) => t.classList.toggle('active', i===li));
+  document.querySelectorAll('.lesson-body').forEach((b,i) => b.classList.toggle('active', i===li));
+  document.getElementById('lesson-panel').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+/* ── MARK DONE + CEREMONY ── */
+function markDone(mi, li) {
+  if (STATE.progress[mi][li]) return;
+  STATE.progress[mi][li] = true;
+
+  const btn = document.getElementById(`cbtn-${mi}-${li}`);
+  if (btn) { btn.textContent = '✓ Completed'; btn.classList.add('done'); }
+
+  const tab = document.getElementById(`tab-${mi}-${li}`);
+  if (tab) {
+    tab.classList.add('done');
+    const chk = tab.querySelector('.tab-check');
+    if (chk) { chk.textContent = '✓'; chk.classList.add('check-pop'); }
+  }
+
+  // flash the lesson body
+  const lb = document.getElementById(`lb-${mi}-${li}`);
+  if (lb) { lb.classList.remove('flash'); void lb.offsetWidth; lb.classList.add('flash'); }
+
+  updateProgress();
+
+  if (modDone(mi)) setTimeout(() => showCeremony(mi), 700);
+}
+
+function showCeremony(mi) {
+  const mod = MODULES[mi];
+  document.getElementById('ceremonyTitle').textContent = mod.title;
+  const nextMi = mi < MODULES.length - 1 ? mi + 1 : null;
+  document.getElementById('ceremonySub').textContent = nextMi !== null
+    ? `You have completed all lessons in Module ${mod.num}. The knowledge is yours — now the work begins.`
+    : `You have completed the entire programme. Extraordinary.`;
+  const nextBtn = document.getElementById('ceremonyNext');
+  if (nextMi !== null) {
+    nextBtn.style.display = 'inline-block';
+    nextBtn.onclick = () => { closeCeremony(); openModule(nextMi); };
+  } else {
+    nextBtn.style.display = 'none';
+  }
+  document.getElementById('ceremony-overlay').classList.add('show');
+}
+function closeCeremony() {
+  document.getElementById('ceremony-overlay').classList.remove('show');
+}
+
+renderGrid();
+updateProgress();
+</script>
+</body>
+</html>

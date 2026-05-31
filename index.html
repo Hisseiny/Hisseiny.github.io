@@ -1193,6 +1193,74 @@ button:focus-visible {
   z-index: 1;
   pointer-events: auto;
 }
+
+/* Journey Sidebar Index (Revolut/Anthropic style) */
+#journey-sidebar {
+  transition: all 400ms ease;
+}
+
+.journey-dot {
+  position: relative;
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.journey-circle {
+  width: 5px;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
+  transition: all 300ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.journey-dot:hover .journey-circle,
+.journey-dot.active .journey-circle {
+  background: var(--color-accent);
+  box-shadow: 0 0 10px var(--color-accent-glow);
+  width: 8px;
+  height: 8px;
+}
+
+/* Tooltips */
+.journey-tooltip {
+  position: absolute;
+  left: 28px;
+  top: 50%;
+  transform: translateY(-50%) translateX(-10px);
+  background: rgba(10, 10, 10, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(8px);
+  padding: 6px 12px;
+  border-radius: 6px;
+  color: #fff;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 350ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.journey-dot:hover .journey-tooltip {
+  opacity: 1;
+  transform: translateY(-50%) translateX(0);
+}
+
+/* Soft Narrative Eyebrows (Mistral / Airbnb storytelling style) */
+.narrative-eyebrow {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: 1.25rem;
+  color: rgba(255, 255, 255, 0.3);
+  letter-spacing: 0.03em;
+  margin-bottom: var(--space-2);
+}
 </style>
 
 <script>
@@ -1317,6 +1385,34 @@ tailwind.config = {
         </button>
     </nav>
 
+    <!-- Journey Sidebar Index (Desktop Only) -->
+    <div class="hidden lg:flex fixed left-8 top-1/2 -translate-y-1/2 flex-col items-center gap-8 z-40" id="journey-sidebar">
+        <div class="w-px h-16 bg-gradient-to-b from-transparent to-white/10"></div>
+        <div class="flex flex-col gap-6 items-center">
+            <a href="#hero" class="journey-dot active group" data-chapter="01">
+                <span class="journey-tooltip" data-i18n="journey-01">01 Introduction</span>
+                <span class="journey-circle"></span>
+            </a>
+            <a href="#skills" class="journey-dot group" data-chapter="02">
+                <span class="journey-tooltip" data-i18n="journey-02">02 Capabilities</span>
+                <span class="journey-circle"></span>
+            </a>
+            <a href="#experience" class="journey-dot group" data-chapter="03">
+                <span class="journey-tooltip" data-i18n="journey-03">03 Experience</span>
+                <span class="journey-circle"></span>
+            </a>
+            <a href="#projects" class="journey-dot group" data-chapter="04">
+                <span class="journey-tooltip" data-i18n="journey-04">04 Selected Works</span>
+                <span class="journey-circle"></span>
+            </a>
+            <a href="#learning" class="journey-dot group" data-chapter="05">
+                <span class="journey-tooltip" data-i18n="journey-05">05 Academic Lab</span>
+                <span class="journey-circle"></span>
+            </a>
+        </div>
+        <div class="w-px h-16 bg-gradient-to-t from-transparent to-white/10"></div>
+    </div>
+
     <!-- Mobile Navigation -->
     <div class="mobile-nav" id="mobile-nav">
         <button id="menu-close" class="absolute top-8 right-8 text-white p-2" aria-label="Close menu">
@@ -1333,7 +1429,7 @@ tailwind.config = {
     <!-- ==========================================
          HERO SECTION
          ========================================== -->
-    <main class="flex-grow flex min-h-screen pt-20 relative items-center justify-center">
+    <main class="flex-grow flex min-h-screen pt-20 relative items-center justify-center" id="hero">
 
         <!-- Background Noodles -->
         <div class="absolute inset-0 pointer-events-none z-0 opacity-20 mix-blend-screen" aria-hidden="true">
@@ -1511,6 +1607,7 @@ tailwind.config = {
         <div class="px-6 lg:px-12 max-w-7xl mx-auto relative z-10 mt-12">
             <div class="flex flex-col md:flex-row gap-8 animate-enter mb-20 items-end justify-between">
                 <div>
+                    <div class="narrative-eyebrow" data-i18n="eyebrow-skills">Chapter I &mdash; The Core Capabilities</div>
                     <span class="text-[10px] font-mono text-[#FACC15] uppercase tracking-[0.2em] border border-[#FACC15]/20 px-2 py-1 rounded inline-block mb-4">What I Do</span>
                     <h2 class="text-4xl lg:text-5xl font-display font-semibold text-white tracking-tighter mb-4">
                         Technical<br>
@@ -1621,6 +1718,7 @@ tailwind.config = {
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 mb-16 items-end">
                 <div class="flex flex-col gap-6 animate-enter">
+                    <div class="narrative-eyebrow" data-i18n="eyebrow-experience">Chapter II &mdash; Sprints &amp; Professional Focus</div>
                     <span class="text-[10px] font-mono text-[#FACC15] uppercase tracking-[0.2em] border border-[#FACC15]/20 px-2 py-1 rounded inline-block w-fit">Career Path</span>
                     <h2 class="text-4xl lg:text-6xl font-display font-medium text-white tracking-tighter leading-[0.9]">
                         Work<br>
@@ -1788,6 +1886,7 @@ tailwind.config = {
 
             <div class="flex flex-col md:flex-row items-end justify-between gap-8 mb-12">
                 <div class="animate-enter">
+                    <div class="narrative-eyebrow" data-i18n="eyebrow-projects">Chapter III &mdash; Selected Works &amp; Proof of Value</div>
                     <span class="text-[10px] font-mono text-[#FACC15] uppercase tracking-[0.2em] border border-[#FACC15]/20 px-2 py-1 rounded inline-block mb-4">Highlights</span>
                     <h2 class="text-4xl lg:text-5xl font-display font-semibold text-white tracking-tighter">
                         Featured<br>
@@ -2141,6 +2240,7 @@ tailwind.config = {
         <div class="px-6 lg:px-12 max-w-7xl mx-auto relative z-10">
 
             <div class="animate-enter mb-12">
+                <div class="narrative-eyebrow" data-i18n="eyebrow-learning">Chapter IV &mdash; The Leadership Lab</div>
                 <span class="text-[10px] font-mono text-[#FACC15] uppercase tracking-[0.2em] border border-[#FACC15]/20 px-2 py-1 rounded inline-block mb-4">Always Learning</span>
                 <h2 class="text-4xl lg:text-5xl font-display font-semibold text-white tracking-tighter">
                     Learning<br>
@@ -2244,6 +2344,7 @@ tailwind.config = {
         <div class="px-6 lg:px-12 max-w-7xl mx-auto relative z-10">
 
             <div class="animate-enter mb-12">
+                <div class="narrative-eyebrow" data-i18n="eyebrow-education">Chapter V &mdash; Academic Credentials</div>
                 <span class="text-[10px] font-mono text-[#FACC15] uppercase tracking-[0.2em] border border-[#FACC15]/20 px-2 py-1 rounded inline-block mb-4">Background</span>
                 <h2 class="text-4xl lg:text-5xl font-display font-semibold text-white tracking-tighter">
                     Education &amp;<br>
@@ -3174,7 +3275,17 @@ tailwind.config = {
                 "sprint-p2-desc": "Module 3 (Communication &amp; Influence) in Leadership Lab.",
                 "sprint-p3-title": "Cloud &amp; AI Prep",
                 "sprint-p3-desc": "Azure GenAI certification prep &amp; voice agent flows.",
-                "sprint-progress-lbl": "Sprint Progress"
+                "sprint-progress-lbl": "Sprint Progress",
+                "eyebrow-skills": "Chapter I &mdash; The Core Capabilities",
+                "eyebrow-experience": "Chapter II &mdash; Sprints &amp; Professional Focus",
+                "eyebrow-projects": "Chapter III &mdash; Selected Works &amp; Proof of Value",
+                "eyebrow-learning": "Chapter IV &mdash; The Leadership Lab",
+                "eyebrow-education": "Chapter V &mdash; Academic Credentials",
+                "journey-01": "01 Introduction",
+                "journey-02": "02 Capabilities",
+                "journey-03": "03 Experience",
+                "journey-04": "04 Selected Works",
+                "journey-05": "05 Academic Lab"
             },
             fr: {
                 "nav-skills": "Compétences",
@@ -3196,7 +3307,17 @@ tailwind.config = {
                 "sprint-p2-desc": "Module 3 (Communication &amp; Influence) dans le Lab de Leadership.",
                 "sprint-p3-title": "Préparation Cloud &amp; IA",
                 "sprint-p3-desc": "Certification Azure GenAI &amp; agents vocaux.",
-                "sprint-progress-lbl": "Progression du Sprint"
+                "sprint-progress-lbl": "Progression du Sprint",
+                "eyebrow-skills": "Chapitre I &mdash; Compétences Clés",
+                "eyebrow-experience": "Chapitre II &mdash; Sprints &amp; Focus Professionnel",
+                "eyebrow-projects": "Chapitre III &mdash; Projets Sélectionnés &amp; Valeur",
+                "eyebrow-learning": "Chapitre IV &mdash; Le Lab de Leadership",
+                "eyebrow-education": "Chapitre V &mdash; Parcours Académique",
+                "journey-01": "01 Introduction",
+                "journey-02": "02 Compétences",
+                "journey-03": "03 Expérience",
+                "journey-04": "04 Projets",
+                "journey-05": "05 Lab Académique"
             }
         };
 
@@ -3750,6 +3871,53 @@ tailwind.config = {
         }
 
         requestAnimationFrame(animate);
+    })();
+    </script>
+
+    <!-- Storytelling Journey Scroll Spy Script -->
+    <script>
+    (function() {
+        'use strict';
+        const dots = document.querySelectorAll('.journey-dot');
+        const sections = [
+            document.getElementById('hero'),
+            document.getElementById('skills'),
+            document.getElementById('experience'),
+            document.getElementById('projects'),
+            document.getElementById('learning')
+        ];
+
+        // Dynamic active state scroll tracking
+        function updateActiveDot() {
+            const scrollPos = window.scrollY + window.innerHeight / 3;
+            
+            sections.forEach((section, index) => {
+                if (!section) return;
+                const top = section.offsetTop;
+                const height = section.offsetHeight;
+                
+                if (scrollPos >= top && scrollPos < top + height) {
+                    dots.forEach(d => d.classList.remove('active'));
+                    if (dots[index]) {
+                        dots[index].classList.add('active');
+                    }
+                }
+            });
+        }
+
+        // Smooth scroll implementation
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetSec = sections[index];
+                if (targetSec) {
+                    targetSec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        window.addEventListener('scroll', updateActiveDot, { passive: true });
+        updateActiveDot(); // Trigger initially
     })();
     </script>
     <!-- Cloudflare Web Analytics -->

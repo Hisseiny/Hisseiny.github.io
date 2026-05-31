@@ -1430,6 +1430,10 @@ tailwind.config = {
          HERO SECTION
          ========================================== -->
     <main class="flex-grow flex min-h-screen pt-20 relative items-center justify-center" id="hero">
+        <!-- Profile Avatar (desktop centerpiece) -->
+        <div class="hidden lg:block absolute top-[110px] right-6 lg:right-12 z-20 w-[130px] h-[130px] rounded-full overflow-hidden border-2 border-[#FACC15]/40 avatar-pulse shadow-[0_0_30px_rgba(250,204,21,0.15)]">
+            <img src="images/avatar.png" alt="Hissein Ali" class="w-full h-full object-cover">
+        </div>
 
         <!-- Background Noodles -->
         <div class="absolute inset-0 pointer-events-none z-0 opacity-20 mix-blend-screen" aria-hidden="true">
@@ -1559,10 +1563,7 @@ tailwind.config = {
                     </svg>
                 </div>
 
-                <!-- Profile Avatar (desktop centerpiece) -->
-                <div class="absolute top-8 right-8 z-20 w-[130px] h-[130px] rounded-full overflow-hidden border-2 border-[#FACC15]/40 avatar-pulse shadow-[0_0_30px_rgba(250,204,21,0.15)]">
-                    <img src="images/avatar.png" alt="Hissein Ali" class="w-full h-full object-cover">
-                </div>
+
 
                 <!-- Floating Labels -->
                 <div class="absolute top-1/4 left-0 -translate-x-4 flex flex-col items-center gap-2 animate-enter delay-300 float">

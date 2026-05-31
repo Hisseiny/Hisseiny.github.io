@@ -1004,7 +1004,7 @@ button:focus-visible {
 }
 
 .cmd-palette-hint {
-  position: fixed; bottom: 64px; left: 16px; z-index: 50;
+  position: fixed; bottom: 16px; left: 16px; z-index: 50;
   display: flex; align-items: center; gap: 6px;
   font-family: 'JetBrains Mono', monospace;
   font-size: .7rem; color: var(--color-text-muted);
@@ -1016,9 +1016,6 @@ button:focus-visible {
   padding: 2px 6px; border-radius: 4px; font-size: .65rem;
 }
 @media(max-width:640px){ .cmd-palette-hint { display: none; } }
-
-/* Ambient sound toggle active state */
-#sound-toggle.sound-on { color: var(--color-accent); border-color: var(--color-accent-dim); }
 
 
 /* Career Progress Bar */
@@ -1178,12 +1175,6 @@ tailwind.config = {
             <div class="font-mono text-neutral-700 text-[10px] mt-6 uppercase tracking-[0.25em]">Press Enter or click anywhere</div>
         </div>
     </div>
-
-    <!-- Ambient Sound Toggle -->
-    <button id="sound-toggle" type="button" aria-pressed="false" aria-label="Toggle ambient sound" class="fixed bottom-6 left-6 z-[60] inline-flex items-center gap-2 px-3 py-2 rounded-full border border-white/10 bg-[#080808]/80 backdrop-blur-sm text-neutral-400 hover:text-[#FACC15] hover:border-[#FACC15]/30 transition-all duration-300 text-[10px] font-mono uppercase tracking-widest">
-        <iconify-icon icon="lucide:volume-x" width="14"></iconify-icon>
-        <span class="sound-label hidden sm:inline">Ambient</span>
-    </button>
 
     <!-- Scroll Progress Indicator -->
     <div id="scroll-progress" style="width: 0%"></div>
@@ -3055,7 +3046,7 @@ tailwind.config = {
     })();
     </script>
 
-    <!-- Lenis smooth scroll + entry gate + ambient sound -->
+    <!-- Lenis smooth scroll + entry gate -->
     <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
     <script>
     (function () {
@@ -3111,43 +3102,6 @@ tailwind.config = {
           if (!entered && (e.key === 'Enter' || e.key === 'Escape')) enter();
         });
         setTimeout(function () { if (enterBtn) enterBtn.focus(); }, 120);
-      }
-
-      // ---------- 3. Ambient sound (synthesized, off by default) ----------
-      var sbtn = document.getElementById('sound-toggle');
-      if (sbtn) {
-        var ctx, master, started = false, on = false, TARGET = 0.05;
-        function build() {
-          ctx = new (window.AudioContext || window.webkitAudioContext)();
-          master = ctx.createGain(); master.gain.value = 0; master.connect(ctx.destination);
-          var filter = ctx.createBiquadFilter();
-          filter.type = 'lowpass'; filter.frequency.value = 520; filter.Q.value = 0.7;
-          filter.connect(master);
-          [55, 82.41, 110, 164.81].forEach(function (f, idx) {
-            var o = ctx.createOscillator();
-            o.type = idx % 2 ? 'sine' : 'triangle';
-            o.frequency.value = f; o.detune.value = (idx - 1.5) * 5;
-            var g = ctx.createGain(); g.gain.value = idx === 0 ? 0.55 : 0.2;
-            o.connect(g); g.connect(filter); o.start();
-          });
-          var lfo = ctx.createOscillator(); lfo.frequency.value = 0.05;
-          var lg = ctx.createGain(); lg.gain.value = 200;
-          lfo.connect(lg); lg.connect(filter.frequency); lfo.start();
-          started = true;
-        }
-        sbtn.addEventListener('click', function () {
-          if (!started) build();
-          if (ctx.state === 'suspended') ctx.resume();
-          on = !on;
-          var t = ctx.currentTime;
-          master.gain.cancelScheduledValues(t);
-          master.gain.setValueAtTime(master.gain.value, t);
-          master.gain.linearRampToValueAtTime(on ? TARGET : 0, t + (on ? 1.6 : 0.6));
-          sbtn.classList.toggle('sound-on', on);
-          sbtn.setAttribute('aria-pressed', on ? 'true' : 'false');
-          var ic = sbtn.querySelector('iconify-icon'); if (ic) ic.setAttribute('icon', on ? 'lucide:volume-2' : 'lucide:volume-x');
-          var lb = sbtn.querySelector('.sound-label'); if (lb) lb.textContent = on ? 'Ambient on' : 'Ambient';
-        });
       }
     })();
     </script>

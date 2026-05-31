@@ -1721,10 +1721,27 @@ tailwind.config = {
                         <p class="text-sm text-neutral-400 font-light leading-relaxed mb-6">
                             A <span class="text-white font-normal">wake-word activated voice assistant</span> for people juggling multiple projects. Say &ldquo;Oppy&rdquo; and it reads urgency across your <span class="text-white font-normal">Gmail and Google Calendar</span>, then talks back like a direct mentor &mdash; powered by Gemini 3 Flash and 2.5 Flash TTS, with an animated avatar that tracks, blinks and speaks.
                         </p>
-                        <div class="flex flex-wrap gap-x-6 gap-y-2 text-xs text-neutral-500">
+                        <div class="flex flex-wrap gap-x-6 gap-y-2 text-xs text-neutral-500 mb-6">
                             <span class="flex items-center gap-1.5"><iconify-icon icon="lucide:audio-lines" width="14" class="text-[#FACC15]"></iconify-icon> Wake-word voice control</span>
                             <span class="flex items-center gap-1.5"><iconify-icon icon="lucide:sparkles" width="14" class="text-[#FACC15]"></iconify-icon> Gemini chat + TTS</span>
                             <span class="flex items-center gap-1.5"><iconify-icon icon="lucide:calendar-clock" width="14" class="text-[#FACC15]"></iconify-icon> Gmail + Calendar</span>
+                        </div>
+                        <!-- Demo / interview video -->
+                        <div class="relative z-10">
+                            <span class="flex items-center gap-2 text-[10px] font-mono text-neutral-600 uppercase tracking-[0.15em] mb-2">
+                                <iconify-icon icon="lucide:play-circle" width="13" class="text-[#FACC15]"></iconify-icon>
+                                Demo &amp; interview &middot; Google Hackathon
+                            </span>
+                            <video
+                                src="videos/oppy-hackathon.mp4"
+                                controls
+                                preload="metadata"
+                                playsinline
+                                class="w-full max-h-[420px] rounded-lg border border-white/10 bg-black object-contain"
+                                aria-label="Oppy — Google Hackathon demo and interview">
+                                Your browser does not support embedded video.
+                                <a href="videos/oppy-hackathon.mp4" class="text-[#FACC15]">Download the video</a>.
+                            </video>
                         </div>
                     </div>
                 </div>

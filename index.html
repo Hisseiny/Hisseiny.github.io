@@ -1221,6 +1221,17 @@ tailwind.config = {
             <!-- Left: Content -->
             <div class="flex flex-col justify-center max-w-2xl">
 
+                <!-- Profile Avatar (mobile / tablet) -->
+                <div class="lg:hidden flex items-center gap-4 mb-6 animate-enter">
+                    <div class="w-20 h-20 rounded-full overflow-hidden border-2 border-[#FACC15]/40 shadow-[0_0_30px_rgba(250,204,21,0.15)] shrink-0">
+                        <img src="images/avatar.png" alt="Hissein Ali" width="80" height="80" class="w-full h-full object-cover">
+                    </div>
+                    <div>
+                        <div class="font-display font-semibold text-white text-lg leading-tight">Hissein Ali</div>
+                        <div class="text-neutral-500 text-xs font-mono">Cloud Solution Architect &amp; AI</div>
+                    </div>
+                </div>
+
                 <!-- Greeting + Status -->
                 <div class="flex items-center gap-3 mb-6 animate-enter">
                     <div class="status-dot"></div>
@@ -1322,6 +1333,11 @@ tailwind.config = {
                             <ellipse cx="100" cy="100" rx="75" ry="25" transform="rotate(165 100 100)" stroke-dasharray="2 2" opacity="0.5"></ellipse>
                         </g>
                     </svg>
+                </div>
+
+                <!-- Profile Avatar (desktop centerpiece) -->
+                <div class="absolute z-10 w-[280px] h-[280px] rounded-full overflow-hidden border-2 border-[#FACC15]/30 shadow-[0_0_50px_rgba(250,204,21,0.18)] float">
+                    <img src="images/avatar.png" alt="Hissein Ali" class="w-full h-full object-cover">
                 </div>
 
                 <!-- Floating Labels -->

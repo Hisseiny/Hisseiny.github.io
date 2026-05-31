@@ -1004,7 +1004,7 @@ button:focus-visible {
 }
 
 .cmd-palette-hint {
-  position: fixed; bottom: 16px; left: 16px; z-index: 50;
+  position: fixed; bottom: 64px; left: 16px; z-index: 50;
   display: flex; align-items: center; gap: 6px;
   font-family: 'JetBrains Mono', monospace;
   font-size: .7rem; color: var(--color-text-muted);
@@ -1016,6 +1016,9 @@ button:focus-visible {
   padding: 2px 6px; border-radius: 4px; font-size: .65rem;
 }
 @media(max-width:640px){ .cmd-palette-hint { display: none; } }
+
+/* Ambient sound toggle active state */
+#sound-toggle.sound-on { color: var(--color-accent); border-color: var(--color-accent-dim); }
 
 
 /* Career Progress Bar */
@@ -1154,6 +1157,33 @@ tailwind.config = {
     <a href="#skills" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[9999] focus:bg-[#FACC15] focus:text-[#050505] focus:px-4 focus:py-2 focus:text-sm focus:font-bold focus:tracking-wider focus:uppercase focus:rounded-sm focus:shadow-lg">Skip to content</a>
 
 
+
+    <!-- Entry Gate -->
+    <div id="entry-gate" class="fixed inset-0 z-[10000] bg-[#050505] flex flex-col items-center justify-center text-center px-6 cursor-pointer">
+        <div class="grid-bg absolute inset-0 opacity-[0.05] pointer-events-none"></div>
+        <div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(circle at center, rgba(250,204,21,0.06), transparent 60%);"></div>
+        <div class="relative z-10 flex flex-col items-center">
+            <span class="status-badge !text-[9px] mb-8">
+                <span class="status-dot"></span>
+                Portfolio
+            </span>
+            <h1 class="font-display font-semibold text-white text-4xl sm:text-6xl lg:text-7xl tracking-tighter leading-none" style="min-height:1.15em;">
+                <span id="entry-typed"></span><span id="entry-cursor" class="typed-cursor"></span>
+            </h1>
+            <p class="font-mono text-neutral-500 text-[11px] sm:text-sm mt-5 tracking-[0.15em] uppercase">AI Solution Engineer &middot; Paris</p>
+            <button id="entry-enter" class="btn-primary mt-10 transition-opacity duration-500" style="opacity:0;">
+                Enter
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </button>
+            <div class="font-mono text-neutral-700 text-[10px] mt-6 uppercase tracking-[0.25em]">Press Enter or click anywhere</div>
+        </div>
+    </div>
+
+    <!-- Ambient Sound Toggle -->
+    <button id="sound-toggle" type="button" aria-pressed="false" aria-label="Toggle ambient sound" class="fixed bottom-6 left-6 z-[60] inline-flex items-center gap-2 px-3 py-2 rounded-full border border-white/10 bg-[#080808]/80 backdrop-blur-sm text-neutral-400 hover:text-[#FACC15] hover:border-[#FACC15]/30 transition-all duration-300 text-[10px] font-mono uppercase tracking-widest">
+        <iconify-icon icon="lucide:volume-x" width="14"></iconify-icon>
+        <span class="sound-label hidden sm:inline">Ambient</span>
+    </button>
 
     <!-- Scroll Progress Indicator -->
     <div id="scroll-progress" style="width: 0%"></div>
@@ -2929,7 +2959,9 @@ tailwind.config = {
 
         function cpScrollTo(sel) {
             var el = document.querySelector(sel);
-            if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            if (!el) return;
+            if (window.lenis) window.lenis.scrollTo(el, { offset: -70 });
+            else el.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
 
         function cpOpen() {
@@ -3020,6 +3052,103 @@ tailwind.config = {
             var hintKbd = document.querySelector('.cmd-palette-hint kbd');
             if (hintKbd) hintKbd.textContent = '\u2318';
         }
+    })();
+    </script>
+
+    <!-- Lenis smooth scroll + entry gate + ambient sound -->
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+    <script>
+    (function () {
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      // ---------- 1. Lenis smooth scroll ----------
+      if (!reduce && typeof Lenis !== 'undefined') {
+        var lenis = new Lenis({ duration: 1.05, smoothWheel: true, wheelMultiplier: 0.9 });
+        window.lenis = lenis;
+        document.documentElement.style.scrollBehavior = 'auto';
+        function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+        requestAnimationFrame(raf);
+        document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+          a.addEventListener('click', function (e) {
+            var href = a.getAttribute('href');
+            if (href && href.length > 1) {
+              var target = document.querySelector(href);
+              if (target) { e.preventDefault(); lenis.scrollTo(target, { offset: -70 }); }
+            }
+          });
+        });
+      }
+
+      // ---------- 2. Entry gate ----------
+      var gate = document.getElementById('entry-gate');
+      if (gate) {
+        var typedEl = document.getElementById('entry-typed');
+        var enterBtn = document.getElementById('entry-enter');
+        var NAME = 'Hissein Ali';
+        if (window.lenis) window.lenis.stop(); else document.documentElement.style.overflow = 'hidden';
+
+        function showEnter() { if (enterBtn) enterBtn.style.opacity = '1'; }
+        if (reduce) { typedEl.textContent = NAME; showEnter(); }
+        else {
+          var i = 0;
+          (function type() {
+            typedEl.textContent = NAME.slice(0, i);
+            if (i++ <= NAME.length) setTimeout(type, 95);
+            else showEnter();
+          })();
+        }
+
+        var entered = false;
+        function enter() {
+          if (entered) return; entered = true;
+          gate.style.transition = 'opacity 0.7s ease';
+          gate.style.opacity = '0';
+          if (window.lenis) window.lenis.start(); else document.documentElement.style.overflow = '';
+          setTimeout(function () { gate.style.display = 'none'; }, 720);
+        }
+        gate.addEventListener('click', enter);
+        document.addEventListener('keydown', function (e) {
+          if (!entered && (e.key === 'Enter' || e.key === 'Escape')) enter();
+        });
+        setTimeout(function () { if (enterBtn) enterBtn.focus(); }, 120);
+      }
+
+      // ---------- 3. Ambient sound (synthesized, off by default) ----------
+      var sbtn = document.getElementById('sound-toggle');
+      if (sbtn) {
+        var ctx, master, started = false, on = false, TARGET = 0.05;
+        function build() {
+          ctx = new (window.AudioContext || window.webkitAudioContext)();
+          master = ctx.createGain(); master.gain.value = 0; master.connect(ctx.destination);
+          var filter = ctx.createBiquadFilter();
+          filter.type = 'lowpass'; filter.frequency.value = 520; filter.Q.value = 0.7;
+          filter.connect(master);
+          [55, 82.41, 110, 164.81].forEach(function (f, idx) {
+            var o = ctx.createOscillator();
+            o.type = idx % 2 ? 'sine' : 'triangle';
+            o.frequency.value = f; o.detune.value = (idx - 1.5) * 5;
+            var g = ctx.createGain(); g.gain.value = idx === 0 ? 0.55 : 0.2;
+            o.connect(g); g.connect(filter); o.start();
+          });
+          var lfo = ctx.createOscillator(); lfo.frequency.value = 0.05;
+          var lg = ctx.createGain(); lg.gain.value = 200;
+          lfo.connect(lg); lg.connect(filter.frequency); lfo.start();
+          started = true;
+        }
+        sbtn.addEventListener('click', function () {
+          if (!started) build();
+          if (ctx.state === 'suspended') ctx.resume();
+          on = !on;
+          var t = ctx.currentTime;
+          master.gain.cancelScheduledValues(t);
+          master.gain.setValueAtTime(master.gain.value, t);
+          master.gain.linearRampToValueAtTime(on ? TARGET : 0, t + (on ? 1.6 : 0.6));
+          sbtn.classList.toggle('sound-on', on);
+          sbtn.setAttribute('aria-pressed', on ? 'true' : 'false');
+          var ic = sbtn.querySelector('iconify-icon'); if (ic) ic.setAttribute('icon', on ? 'lucide:volume-2' : 'lucide:volume-x');
+          var lb = sbtn.querySelector('.sound-label'); if (lb) lb.textContent = on ? 'Ambient on' : 'Ambient';
+        });
+      }
     })();
     </script>
 </body>

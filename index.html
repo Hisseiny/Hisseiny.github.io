@@ -320,6 +320,10 @@ button:focus-visible {
 
 .exp-card > * { position: relative; z-index: 1; }
 
+/* Company logos inside experience cards (white SVGs -> invert to dark on hover) */
+.exp-logo { height: 1.1rem; width: auto; transition: filter var(--transition-base); }
+.exp-card:hover .exp-logo { filter: brightness(0); }
+
 /* --- Buttons --- */
 .btn-primary {
   position: relative;
@@ -1544,7 +1548,12 @@ tailwind.config = {
                                 <div class="status-dot !bg-green-400 !shadow-none" style="animation: none;"></div>
                                 Current
                             </div>
-                            <span class="text-xs font-bold uppercase tracking-widest text-white exp-text">Accenture</span>
+                            <span class="flex items-center gap-2.5 text-xs font-bold uppercase tracking-widest text-white exp-text">
+                                <img src="images/logos/accenture.svg" alt="Accenture" class="exp-logo">
+                                Accenture
+                                <span class="w-px h-3 bg-white/20"></span>
+                                <img src="images/logos/airbus.svg" alt="Airbus" class="exp-logo" title="Client: Airbus">
+                            </span>
                         </div>
                         <span class="text-xs font-mono text-neutral-500 mb-2 exp-text-dim">Since October 2025 &middot; Paris (Client: Airbus)</span>
                         <h3 class="text-xl text-white font-display font-medium mb-4 exp-text">Apprentice Consultant &mdash; Digital Transformation &amp; GenAI</h3>
@@ -1561,7 +1570,10 @@ tailwind.config = {
                     <div class="flex flex-col h-full">
                         <div class="flex justify-between items-start mb-4">
                             <span class="text-xs font-mono text-neutral-500 exp-text-dim">Apr &ndash; Aug 2024</span>
-                            <span class="text-xs font-bold uppercase tracking-widest text-white exp-text">BT Group</span>
+                            <span class="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-white exp-text">
+                                <img src="images/logos/bt.svg" alt="BT Group" class="exp-logo">
+                                BT Group
+                            </span>
                         </div>
                         <span class="text-xs font-mono text-neutral-500 mb-2 exp-text-dim">London, United Kingdom</span>
                         <h3 class="text-xl font-display font-medium text-white mb-4 exp-text">Product Owner Intern</h3>
@@ -1580,6 +1592,16 @@ tailwind.config = {
                         <div>
                             <span class="block text-xs font-mono text-neutral-500 mb-1 exp-text-dim">Mar &ndash; Jun 2025 &middot; Brest, France</span>
                             <h3 class="text-xl font-display font-medium text-white exp-text">R&amp;D Engineer Intern @ Lab-STICC (CNRS)</h3>
+                        </div>
+                        <div class="flex items-center gap-3 shrink-0 justify-center md:justify-end mt-2 md:mt-0">
+                            <span class="exp-text inline-flex items-center gap-1.5 text-sm font-display font-bold tracking-wide text-white">
+                                <iconify-icon icon="lucide:atom" width="16" class="text-[#FACC15] exp-icon"></iconify-icon>
+                                CNRS
+                            </span>
+                            <a href="https://github.com/Hisseiny/SPW_SF" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs uppercase tracking-widest text-neutral-300 hover:text-[#FACC15] bg-black/50 border border-white/10 rounded-md px-3 py-1.5 transition-colors" style="position:relative; z-index:2;">
+                                <iconify-icon icon="ri:github-fill" width="14"></iconify-icon>
+                                SPW_SF
+                            </a>
                         </div>
                     </div>
                     <p class="text-sm text-neutral-400 leading-relaxed font-light max-w-3xl mt-2 exp-text-dim">

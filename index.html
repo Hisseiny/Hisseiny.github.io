@@ -2595,14 +2595,74 @@ tailwind.config = {
             else renderSug(['Why hire me?','Projects','Experience','Contact']);
         }
 
+        // ---- Speech Synthesis (Oppy Voice Integration) ----
+        var synth = window.speechSynthesis;
+        var currentUtterance = null;
+        function speakText(text) {
+            if (!synth) return;
+            if (synth.speaking) {
+                synth.cancel();
+                if (currentUtterance && currentUtterance.text === text) {
+                    currentUtterance = null;
+                    return;
+                }
+            }
+            var cleanText = text.replace(/<[^>]*>/g, '').trim();
+            var utter = new SpeechSynthesisUtterance(cleanText);
+            var voices = synth.getVoices();
+            var englishVoice = voices.find(function(v) { return v.lang.startsWith('en') && v.name.includes('Google'); }) ||
+                               voices.find(function(v) { return v.lang.startsWith('en'); });
+            if (englishVoice) utter.voice = englishVoice;
+            utter.rate = 1.05;
+            utter.pitch = 1.0;
+            currentUtterance = utter;
+            synth.speak(utter);
+        }
+
         // ---- Messages ----
         function addMsg(role, text, isStream) {
             var msg = document.createElement('div');
             msg.className = 'msg msg-' + role;
+            
+            var header = document.createElement('div');
+            header.className = 'flex items-center gap-2 mb-1';
+            
             var label = document.createElement('span');
             label.className = 'msg-role';
             label.textContent = role === 'ai' ? 'hissein.ai' : 'you';
-            msg.appendChild(label);
+            header.appendChild(label);
+            
+            if (role === 'ai') {
+                var speakBtn = document.createElement('button');
+                speakBtn.className = 'speak-btn opacity-40 hover:opacity-100 hover:text-[#FACC15] transition-all flex items-center justify-center';
+                speakBtn.style.background = 'none';
+                speakBtn.style.border = 'none';
+                speakBtn.style.cursor = 'pointer';
+                speakBtn.style.padding = '0';
+                speakBtn.title = 'Listen to response (Oppy TTS)';
+                speakBtn.innerHTML = '<iconify-icon icon="lucide:volume-2" width="13"></iconify-icon>';
+                
+                speakBtn.addEventListener('click', function() {
+                    var contentText = body.textContent || body.innerText;
+                    speakText(contentText);
+                    if (synth.speaking) {
+                        speakBtn.innerHTML = '<iconify-icon icon="lucide:volume-x" width="13" class="text-red-400"></iconify-icon>';
+                    } else {
+                        speakBtn.innerHTML = '<iconify-icon icon="lucide:volume-2" width="13"></iconify-icon>';
+                    }
+                });
+                
+                var t = setInterval(function() {
+                    if (!synth.speaking && speakBtn.innerHTML.includes('volume-x')) {
+                        speakBtn.innerHTML = '<iconify-icon icon="lucide:volume-2" width="13"></iconify-icon>';
+                    }
+                }, 500);
+                
+                header.appendChild(speakBtn);
+            }
+            
+            msg.appendChild(header);
+            
             var body = document.createElement('div');
             body.className = 'msg-content';
             if (!isStream) body.textContent = text;
@@ -3077,35 +3137,114 @@ tailwind.config = {
       // ---------- 2. Entry gate ----------
       var gate = document.getElementById('entry-gate');
       if (gate) {
-        var typedEl = document.getElementById('entry-typed');
-        var enterBtn = document.getElementById('entry-enter');
-        var NAME = 'Hissein Ali';
-        if (window.lenis) window.lenis.stop(); else document.documentElement.style.overflow = 'hidden';
-
-        function showEnter() { if (enterBtn) enterBtn.style.opacity = '1'; }
-        if (reduce) { typedEl.textContent = NAME; showEnter(); }
-        else {
-          var i = 0;
-          (function type() {
-            typedEl.textContent = NAME.slice(0, i);
-            if (i++ <= NAME.length) setTimeout(type, 95);
-            else showEnter();
-          })();
-        }
-
         var entered = false;
         function enter() {
           if (entered) return; entered = true;
+          sessionStorage.setItem('entry-gate-skipped', 'true');
           gate.style.transition = 'opacity 0.7s ease';
           gate.style.opacity = '0';
           if (window.lenis) window.lenis.start(); else document.documentElement.style.overflow = '';
           setTimeout(function () { gate.style.display = 'none'; }, 720);
         }
-        gate.addEventListener('click', enter);
-        document.addEventListener('keydown', function (e) {
-          if (!entered && (e.key === 'Enter' || e.key === 'Escape')) enter();
-        });
-        setTimeout(function () { if (enterBtn) enterBtn.focus(); }, 120);
+
+        if (sessionStorage.getItem('entry-gate-skipped') === 'true') {
+          gate.style.display = 'none';
+          entered = true;
+          if (window.lenis) window.lenis.start(); else document.documentElement.style.overflow = '';
+        } else {
+          var typedEl = document.getElementById('entry-typed');
+          var enterBtn = document.getElementById('entry-enter');
+          var NAME = 'Hissein Ali';
+          if (window.lenis) window.lenis.stop(); else document.documentElement.style.overflow = 'hidden';
+
+          function showEnter() { if (enterBtn) enterBtn.style.opacity = '1'; }
+          if (reduce) { typedEl.textContent = NAME; showEnter(); }
+          else {
+            var i = 0;
+            (function type() {
+              typedEl.textContent = NAME.slice(0, i);
+              if (i++ <= NAME.length) setTimeout(type, 95);
+              else showEnter();
+            })();
+          }
+
+          gate.addEventListener('click', enter);
+          document.addEventListener('keydown', function (e) {
+            if (!entered && (e.key === 'Enter' || e.key === 'Escape')) enter();
+          });
+          setTimeout(function () { if (enterBtn) enterBtn.focus(); }, 120);
+        }
+      }
+
+      // ---------- 3. Konami Code Easter Egg ----------
+      var konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+      var konamiIndex = 0;
+      
+      document.addEventListener('keydown', function(e) {
+        if (e.key === konamiCode[konamiIndex]) {
+          konamiIndex++;
+          if (konamiIndex === konamiCode.length) {
+            activateKonami();
+            konamiIndex = 0;
+          }
+        } else {
+          konamiIndex = 0;
+        }
+      });
+
+      function activateKonami() {
+        var root = document.documentElement;
+        root.style.setProperty('--color-accent', '#39ff14');
+        root.style.setProperty('--color-accent-dim', 'rgba(57, 255, 20, 0.15)');
+        root.style.setProperty('--color-accent-glow', 'rgba(57, 255, 20, 0.4)');
+        
+        var toast = document.createElement('div');
+        toast.style.position = 'fixed';
+        toast.style.top = '2rem';
+        toast.style.left = '50%';
+        toast.style.transform = 'translateX(-50%) translateY(-20px)';
+        toast.style.background = '#0a0a0a';
+        toast.style.border = '1px solid #39ff14';
+        toast.style.color = '#39ff14';
+        toast.style.padding = '12px 24px';
+        toast.style.fontFamily = "'JetBrains Mono', monospace";
+        toast.style.fontSize = '12px';
+        toast.style.zIndex = '99999';
+        toast.style.boxShadow = '0 0 20px rgba(57, 255, 20, 0.4)';
+        toast.style.borderRadius = '4px';
+        toast.style.opacity = '0';
+        toast.style.transition = 'all 0.5s cubic-bezier(0.23, 1, 0.32, 1)';
+        toast.textContent = '🎮 KONAMI CODE ACTIVATED: RETRO HACKER MODE ENGAGED 🎮';
+        
+        document.body.appendChild(toast);
+        
+        setTimeout(function() {
+          toast.style.transform = 'translateX(-50%) translateY(0)';
+          toast.style.opacity = '1';
+        }, 100);
+        
+        setTimeout(function() {
+          toast.style.transform = 'translateX(-50%) translateY(-20px)';
+          toast.style.opacity = '0';
+          setTimeout(function() {
+            toast.remove();
+          }, 500);
+        }, 4000);
+
+        try {
+          var context = new (window.AudioContext || window.webkitAudioContext)();
+          var osc = context.createOscillator();
+          var gain = context.createGain();
+          osc.connect(gain);
+          gain.connect(context.destination);
+          osc.type = 'square';
+          osc.frequency.setValueAtTime(440, context.currentTime);
+          osc.frequency.setValueAtTime(880, context.currentTime + 0.1);
+          gain.gain.setValueAtTime(0.05, context.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, context.currentTime + 0.3);
+          osc.start();
+          osc.stop(context.currentTime + 0.3);
+        } catch(err) {}
       }
     })();
     </script>

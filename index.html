@@ -1229,13 +1229,13 @@ tailwind.config = {
             <div class="flex flex-col justify-center max-w-2xl">
 
                 <!-- Profile Avatar (mobile / tablet) -->
-                <div class="lg:hidden flex items-center gap-4 mb-6 animate-enter">
-                    <div class="w-20 h-20 rounded-full overflow-hidden border-2 border-[#FACC15]/40 shadow-[0_0_30px_rgba(250,204,21,0.15)] shrink-0">
-                        <img src="images/avatar.png" alt="Hissein Ali" width="80" height="80" class="w-full h-full object-cover">
-                    </div>
+                <div class="lg:hidden flex items-center justify-end gap-4 mb-6 animate-enter text-right">
                     <div>
                         <div class="font-display font-semibold text-white text-lg leading-tight">Hissein Ali</div>
                         <div class="text-neutral-500 text-xs font-mono">Cloud Solution Architect &amp; AI</div>
+                    </div>
+                    <div class="w-20 h-20 rounded-full overflow-hidden border-2 border-[#FACC15]/40 shadow-[0_0_30px_rgba(250,204,21,0.15)] shrink-0">
+                        <img src="images/avatar.png" alt="Hissein Ali" width="80" height="80" class="w-full h-full object-cover">
                     </div>
                 </div>
 
@@ -1338,7 +1338,7 @@ tailwind.config = {
                 </div>
 
                 <!-- Profile Avatar (desktop centerpiece) -->
-                <div class="absolute inset-0 m-auto z-10 w-[280px] h-[280px] rounded-full overflow-hidden border-2 border-[#FACC15]/40 avatar-pulse">
+                <div class="absolute top-0 right-0 z-20 w-[240px] h-[240px] rounded-full overflow-hidden border-2 border-[#FACC15]/40 avatar-pulse">
                     <img src="images/avatar.png" alt="Hissein Ali" class="w-full h-full object-cover">
                 </div>
 
@@ -1356,7 +1356,7 @@ tailwind.config = {
                     </span>
                 </div>
 
-                <div class="absolute top-1/4 right-8 animate-enter delay-500 float float-delay-2">
+                <div class="absolute top-[58%] right-12 animate-enter delay-500 float float-delay-2">
                     <div class="status-badge !text-[9px]">
                         <div class="status-dot !w-[4px] !h-[4px]"></div>
                         Deploying

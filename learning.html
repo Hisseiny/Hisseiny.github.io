@@ -562,12 +562,17 @@ footer a:hover { opacity: 0.8; }
 
 <!-- Progress Dock -->
 <div id="progress-dock">
-  <a href="index.html" class="dock-back">
+  <a href="index.html" class="dock-back" data-i18n="dock-back">
     <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
     Portfolio
   </a>
   <div class="dock-sep"></div>
-  <span class="dock-label">Progress</span>
+  <div class="flex items-center border border-white/10 rounded-full overflow-hidden p-0.5 bg-black/40 mr-2" id="lang-switcher" style="display: flex; align-items: center; border-radius: 999px; border: 1px solid rgba(255,255,255,0.1); overflow: hidden; padding: 2px;">
+    <button class="px-2 py-0.5 text-[8px] font-bold uppercase tracking-wider rounded-full transition-all text-[#c9a84c] bg-white/5" id="btn-lang-en" style="background: rgba(255,255,255,0.05); border: none; cursor: pointer; border-radius: 999px; color: #c9a84c; font-weight: 700; padding: 2px 8px; font-size: 8px;">EN</button>
+    <button class="px-2 py-0.5 text-[8px] font-bold uppercase tracking-wider rounded-full transition-all text-neutral-500 hover:text-white" id="btn-lang-fr" style="background: none; border: none; cursor: pointer; border-radius: 999px; color: #5a5a7a; font-weight: 700; padding: 2px 8px; font-size: 8px;">FR</button>
+  </div>
+  <div class="dock-sep"></div>
+  <span class="dock-label" data-i18n="dock-progress">Progress</span>
   <div class="dock-bar-wrap"><div class="dock-bar-fill" id="dockFill"></div></div>
   <span class="dock-pct" id="dockPct">0%</span>
   <div class="dock-modules" id="dockDots"></div>
@@ -576,25 +581,25 @@ footer a:hover { opacity: 0.8; }
 <!-- Hero -->
 <div class="hero">
   <div class="hero-line"></div>
-  <div class="hero-eyebrow">Self-Directed Programme &middot; 8 Modules</div>
-  <h1>Leadership &amp;<br><em>Entrepreneurship</em></h1>
-  <p class="hero-sub">The intellectual substance of professional leadership development &mdash; distilled into a rigorous programme you own completely. Built by Hissein Ali.</p>
+  <div class="hero-eyebrow" data-i18n="learning-eyebrow">Self-Directed Programme &middot; 8 Modules</div>
+  <h1 data-i18n="learning-title">Leadership &amp;<br><em>Entrepreneurship</em></h1>
+  <p class="hero-sub" data-i18n="learning-sub">The intellectual substance of professional leadership development &mdash; distilled into a rigorous programme you own completely. Built by Hissein Ali.</p>
   <div class="hero-rule"></div>
   <div class="stats">
-    <div><div class="stat-num">8</div><div class="stat-lbl">Modules</div></div>
-    <div><div class="stat-num">27</div><div class="stat-lbl">Lessons</div></div>
-    <div><div class="stat-num">~12h</div><div class="stat-lbl">Study Time</div></div>
-    <div><div class="stat-num">24</div><div class="stat-lbl">Exercises</div></div>
+    <div><div class="stat-num">8</div><div class="stat-lbl" data-i18n="stat-lbl-modules">Modules</div></div>
+    <div><div class="stat-num">27</div><div class="stat-lbl" data-i18n="stat-lbl-lessons">Lessons</div></div>
+    <div><div class="stat-num">~12h</div><div class="stat-lbl" data-i18n="stat-lbl-study">Study Time</div></div>
+    <div><div class="stat-num">24</div><div class="stat-lbl" data-i18n="stat-lbl-exercises">Exercises</div></div>
   </div>
-  <a class="cta" href="#modules">Begin the programme <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg></a>
+  <a class="cta" href="#modules" data-i18n="learning-cta">Begin the programme <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg></a>
 </div>
 
 <!-- Module Grid -->
 <div id="modules">
   <div class="inner">
-    <div class="sec-label">Curriculum</div>
-    <h2 class="sec-title">Eight <em>Core</em> Modules</h2>
-    <p class="sec-intro">Each module is a deep study unit. Read, reflect, complete the exercise &mdash; then mark it done. Progress is tracked at the top of every page.</p>
+    <div class="sec-label" data-i18n="curriculum-label">Curriculum</div>
+    <h2 class="sec-title" data-i18n="curriculum-title">Eight <em>Core</em> Modules</h2>
+    <p class="sec-intro" data-i18n="curriculum-intro">Each module is a deep study unit. Read, reflect, complete the exercise &mdash; then mark it done. Progress is tracked at the top of every page.</p>
     <div class="grid" id="moduleGrid"></div>
   </div>
 </div>
@@ -604,7 +609,7 @@ footer a:hover { opacity: 0.8; }
   <div class="inner">
     <div class="lesson-header">
       <span class="lesson-module-label" id="panelModLabel"></span>
-      <button class="close-btn" onclick="closePanel()">&times; Close module</button>
+      <button class="close-btn" onclick="closePanel()" data-i18n="close-module">&times; Close module</button>
     </div>
     <div class="lesson-tabs" id="lessonTabs"></div>
     <div id="lessonBody"></div>
@@ -614,14 +619,14 @@ footer a:hover { opacity: 0.8; }
 <!-- Four Pillars -->
 <div id="framework">
   <div class="inner">
-    <div class="sec-label">The Framework</div>
-    <h2 class="sec-title">Four <em>Universal</em> Traits</h2>
-    <p class="sec-intro">Every exceptional leader &mdash; across sport, military, arts, and commerce &mdash; shares these four qualities.</p>
+    <div class="sec-label" data-i18n="framework-label">The Framework</div>
+    <h2 class="sec-title" data-i18n="framework-title">Four <em>Universal</em> Traits</h2>
+    <p class="sec-intro" data-i18n="framework-intro">Every exceptional leader &mdash; across sport, military, arts, and commerce &mdash; shares these four qualities.</p>
     <div class="pillars">
-      <div class="pillar"><div class="pillar-icon">&#9670;</div><div class="pillar-name">Vision</div><div class="pillar-desc">Seeing what others cannot yet imagine. Articulating it so others choose to follow.</div></div>
-      <div class="pillar"><div class="pillar-icon">&#9671;</div><div class="pillar-name">Authenticity</div><div class="pillar-desc">Consistency between values, words, and actions &mdash; under pressure as much as in comfort.</div></div>
-      <div class="pillar"><div class="pillar-icon">&#9670;</div><div class="pillar-name">Resilience</div><div class="pillar-desc">Absorbing setbacks without losing direction. Performing sustainably, not just brilliantly once.</div></div>
-      <div class="pillar"><div class="pillar-icon">&#9673;</div><div class="pillar-name">Impact</div><div class="pillar-desc">Creating change that outlasts your tenure. Results matter &mdash; and so does how you achieve them.</div></div>
+      <div class="pillar"><div class="pillar-icon">&#9670;</div><div class="pillar-name" data-i18n="pillar-vision-name">Vision</div><div class="pillar-desc" data-i18n="pillar-vision-desc">Seeing what others cannot yet imagine. Articulating it so others choose to follow.</div></div>
+      <div class="pillar"><div class="pillar-icon">&#9671;</div><div class="pillar-name" data-i18n="pillar-auth-name">Authenticity</div><div class="pillar-desc" data-i18n="pillar-auth-desc">Consistency between values, words, and actions &mdash; under pressure as much as in comfort.</div></div>
+      <div class="pillar"><div class="pillar-icon">&#9670;</div><div class="pillar-name" data-i18n="pillar-res-name">Resilience</div><div class="pillar-desc" data-i18n="pillar-res-desc">Absorbing setbacks without losing direction. Performing sustainably, not just brilliantly once.</div></div>
+      <div class="pillar"><div class="pillar-icon">&#9673;</div><div class="pillar-name" data-i18n="pillar-imp-name">Impact</div><div class="pillar-desc" data-i18n="pillar-imp-desc">Creating change that outlasts your tenure. Results matter &mdash; and so does how you achieve them.</div></div>
     </div>
   </div>
 </div>
@@ -629,31 +634,31 @@ footer a:hover { opacity: 0.8; }
 <!-- Reading List -->
 <div id="reading">
   <div class="inner">
-    <div class="sec-label">Essential Reading</div>
-    <h2 class="sec-title">The <em>Canon</em></h2>
-    <p class="sec-intro">Ten texts that form the intellectual backbone of this programme.</p>
+    <div class="sec-label" data-i18n="reading-label">Essential Reading</div>
+    <h2 class="sec-title" data-i18n="reading-title">The <em>Canon</em></h2>
+    <p class="sec-intro" data-i18n="reading-intro">Ten texts that form the intellectual backbone of this programme.</p>
     <div class="books">
-      <div class="book"><div class="book-n">01</div><div><div class="book-t">On Becoming a Leader &mdash; Warren Bennis</div><div class="book-note">The foundational text on authentic leadership. Start here.</div></div></div>
-      <div class="book"><div class="book-n">02</div><div><div class="book-t">The Innovator's Dilemma &mdash; Christensen</div><div class="book-note">Why great firms fail and entrepreneurs exploit their blind spots.</div></div></div>
-      <div class="book"><div class="book-n">03</div><div><div class="book-t">Getting to Yes &mdash; Fisher, Ury &amp; Patton</div><div class="book-note">Harvard's definitive guide to principled negotiation.</div></div></div>
-      <div class="book"><div class="book-n">04</div><div><div class="book-t">Team of Teams &mdash; Gen. McChrystal</div><div class="book-note">How adaptability replaces hierarchy in complex environments.</div></div></div>
-      <div class="book"><div class="book-n">05</div><div><div class="book-t">Zero to One &mdash; Peter Thiel</div><div class="book-note">A contrarian philosophy of venture creation. Dense. Important.</div></div></div>
-      <div class="book"><div class="book-n">06</div><div><div class="book-t">The Righteous Mind &mdash; Jonathan Haidt</div><div class="book-note">Essential for ethical leadership. Why good people disagree.</div></div></div>
-      <div class="book"><div class="book-n">07</div><div><div class="book-t">Thinking, Fast and Slow &mdash; Kahneman</div><div class="book-note">The cognitive science every decision-maker must understand.</div></div></div>
-      <div class="book"><div class="book-n">08</div><div><div class="book-t">The Hard Thing About Hard Things</div><div class="book-note">Unvarnished entrepreneurial leadership. No platitudes.</div></div></div>
-      <div class="book"><div class="book-n">09</div><div><div class="book-t">Never Split the Difference &mdash; Voss</div><div class="book-note">FBI negotiation methods applied to business and leadership.</div></div></div>
-      <div class="book"><div class="book-n">10</div><div><div class="book-t">Executive Presence &mdash; Sylvia Ann Hewlett</div><div class="book-note">Research-backed guide to gravitas, communication, and presence.</div></div></div>
+      <div class="book"><div class="book-n">01</div><div><div class="book-t">On Becoming a Leader &mdash; Warren Bennis</div><div class="book-note" data-i18n="book-1-note">The foundational text on authentic leadership. Start here.</div></div></div>
+      <div class="book"><div class="book-n">02</div><div><div class="book-t">The Innovator's Dilemma &mdash; Christensen</div><div class="book-note" data-i18n="book-2-note">Why great firms fail and entrepreneurs exploit their blind spots.</div></div></div>
+      <div class="book"><div class="book-n">03</div><div><div class="book-t">Getting to Yes &mdash; Fisher, Ury &amp; Patton</div><div class="book-note" data-i18n="book-3-note">Harvard's definitive guide to principled negotiation.</div></div></div>
+      <div class="book"><div class="book-n">04</div><div><div class="book-t">Team of Teams &mdash; Gen. McChrystal</div><div class="book-note" data-i18n="book-4-note">How adaptability replaces hierarchy in complex environments.</div></div></div>
+      <div class="book"><div class="book-n">05</div><div><div class="book-t">Zero to One &mdash; Peter Thiel</div><div class="book-note" data-i18n="book-5-note">A contrarian philosophy of venture creation. Dense. Important.</div></div></div>
+      <div class="book"><div class="book-n">06</div><div><div class="book-t">The Righteous Mind &mdash; Jonathan Haidt</div><div class="book-note" data-i18n="book-6-note">Essential for ethical leadership. Why good people disagree.</div></div></div>
+      <div class="book"><div class="book-n">07</div><div><div class="book-t">Thinking, Fast and Slow &mdash; Kahneman</div><div class="book-note" data-i18n="book-7-note">The cognitive science every decision-maker must understand.</div></div></div>
+      <div class="book"><div class="book-n">08</div><div><div class="book-t">The Hard Thing About Hard Things</div><div class="book-note" data-i18n="book-8-note">Unvarnished entrepreneurial leadership. No platitudes.</div></div></div>
+      <div class="book"><div class="book-n">09</div><div><div class="book-t">Never Split the Difference &mdash; Voss</div><div class="book-note" data-i18n="book-9-note">FBI negotiation methods applied to business and leadership.</div></div></div>
+      <div class="book"><div class="book-n">10</div><div><div class="book-t">Executive Presence &mdash; Sylvia Ann Hewlett</div><div class="book-note" data-i18n="book-10-note">Research-backed guide to gravitas, communication, and presence.</div></div></div>
     </div>
   </div>
 </div>
 
 <footer>
-  <p>This programme was built as a <strong>self-directed equivalent</strong> to Oxford Lifelong Learning's Leadership &amp; Entrepreneurship course. Same frameworks, same canon. No credential &mdash; only the knowledge.</p>
-  <p style="margin-top: 16px;"><a href="index.html">&larr; Back to Portfolio</a></p>
+  <p data-i18n="footer-text">This programme was built as a <strong>self-directed equivalent</strong> to Oxford Lifelong Learning's Leadership &amp; Entrepreneurship course. Same frameworks, same canon. No credential &mdash; only the knowledge.</p>
+  <p style="margin-top: 16px;"><a href="index.html" data-i18n="footer-back">&larr; Back to Portfolio</a></p>
 </footer>
 
 <script>
-const MODULES = [
+const MODULES_EN = [
 {num:"01",title:"The Blueprint of a Leader",tagline:"What separates leaders from managers \u2014 and vision from wishful thinking.",duration:"~90 min",
 lessons:[
 {title:"What Makes a Leader",intro:"Leadership is not a title. It is a sustained pattern of behaviour \u2014 most visible when it costs something.",
@@ -821,21 +826,534 @@ ex:{title:"Influence Map",sub:"Understand the network you have \u2014 then build
 ];
 
 /* STATE */
+let MODULES = JSON.parse(JSON.stringify(MODULES_EN));
+
 const STATE = {
-  progress: MODULES.map(m => m.lessons.map(() => false)),
+  progress: MODULES_EN.map(m => m.lessons.map(() => false)),
   currentModule: -1, currentLesson: 0
 };
-const totalL = MODULES.reduce((s,m)=>s+m.lessons.length,0);
+const totalL = MODULES_EN.reduce((s,m)=>s+m.lessons.length,0);
 const doneCount = () => STATE.progress.reduce((s,p)=>s+p.filter(Boolean).length,0);
 const modDone = mi => STATE.progress[mi].every(Boolean);
 const modPartial = mi => STATE.progress[mi].some(Boolean) && !modDone(mi);
 
 /* SCROLL PROGRESS */
 const progressBar = document.getElementById('scroll-progress');
-window.addEventListener('scroll', () => {
-  const s = window.scrollY, d = document.documentElement.scrollHeight - window.innerHeight;
-  progressBar.style.width = (d > 0 ? (s/d)*100 : 0) + '%';
-}, {passive:true});
+if (progressBar) {
+  window.addEventListener('scroll', () => {
+    const s = window.scrollY, d = document.documentElement.scrollHeight - window.innerHeight;
+    progressBar.style.width = (d > 0 ? (s/d)*100 : 0) + '%';
+  }, {passive:true});
+}
+
+const MODULES_FR_TRANSLATIONS = {
+  0: {
+    title: "Le Modèle du Leader",
+    tagline: "Ce qui sépare les leaders des managers — et la vision du simple souhait.",
+    lessons: [
+      {
+        title: "Qu'est-ce qu'un Leader",
+        intro: "Le leadership n'est pas un titre. C'est un modèle de comportement durable — plus visible quand il coûte quelque chose.",
+        ex: {
+          title: "L'Autopsie du Leadership",
+          sub: "Deux courtes réflexions. Soyez honnête — c'est tout l'intérêt.",
+          steps: [
+            "Écrivez 3 à 4 phrases sur un moment où vous avez dirigé efficacement. Quelles conditions ont rendu cela possible ?",
+            "Écrivez 3 à 4 phrases sur un moment où votre leadership a échoué. Qu'est-ce qui manquait ?",
+            "Quel est le modèle unique qui relie ces deux réponses ? C'est votre point de départ."
+          ]
+        }
+      },
+      {
+        title: "De la Vision à la Réalité",
+        intro: "Avoir une vision est le strict minimum. La traduire en comportement quotidien est le véritable travail.",
+        ex: {
+          title: "L'Audit de Vision",
+          sub: "Un diagnostic rapide. La plupart des leaders sont surpris de ce qu'ils trouvent.",
+          steps: [
+            "Énoncez votre vision actuelle du leadership en une seule phrase.",
+            "Listez les cinq décisions les plus importantes que vous avez prises le mois dernier. Reflètent-elles cette vision ?",
+            "Nommez un changement structurel — une métrique, un rituel, une question — qui renforcerait votre vision en pratique."
+          ]
+        }
+      },
+      {
+        title: "Styles de Leadership",
+        intro: "Votre style par défaut a fonctionné par le passé. Évoluer nécessite d'ajouter de nouveaux styles.",
+        ex: {
+          title: "Cartographie des Styles",
+          sub: "Une auto-évaluation honnête prend dix minutes. L'insight dure plus longtemps.",
+          steps: [
+            "Identifiez votre style dominant. Dans quelle situation vous y êtes-vous fié pour la première fois ?",
+            "Nommez un contexte actuel où ce style sous-performe systématiquement.",
+            "Identifiez un leader dont le style diffère du vôtre. Quelle qualité lui emprunteriez-vous et dans quelle situation ?"
+          ]
+        }
+      }
+    ]
+  },
+  1: {
+    title: "Créer du Lien et des Points Communs",
+    tagline: "La confiance ne se construit pas en salle de réunion. Elle naît de chaque petit instant.",
+    lessons: [
+      {
+        title: "La Science du Rapport",
+        intro: "Le rapport n'est pas du charme. C'est la sécurité psychologique au niveau interpersonnel.",
+        ex: {
+          title: "Le Rituel des Trois Minutes",
+          sub: "Simple. Cohérent. Étonnamment puissant avec le temps.",
+          steps: [
+            "Pendant une semaine, passez trois minutes sincères avec un membre différent de l'équipe chaque jour.",
+            "Posez une question sur son expérience de son travail, pas sur le statut du projet. Écoutez sans rediriger.",
+            "Après sept jours : quelque chose a-t-il changé dans sa façon de s'engager avec vous ?"
+          ]
+        }
+      },
+      {
+        title: "Trouver un Terrain D'entente",
+        intro: "Ceux qui semblent en désaccord sur la méthode partagent presque toujours des objectifs sous-jacents.",
+        ex: {
+          title: "Cartographie du Terrain Commun",
+          sub: "Choisissez une tension réelle et actuelle. Cela ne fonctionne que sur du matériel vivant.",
+          steps: [
+            "Identifiez un conflit ou une tension active dans votre équipe ou organisation.",
+            "Écrivez la position déclarée de chaque partie — ce qu'elle dit vouloir.",
+            "Sous chacune, écrivez ce que vous croyez être leur intérêt sous-jacent réel.",
+            "Où ces intérêts se chevauchent-ils ? C'est votre point de départ."
+          ]
+        }
+      },
+      {
+        title: "Le Coaching comme Leadership",
+        intro: "Passer de la directive à la question est l'un des leviers les plus puissants d'un leader.",
+        ex: {
+          title: "Le modèle GROW en Pratique",
+          sub: "Utilisez ce cadre lors de votre prochaine conversation individuelle.",
+          steps: [
+            "Goal : Que voulez-vous accomplir dans cette conversation ?",
+            "Reality : Quelle est la situation actuelle, honnêtement ? Qu'avez-vous essayé ?",
+            "Options : Quelles sont toutes les pistes possibles — y compris les inconfortables ?",
+            "Will : À quelle action spécifique vous engagez-vous, et pour quand exactement ?"
+          ]
+        }
+      }
+    ]
+  },
+  2: {
+    title: "Communication & Influence",
+    tagline: "Les données changent les esprits. Les histoires changent les comportements. La clarté change les organisations.",
+    lessons: [
+      {
+        title: "L'Architecture de la Persuasion",
+        intro: "Les trois modes de persuasion d'Aristote ont 2 400 ans et restent les plus précis.",
+        ex: {
+          title: "L'Audit de Persuasion",
+          sub: "Choisissez une communication récente qui n'a pas atterri comme prévu.",
+          steps: [
+            "Notez-la de 1 à 10 sur chaque dimension : Ethos, Pathos, Logos.",
+            "Laquelle a obtenu la note la plus basse ? C'était le point de défaillance.",
+            "Repensez les 60 premières secondes en menant avec la dimension la plus faible."
+          ]
+        }
+      },
+      {
+        title: "Storytelling pour Leaders",
+        intro: "La chose la plus puissante que vous puissiez faire en conseil d'administration est de raconter une histoire vraie et bien menée.",
+        ex: {
+          title: "Construisez votre Banque d'Histoires",
+          sub: "Trois histoires. Quatre à six phrases chacune. Ce sont vos actifs professionnels les plus précieux.",
+          steps: [
+            "Un échec — et ce qu'il vous a réellement appris. Pas la version polie.",
+            "Un moment où quelqu'un a sincèrement changé votre avis — qu'est-ce qui a changé et pourquoi ?",
+            "Un moment où votre équipe a accompli something qui vous a surpris — qu'est-ce qui l'a rendu possible ?"
+          ]
+        }
+      },
+      {
+        title: "Écoute Profonde",
+        intro: "La plupart des leaders écoutent pour répondre. Les plus rares écoutent pour comprendre — et la différence se sent en quelques secondes.",
+        ex: {
+          title: "Diagnostic d'Écoute",
+          sub: "Appliquez ceci à vos trois prochaines conversations importantes.",
+          steps: [
+            "Notez à quel moment vous avez commencé à former votre réponse pendant que l'autre parlait.",
+            "Comptez combien de fois vous avez redirigé la conversation vers votre propre cadre.",
+            "Vérifiez : à la fin, pouvez-vous énoncer précisément ce qui comptait le plus pour l'autre ?"
+          ]
+        }
+      }
+    ]
+  },
+  3: {
+    title: "Innovation & Esprit Entrepreneurial",
+    tagline: "L'innovation n'est pas un acte de création. C'est une discipline culturelle et un choix de leadership.",
+    lessons: [
+      {
+        title: "L'Esprit de l'Innovateur",
+        intro: "Les leaders en place échouent non pas parce qu'ils cessent d'innover, mais parce qu'ils optimisent pour les mauvais clients.",
+        ex: {
+          title: "Cartographie de la Disruption",
+          sub: "Appliquez le cadre à votre propre secteur — honnêtement.",
+          steps: [
+            "Nommez le modèle d'affaires dominant dans votre domaine. Qui sert-il le mieux ?",
+            "Qui est mal servi — surfacturé, sur-compliqué ou simplement ignoré ?",
+            "Quelle alternative plus simple pourrait servir ce groupe ignoré ?"
+          ]
+        }
+      },
+      {
+        title: "De l'Idée à l'Entreprise",
+        intro: "Le goulot d'étranglement n'est jamais les idées. C'est le chemin de l'hypothèse à la preuve.",
+        ex: {
+          title: "Le Test de l'Hypothèse la plus Risquée",
+          sub: "Faites ceci avant de rédiger un plan d'affaires, pas après.",
+          steps: [
+            "Listez les trois hypothèses dont dépend le succès de votre entreprise.",
+            "Pour chacune : quelle est l'expérience la plus rapide et la moins chère pour savoir si elle est vraie ?",
+            "Lancez la première expérience avant de construire autre chose."
+          ]
+        }
+      },
+      {
+        title: "Éducation Financière pour Leaders",
+        intro: "Les leaders qui ne savent pas lire les signaux financiers dépendent en permanence des autres.",
+        ex: {
+          title: "Vérification de la Maîtrise Financière",
+          sub: "Trois questions clés. Si vous ne pouvez y répondre, c'est votre point de départ.",
+          steps: [
+            "Pouvez-vous énoncer la marge brute de votre organisation et nommer les deux facteurs clés qui l'influencent ?",
+            "Pouvez-vous identifier le poste de coût le plus important — fixe ou variable ?",
+            "Savez-vous combien de mois de capital d'exploitation détient l'organisation aujourd'hui ?"
+          ]
+        }
+      }
+    ]
+  },
+  4: {
+    title: "Négociation & Architecture d'Équipe",
+    tagline: "La conception de votre équipe détermine le plafond de votre leadership.",
+    lessons: [
+      {
+        title: "Négociation Raisonnée",
+        intro: "Le marchandage de positions ressemble à de la négociation. La négociation raisonnée l'est réellement.",
+        ex: {
+          title: "Cartographie de la MESORE",
+          sub: "Faites ceci avant votre prochaine négociation importante — pas pendant.",
+          steps: [
+            "Identifiez votre Meilleure Solution de Rechange (MESORE / BATNA). Quelle est votre alternative réaliste ?",
+            "Estimez la MESORE de l'autre partie aussi précisément que possible.",
+            "La zone d'accord possible se situe entre les deux alternatives."
+          ]
+        }
+      },
+      {
+        title: "Équipes Haute Performance",
+        intro: "Google a étudié 180 équipes pour trouver ce qui les rendait exceptionnelles. La réponse n'était pas le talent.",
+        ex: {
+          title: "Audit d'Équipe GRPI",
+          sub: "Répondez honnêtement. Le flou dans l'un de ces domaines prédit la sous-performance.",
+          steps: [
+            "Objectifs : Chaque membre peut-il énoncer la priorité absolue en une seule phrase ?",
+            "Rôles : Y a-t-il une responsabilité partagée par deux personnes, ou aucune ?",
+            "Processus : Que se passe-t-il réellement en cas de désaccord authentique ?",
+            "Interpersonnel : Quand a eu lieu le dernier feedback franc — et a-t-il été bien accueilli ?"
+          ]
+        }
+      },
+      {
+        title: "Le Leader comme Architecte",
+        intro: "Dans les environnements complexes, le travail du leader n'est pas de contrôler. C'est de créer les conditions.",
+        ex: {
+          title: "L'Audit de Délégation",
+          sub: "La plupart des leaders sont surpris de tout ce qu'ils contrôlent encore.",
+          steps: [
+            "Listez les cinq dernières décisions qui vous ont été soumises pour approbation. Lesquelles auraient pu être prises plus bas ?",
+            "Pour chacune : de quelles informations cette personne aurait-elle eu besoin, et les a-t-elle ?",
+            "Identifiez une décision à déléguer formellement cette semaine."
+          ]
+        }
+      }
+    ]
+  },
+  5: {
+    title: "Éthique et Leadership",
+    tagline: "Le test de l'éthique d'un leader n'est pas ce qu'il fait quand c'est facile, mais quand cela a un coût.",
+    lessons: [
+      {
+        title: "La Fondation Éthique",
+        intro: "La plupart des échecs de leadership ne sont pas stratégiques, mais moraux.",
+        ex: {
+          title: "Valeurs sous Pression",
+          sub: "Votre comportement sous tension révèle vos valeurs réelles, pas vos discours.",
+          steps: [
+            "Nommez trois valeurs professionnelles qui vous définissent (ex: honnêteté, courage, équité).",
+            "Pour chacune : décrivez une situation récente où cette valeur a été testée. Qu'avez-vous fait ?",
+            "Où se situe l'écart entre votre valeur déclarée et votre action ?"
+          ]
+        }
+      },
+      {
+        title: "Prise de Décision Éthique",
+        intro: "Les choix éthiques difficiles opposent plusieurs valeurs légitimes. Un cadre les rend visibles.",
+        ex: {
+          title: "L'Audit des Trois Lentes",
+          sub: "Appliquez ceci à un dilemme éthique réel auquel vous faites face actuellement.",
+          steps: [
+            "Décrivez la décision en un paragraphe — y compris ce qui la rend difficile.",
+            "Appliquez chaque prisme séparément : Conséquentialiste, Déontologique, Éthique des vertus.",
+            "Où s'accordent-ils ? Où divergent-ils ?"
+          ]
+        }
+      },
+      {
+        title: "Bâtir une Culture Éthique",
+        intro: "L'intégrité individuelle est nécessaire mais insuffisante. La culture détermine ce qui est possible à l'échelle.",
+        ex: {
+          title: "Audit des Signaux Culturels",
+          sub: "Ce que votre organisation récompense raconte une histoire plus claire que ses valeurs déclarées.",
+          steps: [
+            "Nommez trois comportements récemment récompensés ou salués publiquement.",
+            "S'alignent-ils avec vos valeurs déclarées ? Sinon, quels signaux envoient-ils ?",
+            "Identifiez un changement structurel pour encourager les comportements éthiques."
+          ]
+        }
+      }
+    ]
+  },
+  6: {
+    title: "Stratégie Globale & Leadership",
+    tagline: "Le monde n'est pas un marché homogène. Les leaders qui le traitent comme tel sous-performent systématiquement.",
+    lessons: [
+      {
+        title: "Penser Globalement",
+        intro: "La stratégie globale n'est pas une stratégie locale appliquée à plus grande échelle. Elle requiert une pensée différente.",
+        ex: {
+          title: "Analyse des Distances CAGE",
+          sub: "Appliquez ceci à un marché cible envisagé ou existant.",
+          steps: [
+            "Notez le marché cible par rapport à votre marché d'origine sur chaque dimension CAGE (Culturel, Administratif, Géographique, Économique).",
+            "Quelle dimension présente le risque le plus élevé, et l'équipe est-elle prête ?",
+            "Que faudrait-il pour réussir ?"
+          ]
+        }
+      },
+      {
+        title: "Diriger à travers les Cultures",
+        intro: "Les différences culturelles ne sont pas un obstacle. Elles sont le terrain. Apprenez à le connaître.",
+        ex: {
+          title: "Audit de l'Intelligence Culturelle",
+          sub: "Connaître vos propres biais est le point de départ pour diriger à travers les différences.",
+          steps: [
+            "Identifiez la dimension culturelle où votre culture d'origine est la plus extrême.",
+            "Nommez une relation de travail actuelle impactée par une différence culturelle.",
+            "Concevez une adaptation comportementale spécifique pour cette relation."
+          ]
+        }
+      },
+      {
+        title: "Stratégie face à l'Incertitude",
+        intro: "La seule certitude sur l'avenir est que votre modèle actuel est erroné d'une manière ou d'une autre.",
+        ex: {
+          title: "Test de Double Scénario",
+          sub: "Appliquez ceci à la stratégie actuelle de votre organisation.",
+          steps: [
+            "Nommez l'hypothèse principale de votre stratégie sur l'environnement externe à 3 ans.",
+            "Concevez un scénario plausible dans lequel cette hypothèse s'avère fausse.",
+            "Quelles parties de votre stratégie restent valides, et lesquelles doivent changer ?"
+          ]
+        }
+      }
+    ]
+  },
+  7: {
+    title: "Marque Personnelle & Présence Exécutive",
+    tagline: "Votre marque personnelle n'est pas votre réputation. C'est l'histoire délibérée que vous racontez sur votre travail.",
+    lessons: [
+      {
+        title: "Qu'est-ce que la Marque Personnelle ?",
+        intro: "Chaque leader a une marque personnelle. La question est de savoir si c'est celle qu'il souhaitait.",
+        ex: {
+          title: "Audit d'Identité",
+          sub: "Commencez par la vérité avant de penser au récit.",
+          steps: [
+            "Écrivez trois phrases sur votre domaine d'expertise réelle — ce que vous savez faire que les autres ne savent pas.",
+            "Identifiez la perspective distinctive que vous portez dans votre domaine.",
+            "Demandez à trois collègues de confiance : pour quoi êtes-vous connu ? Comparez."
+          ]
+        }
+      },
+      {
+        title: "Présence Exécutive",
+        intro: "La présence n'est pas de la confiance. La confiance est interne. La présence est ce que vous offrez aux autres dans la pièce.",
+        ex: {
+          title: "Diagnostic de Présence",
+          sub: "Cela requiert des retours honnêtes d'autrui — c'est tout l'intérêt.",
+          steps: [
+            "Demandez à deux personnes : 'Quand je suis au mieux de ma forme, que remarquez-vous ?' et 'Quand je ne le suis pas, qu'est-ce qui change ?'",
+            "Cartographiez les réponses selon le gravitas, la communication et l'apparence.",
+            "Pratiquez la pleine présence dans une situation clé ces deux prochaines semaines."
+          ]
+        }
+      },
+      {
+        title: "Influence au-delà de l'Autorité",
+        intro: "Les leaders les plus puissants opèrent bien au-delà de leur autorité formelle. C'est une compétence apprenable.",
+        ex: {
+          title: "Cartographie d'Influence",
+          sub: "Comprenez le réseau que vous avez, puis bâtissez celui dont vous avez besoin.",
+          steps: [
+            "Cartographiez vos cinq relations professionnelles clés. Sont-elles transactionnelles ou mutuelles ?",
+            "Identifiez deux personnes clés dont le soutien ferait avancer votre travail.",
+            "Concevez une action spécifique non-transactionnelle pour investir dans ces relations."
+          ]
+        }
+      }
+    ]
+  }
+};
+
+const TRANSLATIONS = {
+  en: {
+    "dock-back": "Portfolio",
+    "dock-progress": "Progress",
+    "learning-eyebrow": "Self-Directed Programme &middot; 8 Modules",
+    "learning-title": "Leadership &amp;<br><em>Entrepreneurship</em>",
+    "learning-sub": "The intellectual substance of professional leadership development &mdash; distilled into a rigorous programme you own completely. Built by Hissein Ali.",
+    "stat-lbl-modules": "Modules",
+    "stat-lbl-lessons": "Lessons",
+    "stat-lbl-study": "Study Time",
+    "stat-lbl-exercises": "Exercises",
+    "learning-cta": "Begin the programme <svg width=\"13\" height=\"13\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" viewBox=\"0 0 24 24\"><path d=\"M12 5v14M5 12l7 7 7-7\"/></svg>",
+    "curriculum-label": "Curriculum",
+    "curriculum-title": "Eight <em>Core</em> Modules",
+    "curriculum-intro": "Each module is a deep study unit. Read, reflect, complete the exercise &mdash; then mark it done. Progress is tracked at the top of every page.",
+    "close-module": "&times; Close module",
+    "framework-label": "The Framework",
+    "framework-title": "Four <em>Universal</em> Traits",
+    "framework-intro": "Every exceptional leader &mdash; across sport, military, arts, and commerce &mdash; shares these four qualities.",
+    "pillar-vision-name": "Vision",
+    "pillar-vision-desc": "Seeing what others cannot yet imagine. Articulating it so others choose to follow.",
+    "pillar-auth-name": "Authenticity",
+    "pillar-auth-desc": "Consistency between values, words, and actions &mdash; under pressure as much as in comfort.",
+    "pillar-res-name": "Resilience",
+    "pillar-res-desc": "Absorbing setbacks without losing direction. Performing sustainably, not just brilliantly once.",
+    "pillar-imp-name": "Impact",
+    "pillar-imp-desc": "Creating change that outlasts your tenure. Results matter &mdash; and so does how you achieve them.",
+    "reading-label": "Essential Reading",
+    "reading-title": "The <em>Canon</em>",
+    "reading-intro": "Ten texts that form the intellectual backbone of this programme.",
+    "book-1-note": "The foundational text on authentic leadership. Start here.",
+    "book-2-note": "Why great firms fail and entrepreneurs exploit their blind spots.",
+    "book-3-note": "Harvard's definitive guide to principled negotiation.",
+    "book-4-note": "How adaptability replaces hierarchy in complex environments.",
+    "book-5-note": "A contrarian philosophy of venture creation. Dense. Important.",
+    "book-6-note": "Essential for ethical leadership. Why good people disagree.",
+    "book-7-note": "The cognitive science every decision-maker must understand.",
+    "book-8-note": "Unvarnished entrepreneurial leadership. No platitudes.",
+    "book-9-note": "FBI negotiation methods applied to business and leadership.",
+    "book-10-note": "Research-backed guide to gravitas, communication, and presence.",
+    "footer-text": "This programme was built as a <strong>self-directed equivalent</strong> to Oxford Lifelong Learning's Leadership &amp; Entrepreneurship course. Same frameworks, same canon. No credential &mdash; only the knowledge.",
+    "footer-back": "&larr; Back to Portfolio"
+  },
+  fr: {
+    "dock-back": "Portfolio",
+    "dock-progress": "Progression",
+    "learning-eyebrow": "Programme Autodidacte &middot; 8 Modules",
+    "learning-title": "Leadership &amp;<br><em>Entrepreneuriat</em>",
+    "learning-sub": "La substance intellectuelle du développement du leadership professionnel &mdash; distillée dans un programme rigoureux que vous possédez entièrement. Conçu par Hissein Ali.",
+    "stat-lbl-modules": "Modules",
+    "stat-lbl-lessons": "Leçons",
+    "stat-lbl-study": "Temps d'étude",
+    "stat-lbl-exercises": "Exercices",
+    "learning-cta": "Commencer le programme <svg width=\"13\" height=\"13\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" viewBox=\"0 0 24 24\"><path d=\"M12 5v14M5 12l7 7 7-7\"/></svg>",
+    "curriculum-label": "Curriculum",
+    "curriculum-title": "Huit Modules <em>Fondamentaux</em>",
+    "curriculum-intro": "Chaque module est une unité d'étude approfondie. Lisez, réfléchissez, terminez l'exercice, puis marquez-le comme fait. Votre progression est suivie en haut de chaque page.",
+    "close-module": "&times; Fermer le module",
+    "framework-label": "Le Cadre",
+    "framework-title": "Quatre Traits <em>Universels</em>",
+    "framework-intro": "Tout leader exceptionnel &mdash; dans le sport, l'armée, les arts ou le commerce &mdash; partage ces quatre qualités.",
+    "pillar-vision-name": "Vision",
+    "pillar-vision-desc": "Voir ce que les autres ne peuvent pas encore imaginer. L'articuler pour que d'autres choisissent de suivre.",
+    "pillar-auth-name": "Authenticité",
+    "pillar-auth-desc": "Cohérence entre les valeurs, les mots et les actions &mdash; sous pression comme dans le confort.",
+    "pillar-res-name": "Résilience",
+    "pillar-res-desc": "Absorber les revers sans perdre le cap. Performer durablement, pas seulement une fois brillamment.",
+    "pillar-imp-name": "Impact",
+    "pillar-imp-desc": "Créer un changement qui survit à votre mandat. Les résultats comptent &mdash; et la manière d'y parvenir aussi.",
+    "reading-label": "Lecture Essentielle",
+    "reading-title": "Le <em>Canon</em>",
+    "reading-intro": "Dix textes qui forment la colonne vertébrale intellectuelle de ce programme.",
+    "book-1-note": "Le texte fondateur sur le leadership authentique. Commencez ici.",
+    "book-2-note": "Pourquoi les grandes entreprises échouent et comment les entrepreneurs exploitent leurs angles morts.",
+    "book-3-note": "Le guide définitif de Harvard pour une négociation raisonnée.",
+    "book-4-note": "Comment l'adaptabilité remplace la hiérarchie dans les environnements complexes.",
+    "book-5-note": "Une philosophie à contre-courant de la création d'entreprise. Dense. Important.",
+    "book-6-note": "Indispensable pour un leadership éthique. Pourquoi les bonnes gens ne sont pas d'accord.",
+    "book-7-note": "La science cognitive que tout décideur doit comprendre.",
+    "book-8-note": "Le leadership entrepreneurial sans fard. Pas de platitudes.",
+    "book-9-note": "Les méthodes de négociation du FBI appliquées aux affaires et au leadership.",
+    "book-10-note": "Guide basé sur la recherche pour le gravitas, la communication et la présence.",
+    "footer-text": "Ce programme a été conçu comme un <strong>équivalent autodidacte</strong> au cours de Leadership &amp; Entrepreneuriat de Oxford Lifelong Learning. Mêmes cadres, même canon. Pas de diplôme &mdash; seulement le savoir.",
+    "footer-back": "&larr; Retour au Portfolio"
+  }
+};
+
+function applyLanguage(lang) {
+  window.PORTFOLIO_LANG = lang;
+  localStorage.setItem('portfolio-lang', lang);
+
+  // Update switcher styling
+  const btnEn = document.getElementById('btn-lang-en');
+  const btnFr = document.getElementById('btn-lang-fr');
+  if (lang === 'fr') {
+    if (btnEn) { btnEn.style.background = 'none'; btnEn.style.color = '#5a5a7a'; }
+    if (btnFr) { btnFr.style.background = 'rgba(255,255,255,0.05)'; btnFr.style.color = '#c9a84c'; }
+  } else {
+    if (btnEn) { btnEn.style.background = 'rgba(255,255,255,0.05)'; btnEn.style.color = '#c9a84c'; }
+    if (btnFr) { btnFr.style.background = 'none'; btnFr.style.color = '#5a5a7a'; }
+  }
+
+  // Update static UI
+  const nodes = document.querySelectorAll('[data-i18n]');
+  nodes.forEach(node => {
+    const key = node.getAttribute('data-i18n');
+    const translation = TRANSLATIONS[lang][key];
+    if (translation) {
+      node.innerHTML = translation;
+    }
+  });
+
+  // Load French modifications over active array if active
+  MODULES = JSON.parse(JSON.stringify(MODULES_EN));
+  if (lang === 'fr') {
+    MODULES.forEach((m, mi) => {
+      const trans = MODULES_FR_TRANSLATIONS[mi];
+      if (trans) {
+        m.title = trans.title;
+        m.tagline = trans.tagline;
+        m.lessons.forEach((l, li) => {
+          const lTrans = trans.lessons[li];
+          if (lTrans) {
+            l.title = lTrans.title;
+            l.intro = lTrans.intro;
+            if (l.ex && lTrans.ex) {
+              l.ex.title = lTrans.ex.title;
+              l.ex.sub = lTrans.ex.sub;
+              l.ex.steps = lTrans.ex.steps;
+            }
+          }
+        });
+      }
+    });
+  }
+
+  renderGrid();
+  updateProgress();
+  if (STATE.currentModule !== -1) {
+    renderPanel(STATE.currentModule);
+  }
+}
 
 /* PROGRESS */
 function updateProgress() {
@@ -860,7 +1378,7 @@ function renderGrid() {
       <div class="mod-title">${m.title}</div>
       <div class="mod-tagline">${m.tagline}</div>
       <div class="mod-meta">
-        <div class="mod-dur">${m.duration} \u00b7 ${m.lessons.length} lessons</div>
+        <div class="mod-dur">${m.duration} \u00b7 ${m.lessons.length} ${window.PORTFOLIO_LANG === 'fr' ? 'leçons' : 'lessons'}</div>
         <div class="mod-progress-mini">${m.lessons.map(()=>`<div class="mini-dot"></div>`).join('')}</div>
       </div>
     </div>`).join('');
@@ -879,12 +1397,14 @@ function openModule(mi) {
 function closePanel() {
   document.getElementById('lesson-panel').classList.remove('open');
   document.querySelectorAll('.mod-card').forEach(c => c.classList.remove('active'));
+  STATE.currentModule = -1;
 }
 
 /* RENDER PANEL */
 function renderPanel(mi) {
   const mod = MODULES[mi];
-  document.getElementById('panelModLabel').textContent = `Module ${mod.num} \u2014 ${mod.title}`;
+  const modLabel = window.PORTFOLIO_LANG === 'fr' ? `Module` : `Module`;
+  document.getElementById('panelModLabel').textContent = `${modLabel} ${mod.num} \u2014 ${mod.title}`;
   document.getElementById('lessonTabs').innerHTML = mod.lessons.map((l,li) => `
     <button class="lesson-tab ${li===0?'active':''} ${STATE.progress[mi][li]?'done':''}" onclick="switchLesson(${li})" id="tab-${mi}-${li}">
       <span class="tab-check">${STATE.progress[mi][li]?'\u2713':''}</span>${l.title}
@@ -895,20 +1415,20 @@ function renderPanel(mi) {
       <span class="lesson-intro-line">${l.intro}</span>
       ${l.body}
       <div class="exercise">
-        <h4>\u2726 Exercise</h4>
+        <h4>\u2726 ${window.PORTFOLIO_LANG === 'fr' ? 'Exercice' : 'Exercise'}</h4>
         <p class="ex-sub">${l.ex.sub}</p>
         <ol>${l.ex.steps.map(s=>`<li>${s}</li>`).join('')}</ol>
       </div>
       <div class="tags">${l.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
       <div class="lesson-nav-row">
         <button class="nav-btn" onclick="switchLesson(${li-1})" ${li===0?'disabled':''}>
-          <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>Previous
+          <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>${window.PORTFOLIO_LANG === 'fr' ? 'Précédent' : 'Previous'}
         </button>
         <button class="complete-btn ${STATE.progress[mi][li]?'done':''}" onclick="markDone(${mi},${li})" id="cbtn-${mi}-${li}">
-          ${STATE.progress[mi][li]?'\u2713 Completed':'Mark complete'}
+          ${STATE.progress[mi][li] ? (window.PORTFOLIO_LANG === 'fr' ? '\u2713 Terminé' : '\u2713 Completed') : (window.PORTFOLIO_LANG === 'fr' ? 'Marquer comme terminé' : 'Mark complete')}
         </button>
         <button class="nav-btn" onclick="switchLesson(${li+1})" ${li===mod.lessons.length-1?'disabled':''}>
-          Next<svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          ${window.PORTFOLIO_LANG === 'fr' ? 'Suivant' : 'Next'}<svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </button>
       </div>
     </div>`).join('');
@@ -929,7 +1449,10 @@ function markDone(mi, li) {
   if (STATE.progress[mi][li]) return;
   STATE.progress[mi][li] = true;
   const btn = document.getElementById(`cbtn-${mi}-${li}`);
-  if (btn) { btn.textContent = '\u2713 Completed'; btn.classList.add('done'); }
+  if (btn) {
+    btn.textContent = window.PORTFOLIO_LANG === 'fr' ? '\u2713 Terminé' : '\u2713 Completed';
+    btn.classList.add('done');
+  }
   const tab = document.getElementById(`tab-${mi}-${li}`);
   if (tab) {
     tab.classList.add('done');
@@ -946,20 +1469,40 @@ function showCeremony(mi) {
   const mod = MODULES[mi];
   document.getElementById('ceremonyTitle').textContent = mod.title;
   const nextMi = mi < MODULES.length - 1 ? mi + 1 : null;
-  document.getElementById('ceremonySub').textContent = nextMi !== null
-    ? `You have completed all lessons in Module ${mod.num}. The knowledge is yours \u2014 now the work begins.`
-    : `You have completed the entire programme. Extraordinary.`;
+  
+  if (nextMi !== null) {
+    document.getElementById('ceremonySub').textContent = window.PORTFOLIO_LANG === 'fr'
+      ? `Vous avez terminé toutes les leçons du Module ${mod.num}. Ce savoir est le vôtre \u2014 maintenant le travail commence.`
+      : `You have completed all lessons in Module ${mod.num}. The knowledge is yours \u2014 now the work begins.`;
+  } else {
+    document.getElementById('ceremonySub').textContent = window.PORTFOLIO_LANG === 'fr'
+      ? `Vous avez terminé l'intégralité du programme. Extraordinaire.`
+      : `You have completed the entire programme. Extraordinary.`;
+  }
+
   const nextBtn = document.getElementById('ceremonyNext');
   if (nextMi !== null) {
     nextBtn.style.display = 'inline-block';
+    nextBtn.textContent = window.PORTFOLIO_LANG === 'fr' ? 'Module suivant \u2192' : 'Next Module \u2192';
     nextBtn.onclick = () => { closeCeremony(); openModule(nextMi); };
-  } else { nextBtn.style.display = 'none'; }
+  } else {
+    nextBtn.style.display = 'none';
+  }
   document.getElementById('ceremony-overlay').classList.add('show');
 }
+
 function closeCeremony() { document.getElementById('ceremony-overlay').classList.remove('show'); }
 
-renderGrid();
-updateProgress();
+document.addEventListener('DOMContentLoaded', () => {
+  const btnEn = document.getElementById('btn-lang-en');
+  const btnFr = document.getElementById('btn-lang-fr');
+  if (btnEn) btnEn.addEventListener('click', () => applyLanguage('en'));
+  if (btnFr) btnFr.addEventListener('click', () => applyLanguage('fr'));
+
+  // Read language state from localStorage
+  const currentLang = localStorage.getItem('portfolio-lang') || 'en';
+  applyLanguage(currentLang);
+});
 </script>
 </body>
 </html>

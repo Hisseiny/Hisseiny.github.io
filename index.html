@@ -31,6 +31,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js" defer></script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Instrument+Serif:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
 
@@ -941,6 +942,20 @@ button:focus-visible {
 
 .terminal-send:hover { color: var(--color-accent); transform: scale(1.1); }
 
+.terminal-mic {
+  background: none;
+  border: none;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  padding: 4px;
+  transition: all var(--transition-fast);
+  display: flex;
+  flex-shrink: 0;
+}
+
+.terminal-mic:hover { color: var(--color-accent); transform: scale(1.1); }
+.terminal-mic.recording { color: #ef4444; animation: pulse-glow 1.5s infinite; }
+
 /* ── Command Palette (Ctrl+K) ── */
 .cmd-palette-backdrop {
   position: fixed; inset: 0; z-index: 9999;
@@ -1100,6 +1115,87 @@ button:focus-visible {
   .career-stage span:not(.career-dot) { display: none; }
   .career-stage::after { content: attr(data-short); font-size: 9px; }
 }
+
+/* Weekly Sprint Focus Card */
+.sprint-card {
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 16px;
+  padding: var(--space-6);
+  transition: all 400ms cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
+}
+
+.sprint-card:hover {
+  border-color: rgba(250, 204, 21, 0.2);
+  box-shadow: 0 10px 40px rgba(250, 204, 21, 0.03);
+  transform: translateY(-2px);
+}
+
+.sprint-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding-bottom: var(--space-4);
+  margin-bottom: var(--space-4);
+}
+
+.sprint-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+}
+
+@media (min-width: 768px) {
+  .sprint-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.sprint-item {
+  background: rgba(255, 255, 255, 0.01);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  border-radius: 12px;
+  padding: var(--space-4);
+  transition: all 300ms ease;
+}
+
+.sprint-item:hover {
+  background: rgba(255, 255, 255, 0.02);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.sprint-progress-bg {
+  width: 100%;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 99px;
+  overflow: hidden;
+  margin-top: var(--space-2);
+}
+
+.sprint-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #FACC15, #EAB308);
+  border-radius: 99px;
+  transition: width 1s ease-in-out;
+}
+
+/* Three.js Canvas Container */
+#hero-3d-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: auto;
+}
 </style>
 
 <script>
@@ -1199,16 +1295,20 @@ tailwind.config = {
 
         <!-- Desktop Links -->
         <div class="hidden md:flex items-center gap-10 text-xs font-medium uppercase tracking-widest text-neutral-400 absolute left-1/2 -translate-x-1/2">
-            <a href="#skills" class="hover:text-white transition-colors duration-300 relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[1px] after:bg-[#FACC15] after:transition-all after:duration-300 hover:after:w-full">Skills</a>
-            <a href="#experience" class="hover:text-white transition-colors duration-300 relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[1px] after:bg-[#FACC15] after:transition-all after:duration-300 hover:after:w-full">Experience</a>
-            <a href="#projects" class="hover:text-white transition-colors duration-300 relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[1px] after:bg-[#FACC15] after:transition-all after:duration-300 hover:after:w-full">Projects</a>
-            <a href="#learning" class="hover:text-white transition-colors duration-300 relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[1px] after:bg-[#FACC15] after:transition-all after:duration-300 hover:after:w-full">Learning</a>
-            <a href="#education" class="hover:text-white transition-colors duration-300 relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[1px] after:bg-[#FACC15] after:transition-all after:duration-300 hover:after:w-full">Education</a>
+            <a href="#skills" class="hover:text-white transition-colors duration-300 relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[1px] after:bg-[#FACC15] after:transition-all after:duration-300 hover:after:w-full" data-i18n="nav-skills">Skills</a>
+            <a href="#experience" class="hover:text-white transition-colors duration-300 relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[1px] after:bg-[#FACC15] after:transition-all after:duration-300 hover:after:w-full" data-i18n="nav-experience">Experience</a>
+            <a href="#projects" class="hover:text-white transition-colors duration-300 relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[1px] after:bg-[#FACC15] after:transition-all after:duration-300 hover:after:w-full" data-i18n="nav-projects">Projects</a>
+            <a href="#learning" class="hover:text-white transition-colors duration-300 relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[1px] after:bg-[#FACC15] after:transition-all after:duration-300 hover:after:w-full" data-i18n="nav-learning">Learning</a>
+            <a href="#education" class="hover:text-white transition-colors duration-300 relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[1px] after:bg-[#FACC15] after:transition-all after:duration-300 hover:after:w-full" data-i18n="nav-education">Education</a>
         </div>
 
         <!-- Desktop Action -->
         <div class="hidden md:flex items-center gap-6">
-            <a href="mailto:hisseinali.pro@gmail.com" class="btn-primary !py-2 !px-5 !text-[10px]">
+            <div class="flex items-center border border-white/10 rounded-full overflow-hidden p-0.5 bg-black/40" id="lang-switcher">
+                <button class="px-2.5 py-1 text-[9px] font-bold uppercase tracking-wider rounded-full transition-all text-[#FACC15] bg-white/5" id="btn-lang-en">EN</button>
+                <button class="px-2.5 py-1 text-[9px] font-bold uppercase tracking-wider rounded-full transition-all text-neutral-500 hover:text-white" id="btn-lang-fr">FR</button>
+            </div>
+            <a href="mailto:hisseinali.pro@gmail.com" class="btn-primary !py-2 !px-5 !text-[10px]" data-i18n="btn-talk">
                 Let's Talk
                 <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
             </a>
@@ -1282,7 +1382,7 @@ tailwind.config = {
                 </h1>
 
                 <!-- Subtext -->
-                <p class="text-lg text-neutral-400 max-w-md leading-relaxed mb-8 font-light animate-enter delay-200">
+                <p class="text-lg text-neutral-400 max-w-md leading-relaxed mb-8 font-light animate-enter delay-200" data-i18n="hero-sub">
                     From deploying <span class="text-white font-normal">Gemini at Airbus</span> to orchestrating <span class="text-white font-normal">Dust.tt agentic workflows</span> and building <span class="text-white font-normal">RAG systems</span>. An <span class="text-white font-normal">entrepreneur by nature</span>, I bridge the gap between complex AI and real business value.
                 </p>
 
@@ -1290,19 +1390,19 @@ tailwind.config = {
                 <div class="flex gap-8 mb-10 animate-enter delay-300">
                     <div>
                         <div class="stat-number" data-count="3">3</div>
-                        <div class="stat-label">Countries</div>
+                        <div class="stat-label" data-i18n="stat-countries">Countries</div>
                     </div>
                     <div class="w-px bg-white/10"></div>
                     <div>
                         <div class="stat-number" data-count="4">4</div>
-                        <div class="stat-label">Roles</div>
+                        <div class="stat-label" data-i18n="stat-roles">Roles</div>
                     </div>
                     <div class="w-px bg-white/10"></div>
                     <div>
                         <div class="stat-number">
                             <span data-count="2">2</span><span class="text-neutral-500 text-xl">+</span>
                         </div>
-                        <div class="stat-label">Years Exp</div>
+                        <div class="stat-label" data-i18n="stat-exp">Years Exp</div>
                     </div>
                 </div>
 
@@ -1327,8 +1427,8 @@ tailwind.config = {
                 </div>
             </div>
 
-            <!-- Right: Visual Composition -->
             <div class="hidden lg:flex animate-enter delay-200 w-full h-[600px] relative items-center justify-center" aria-hidden="true">
+                <div id="hero-3d-canvas"></div>
 
                 <svg class="absolute inset-0 w-full h-full pointer-events-none z-0" viewBox="0 0 600 600">
                     <defs>
@@ -1534,6 +1634,52 @@ tailwind.config = {
                     <p class="leading-relaxed text-lg font-light text-neutral-400">
                         From R&amp;D engineering to GenAI consulting at Airbus. <span class="text-white font-normal">A constant evolution towards Cloud &amp; AI solutions.</span>
                     </p>
+                </div>
+            </div>
+
+            <!-- Weekly Sprint Focus Card -->
+            <div class="sprint-card mb-12 animate-enter delay-200">
+                <div class="sprint-header">
+                    <div class="flex items-center gap-3">
+                        <span class="text-xl">⚡</span>
+                        <div>
+                            <h3 class="text-lg font-display font-medium text-white tracking-tight" data-i18n="sprint-title">This Week's Focus</h3>
+                            <p class="text-[10px] font-mono text-neutral-500 uppercase tracking-wider mt-0.5" data-i18n="sprint-footer">Updated live &bull; Week 22, 2026</p>
+                        </div>
+                    </div>
+                    <div class="status-badge !border-white/10 !bg-white/5 !text-neutral-400">
+                        <div class="status-dot !bg-[#FACC15] !shadow-[0_0_8px_rgba(250,204,21,0.5)] animate-pulse"></div>
+                        <span data-i18n="sprint-status">Sprint Active</span>
+                    </div>
+                </div>
+                <div class="sprint-grid mb-4">
+                    <!-- Item 1 -->
+                    <div class="sprint-item">
+                        <span class="text-[10px] font-mono text-[#FACC15] uppercase tracking-wider block mb-1">01 &middot; Client Work</span>
+                        <h4 class="text-sm font-medium text-white mb-2" data-i18n="sprint-p1-title">Accenture &amp; Airbus</h4>
+                        <p class="text-xs font-light text-neutral-400 leading-relaxed" data-i18n="sprint-p1-desc">Gemini engineering workflows &amp; PLM digital continuity.</p>
+                    </div>
+                    <!-- Item 2 -->
+                    <div class="sprint-item">
+                        <span class="text-[10px] font-mono text-[#FACC15] uppercase tracking-wider block mb-1">02 &middot; Academic Prep</span>
+                        <h4 class="text-sm font-medium text-white mb-2" data-i18n="sprint-p2-title">Study &amp; Learning</h4>
+                        <p class="text-xs font-light text-neutral-400 leading-relaxed" data-i18n="sprint-p2-desc">Module 3 (Communication &amp; Influence) in Leadership Lab.</p>
+                    </div>
+                    <!-- Item 3 -->
+                    <div class="sprint-item">
+                        <span class="text-[10px] font-mono text-[#FACC15] uppercase tracking-wider block mb-1">03 &middot; Skills &amp; Certs</span>
+                        <h4 class="text-sm font-medium text-white mb-2" data-i18n="sprint-p3-title">Cloud &amp; AI Prep</h4>
+                        <p class="text-xs font-light text-neutral-400 leading-relaxed" data-i18n="sprint-p3-desc">Azure GenAI certification prep &amp; voice agent flows.</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="flex justify-between items-center text-xs text-neutral-400 mb-1">
+                        <span data-i18n="sprint-progress-lbl">Sprint Progress</span>
+                        <span class="font-mono text-white">75%</span>
+                    </div>
+                    <div class="sprint-progress-bg">
+                        <div class="sprint-progress-fill" style="width: 75%;"></div>
+                    </div>
                 </div>
             </div>
 
@@ -2217,6 +2363,9 @@ tailwind.config = {
         <div class="terminal-input-wrap">
             <span class="terminal-prompt">~$</span>
             <input id="terminal-input" type="text" placeholder="Ask me anything..." autocomplete="off" spellcheck="false">
+            <button class="terminal-mic" id="terminal-mic" aria-label="Voice input" title="Voice dictation">
+                <iconify-icon icon="lucide:mic" width="16"></iconify-icon>
+            </button>
             <button class="terminal-send" id="terminal-send" aria-label="Send message">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
             </button>
@@ -2548,6 +2697,7 @@ tailwind.config = {
             { p:['learning','course','leadership','entrepreneurship'], r:"I built a Learning Lab on leadership and entrepreneurship with structured modules and real-world frameworks. It reflects something core about me: I don't just consume knowledge, I package it and share it. Teaching is the best way to master something." },
             { p:['this','chatbot','how does this work','website','built this'], r:"This chatbot runs on Gemini (Google's AI) via a secure Cloudflare Worker proxy, with an intelligent fallback when it's offline. The portfolio itself is hand-crafted: HTML, Tailwind, vanilla JS \u2014 no frameworks. I built the AI, the UI, and the guardrails. It's a portfolio that practices what it preaches." },
             { p:['why','hire','value','what makes you different','unique','stand out','strength'], r:"Here's what makes me different: I operate at the intersection of AI, Cloud, and Business. I can build the prototype, architect the infrastructure, and pitch it to the C-suite \u2014 all in the same week. I've delivered at Airbus, won hackathons under pressure, and I bring international experience across 3 countries. I don't just write code \u2014 I create business value." },
+            { p:['book','call','schedule','calendar','appointment','rendez-vous','meeting','talk'], r:"I'd love to connect! You can book a 30-minute call with me directly on my calendar here: https://calendar.app.google/u17KUo8ARR6UC9hP6 — let's find some common ground." },
         ];
 
         // ---- State ----
@@ -2560,6 +2710,7 @@ tailwind.config = {
         var sugEl = document.getElementById('terminal-suggestions');
         var inp = document.getElementById('terminal-input');
         var sendBtn = document.getElementById('terminal-send');
+        var micBtn = document.getElementById('terminal-mic');
         var statusEl = document.getElementById('terminal-status');
 
         // ---- Check Ollama ----
@@ -2578,7 +2729,7 @@ tailwind.config = {
         }
 
         // ---- Suggestions ----
-        var defSug = ['Who is Hissein?','Why hire me?','Projects','Experience','Tech stack'];
+        var defSug = ['Who is Hissein?','Why hire me?','Projects','Book a Call','Contact'];
 
         function renderSug(list) {
             sugEl.innerHTML = list.map(function(s){ return '<button class="suggestion-chip">'+s+'</button>'; }).join('');
@@ -2587,12 +2738,12 @@ tailwind.config = {
 
         function updateSug(q) {
             q = q.toLowerCase();
-            if (/project|built|show/.test(q)) renderSug(['Dust.tt Hackathon (1st place)','RAG Chatbot','1NF SaaS','Why hire me?']);
-            else if (/experience|work|career/.test(q)) renderSug(['Airbus & Accenture','BT Group London','Lab-STICC R&D','Why hire me?']);
-            else if (/skill|tech|stack/.test(q)) renderSug(['AI & Agents','Cloud & Azure','Projects','Why hire me?']);
-            else if (/education|school|cert/.test(q)) renderSug(['Certifications','Tech stack','Projects','Contact']);
-            else if (/hire|value|why|strength|unique/.test(q)) renderSug(['Projects','Experience','Certifications','Contact']);
-            else renderSug(['Why hire me?','Projects','Experience','Contact']);
+            if (/project|built|show/.test(q)) renderSug(['Dust.tt Hackathon (1st place)','RAG Chatbot','1NF SaaS','Book a Call']);
+            else if (/experience|work|career/.test(q)) renderSug(['Airbus & Accenture','BT Group London','Lab-STICC R&D','Book a Call']);
+            else if (/skill|tech|stack/.test(q)) renderSug(['AI & Agents','Cloud & Azure','Projects','Book a Call']);
+            else if (/education|school|cert/.test(q)) renderSug(['Certifications','Tech stack','Projects','Book a Call']);
+            else if (/hire|value|why|strength|unique/.test(q)) renderSug(['Projects','Experience','Certifications','Book a Call']);
+            else renderSug(['Why hire me?','Projects','Experience','Book a Call']);
         }
 
         // ---- Speech Synthesis (Oppy Voice Integration) ----
@@ -2920,6 +3071,64 @@ tailwind.config = {
         sendBtn.addEventListener('click', function() { sendMsg(inp.value); });
         document.addEventListener('keydown', function(e) { if (e.key === 'Escape' && isOpen) closeTerminal(); });
 
+        // ---- Speech Recognition (Oppy STT Voice Integration) ----
+        var recognition = null;
+        var isRecording = false;
+
+        function initRecognition() {
+            var SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+            if (!SR) return null;
+            var rec = new SR();
+            rec.lang = (window.PORTFOLIO_LANG === 'fr' ? 'fr-FR' : 'en-US'); // Will support billing switcher lang automatically!
+            rec.continuous = false;
+            rec.interimResults = false;
+            rec.onstart = function() {
+                isRecording = true;
+                micBtn.classList.add('recording');
+                micBtn.innerHTML = '<iconify-icon icon="lucide:mic-off" width="16"></iconify-icon>';
+                inp.placeholder = (window.PORTFOLIO_LANG === 'fr' ? 'Écoute en cours... Parlez' : 'Listening... Speak now');
+            };
+            rec.onresult = function(e) {
+                var transcript = e.results[0][0].transcript;
+                inp.value = transcript;
+                stopRecording();
+                sendMsg(transcript);
+            };
+            rec.onerror = function() { stopRecording(); };
+            rec.onend = function() { stopRecording(); };
+            return rec;
+        }
+
+        function toggleRecording() {
+            if (isRecording) stopRecording(); else startRecording();
+        }
+
+        function startRecording() {
+            if (!recognition) recognition = initRecognition();
+            if (!recognition) return;
+            isRecording = true;
+            recognition.start();
+        }
+
+        function stopRecording() {
+            isRecording = false;
+            if (micBtn) {
+                micBtn.classList.remove('recording');
+                micBtn.innerHTML = '<iconify-icon icon="lucide:mic" width="16"></iconify-icon>';
+            }
+            if (inp) inp.placeholder = (window.PORTFOLIO_LANG === 'fr' ? 'Posez-moi une question...' : 'Ask me anything...');
+            try { if (recognition) recognition.stop(); } catch(e){}
+        }
+
+        if (micBtn) {
+            var SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+            if (!SR) {
+                micBtn.style.display = 'none';
+            } else {
+                micBtn.addEventListener('click', toggleRecording);
+            }
+        }
+
         // ---- Draggable (desktop) ----
         var dragging = false, dx = 0, dy = 0;
         var handle = document.getElementById('terminal-drag-handle');
@@ -2938,6 +3147,108 @@ tailwind.config = {
         });
         document.addEventListener('mouseup', function() { dragging = false; terminal.style.transition = ''; });
 
+    })();
+    </script>
+
+    <!-- Bilingual Translation Engine -->
+    <script>
+    (function() {
+        'use strict';
+        window.PORTFOLIO_LANG = localStorage.getItem('portfolio-lang') || 'en';
+
+        const TRANSLATIONS = {
+            en: {
+                "nav-skills": "Skills",
+                "nav-experience": "Experience",
+                "nav-projects": "Projects",
+                "nav-learning": "Learning",
+                "nav-education": "Education",
+                "btn-talk": "Let's Talk",
+                "hero-sub": "From deploying Gemini at Airbus to orchestrating Dust.tt agentic workflows and building RAG systems. An entrepreneur by nature, I bridge the gap between complex AI and real business value.",
+                "stat-countries": "Countries",
+                "stat-roles": "Roles",
+                "stat-exp": "Years Exp",
+                "sprint-title": "This Week's Focus",
+                "sprint-footer": "Updated live &bull; Week 22, 2026",
+                "sprint-status": "Sprint Active",
+                "sprint-p1-title": "Accenture &amp; Airbus",
+                "sprint-p1-desc": "Gemini engineering workflows &amp; PLM digital continuity.",
+                "sprint-p2-title": "Study &amp; Learning",
+                "sprint-p2-desc": "Module 3 (Communication &amp; Influence) in Leadership Lab.",
+                "sprint-p3-title": "Cloud &amp; AI Prep",
+                "sprint-p3-desc": "Azure GenAI certification prep &amp; voice agent flows.",
+                "sprint-progress-lbl": "Sprint Progress"
+            },
+            fr: {
+                "nav-skills": "Compétences",
+                "nav-experience": "Expérience",
+                "nav-projects": "Projets",
+                "nav-learning": "Apprentissage",
+                "nav-education": "Formation",
+                "btn-talk": "Discutons",
+                "hero-sub": "Du déploiement de Gemini chez Airbus à l'orchestration de workflows agentiques sur Dust.tt, en passant par le développement de RAG. Entrepreneur par nature, je relie l'IA complexe et la valeur business.",
+                "stat-countries": "Pays",
+                "stat-roles": "Postes",
+                "stat-exp": "Années Exp",
+                "sprint-title": "Focus de la semaine",
+                "sprint-footer": "Mis à jour en direct &bull; Semaine 22, 2026",
+                "sprint-status": "Sprint Actif",
+                "sprint-p1-title": "Accenture &amp; Airbus",
+                "sprint-p1-desc": "Workflows d'ingénierie Gemini &amp; continuité digitale PLM.",
+                "sprint-p2-title": "Études &amp; Apprentissage",
+                "sprint-p2-desc": "Module 3 (Communication &amp; Influence) dans le Lab de Leadership.",
+                "sprint-p3-title": "Préparation Cloud &amp; IA",
+                "sprint-p3-desc": "Certification Azure GenAI &amp; agents vocaux.",
+                "sprint-progress-lbl": "Progression du Sprint"
+            }
+        };
+
+        function updateLanguageUI() {
+            const btnEn = document.getElementById('btn-lang-en');
+            const btnFr = document.getElementById('btn-lang-fr');
+            
+            if (window.PORTFOLIO_LANG === 'fr') {
+                if (btnEn) { btnEn.className = 'px-2.5 py-1 text-[9px] font-bold uppercase tracking-wider rounded-full transition-all text-neutral-500 hover:text-white'; btnEn.style.background = 'none'; }
+                if (btnFr) { btnFr.className = 'px-2.5 py-1 text-[9px] font-bold uppercase tracking-wider rounded-full transition-all text-black bg-[#FACC15]'; }
+            } else {
+                if (btnEn) { btnEn.className = 'px-2.5 py-1 text-[9px] font-bold uppercase tracking-wider rounded-full transition-all text-black bg-[#FACC15]'; }
+                if (btnFr) { btnFr.className = 'px-2.5 py-1 text-[9px] font-bold uppercase tracking-wider rounded-full transition-all text-neutral-500 hover:text-white'; btnFr.style.background = 'none'; }
+            }
+
+            const nodes = document.querySelectorAll('[data-i18n]');
+            nodes.forEach(node => {
+                const key = node.getAttribute('data-i18n');
+                const translation = TRANSLATIONS[window.PORTFOLIO_LANG][key];
+                if (translation) {
+                    if (key === 'btn-talk') {
+                        node.innerHTML = translation + ' <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>';
+                    } else {
+                        node.textContent = translation;
+                    }
+                }
+            });
+
+            // Auto-update placeholders in terminal chatbot
+            const inp = document.getElementById('terminal-input');
+            if (inp) {
+                inp.placeholder = (window.PORTFOLIO_LANG === 'fr' ? 'Posez-moi une question...' : 'Ask me anything...');
+            }
+        }
+
+        function setLanguage(lang) {
+            window.PORTFOLIO_LANG = lang;
+            localStorage.setItem('portfolio-lang', lang);
+            updateLanguageUI();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const btnEn = document.getElementById('btn-lang-en');
+            const btnFr = document.getElementById('btn-lang-fr');
+            if (btnEn) btnEn.addEventListener('click', () => setLanguage('en'));
+            if (btnFr) btnFr.addEventListener('click', () => setLanguage('fr'));
+
+            updateLanguageUI();
+        });
     })();
     </script>
 
@@ -3246,6 +3557,202 @@ tailwind.config = {
           osc.stop(context.currentTime + 0.3);
         } catch(err) {}
       }
+    })();
+    </script>
+
+    <!-- Three.js Interactive 3D Particle Sphere Script -->
+    <script>
+    (function() {
+        'use strict';
+        const container = document.getElementById('hero-3d-canvas');
+        if (!container) return;
+
+        // Set up Three.js scene
+        const scene = new THREE.Scene();
+        
+        // Setup camera
+        const width = container.clientWidth || 600;
+        const height = container.clientHeight || 600;
+        const camera = new THREE.PerspectiveCamera(60, width / height, 0.1, 1000);
+        camera.position.z = 180;
+
+        // Setup renderer with alpha channel (transparent background)
+        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+        renderer.setSize(width, height);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        container.appendChild(renderer.domElement);
+
+        // Particle Configuration
+        const particleCount = 1800;
+        const radius = 65;
+        const geometry = new THREE.BufferGeometry();
+        const positions = new Float32Array(particleCount * 3);
+        const originalPositions = new Float32Array(particleCount * 3);
+        const colors = new Float32Array(particleCount * 3);
+        
+        const colorAmber = new THREE.Color('#FACC15');
+        const colorWhite = new THREE.Color('#ffffff');
+        const colorNeutral = new THREE.Color('#737373');
+
+        for (let i = 0; i < particleCount; i++) {
+            // Distribute points evenly on a sphere using Fibonacci lattice
+            const k = i + 0.5;
+            const phi = Math.acos(1 - 2 * k / particleCount);
+            const theta = Math.PI * (1 + Math.sqrt(5)) * k;
+
+            const x = radius * Math.sin(phi) * Math.cos(theta);
+            const y = radius * Math.sin(phi) * Math.sin(theta);
+            const z = radius * Math.cos(phi);
+
+            positions[i * 3] = x;
+            positions[i * 3 + 1] = y;
+            positions[i * 3 + 2] = z;
+
+            originalPositions[i * 3] = x;
+            originalPositions[i * 3 + 1] = y;
+            originalPositions[i * 3 + 2] = z;
+
+            // Harmonious color mixture: mostly amber, some white/neutral
+            const rand = Math.random();
+            let chosenColor = colorAmber;
+            if (rand > 0.85) chosenColor = colorWhite;
+            else if (rand > 0.65) chosenColor = colorNeutral;
+
+            colors[i * 3] = chosenColor.r;
+            colors[i * 3 + 1] = chosenColor.g;
+            colors[i * 3 + 2] = chosenColor.b;
+        }
+
+        geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+        // Create a custom delicate round particle texture
+        const pCanvas = document.createElement('canvas');
+        pCanvas.width = 16;
+        pCanvas.height = 16;
+        const pCtx = pCanvas.getContext('2d');
+        const grad = pCtx.createRadialGradient(8, 8, 0, 8, 8, 8);
+        grad.addColorStop(0, 'rgba(255, 255, 255, 1)');
+        grad.addColorStop(1, 'rgba(255, 255, 255, 0)');
+        pCtx.fillStyle = grad;
+        pCtx.beginPath();
+        pCtx.arc(8, 8, 8, 0, Math.PI * 2);
+        pCtx.fill();
+        
+        const texture = new THREE.CanvasTexture(pCanvas);
+
+        const material = new THREE.PointsMaterial({
+            size: 2.2,
+            vertexColors: true,
+            map: texture,
+            transparent: true,
+            blending: THREE.AdditiveBlending,
+            depthWrite: false,
+            opacity: 0.95
+        });
+
+        const particleSystem = new THREE.Points(geometry, material);
+        scene.add(particleSystem);
+
+        // Interaction state
+        let mouseX = 0;
+        let mouseY = 0;
+        let targetX = 0;
+        let targetY = 0;
+        let clickForce = 0;
+        let lastTime = 0;
+
+        // Tracks absolute page scroll to react dynamically to scrolling
+        let scrollY = window.scrollY;
+        window.addEventListener('scroll', () => {
+            scrollY = window.scrollY;
+        }, { passive: true });
+
+        // Hover tracking
+        window.addEventListener('mousemove', (e) => {
+            const rect = container.getBoundingClientRect();
+            // Normalized coordinates (-1 to 1) relative to canvas center
+            const x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+            const y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+            
+            // Only update target rotation if mouse is relatively close to hero visual area
+            if (e.clientY < window.innerHeight) {
+                targetX = x * 0.4;
+                targetY = y * 0.4;
+            }
+        });
+
+        // Click interaction: explosive pulse wave
+        container.addEventListener('click', () => {
+            clickForce = 3.5;
+        });
+
+        // Resize handler
+        window.addEventListener('resize', () => {
+            const w = container.clientWidth || 600;
+            const h = container.clientHeight || 600;
+            camera.aspect = w / h;
+            camera.updateProjectionMatrix();
+            renderer.setSize(w, h);
+        });
+
+        // Animation Loop
+        function animate(timestamp) {
+            requestAnimationFrame(animate);
+
+            if (!lastTime) lastTime = timestamp;
+            const delta = (timestamp - lastTime) * 0.001;
+            lastTime = timestamp;
+
+            // Slow idle self-orbit
+            particleSystem.rotation.y += 0.002;
+            particleSystem.rotation.x += 0.001;
+
+            // Smoothly ease rotation towards mouse
+            mouseX += (targetX - mouseX) * 0.05;
+            mouseY += (targetY - mouseY) * 0.05;
+            particleSystem.rotation.y += mouseX * 0.1;
+            particleSystem.rotation.x -= mouseY * 0.1;
+
+            // Dynamic depth based on scroll position
+            particleSystem.position.z = Math.min(scrollY * 0.06, 80);
+
+            // Handle explosive pulse wave on click
+            const posAttr = geometry.attributes.position;
+            const posArray = posAttr.array;
+
+            if (clickForce > 0.01) {
+                clickForce -= delta * 5.0; // Decay force
+            } else {
+                clickForce = 0;
+            }
+
+            for (let i = 0; i < particleCount; i++) {
+                const i3 = i * 3;
+                const ox = originalPositions[i3];
+                const oy = originalPositions[i3 + 1];
+                const oz = originalPositions[i3 + 2];
+
+                // Calculate vector from center
+                const d = Math.sqrt(ox*ox + oy*oy + oz*oz);
+                const nx = ox / d;
+                const ny = oy / d;
+                const nz = oz / d;
+
+                // Dynamic breathing ripple + click explosion pulse
+                const ripple = Math.sin(timestamp * 0.0015 + d * 0.1) * 1.5;
+                const pulse = clickForce * 20 * Math.sin(timestamp * 0.008 + d * 0.05);
+
+                posArray[i3] = ox + nx * (ripple + pulse);
+                posArray[i3 + 1] = oy + ny * (ripple + pulse);
+                posArray[i3 + 2] = oz + nz * (ripple + pulse);
+            }
+            posAttr.needsUpdate = true;
+
+            renderer.render(scene, camera);
+        }
+
+        requestAnimationFrame(animate);
     })();
     </script>
 </body>

@@ -1541,6 +1541,9 @@ tailwind.config = {
             <h1 class="font-display font-semibold text-white text-4xl sm:text-6xl lg:text-7xl tracking-tighter leading-none" style="min-height:1.15em;">
                 <span id="entry-typed"></span><span id="entry-cursor" class="typed-cursor"></span>
             </h1>
+            <p class="font-serif italic text-neutral-400 text-sm sm:text-lg max-w-lg mt-6 leading-relaxed select-none" style="min-height:2.4em; opacity: 0.85;">
+                <span id="entry-quote"></span><span id="quote-cursor" class="typed-cursor" style="display:none;"></span>
+            </p>
             <p class="font-mono text-neutral-500 text-[11px] sm:text-sm mt-5 tracking-[0.15em] uppercase">AI Solution Engineer &middot; Paris</p>
             <button id="entry-enter" class="btn-primary mt-10 transition-opacity duration-500" style="opacity:0;">
                 Enter
@@ -4015,6 +4018,71 @@ tailwind.config = {
       var gate = document.getElementById('entry-gate');
       if (gate) {
         var entered = false;
+        
+        // Premium Keyboard Audio Click Synthesizer (Real-time Web Audio API)
+        function playPremiumClick() {
+          try {
+            const AudioCtx = window.AudioContext || window.webkitAudioContext;
+            const ctx = new AudioCtx();
+            
+            // Triangle oscillator for low-frequency hollow keycap plastic resonance
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.type = 'triangle';
+            osc.frequency.setValueAtTime(95 + Math.random() * 45, ctx.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(1, ctx.currentTime + 0.05);
+            
+            // Sine oscillator for high-frequency switch contact tap
+            const osc2 = ctx.createOscillator();
+            const gain2 = ctx.createGain();
+            osc2.type = 'sine';
+            osc2.frequency.setValueAtTime(1500 + Math.random() * 350, ctx.currentTime);
+            osc2.frequency.exponentialRampToValueAtTime(100, ctx.currentTime + 0.015);
+            
+            // Dynamic noise buffer to simulate keypress slide friction
+            const bufferSize = ctx.sampleRate * 0.01; // 10ms transient
+            const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+            const data = buffer.getChannelData(0);
+            for (let i = 0; i < bufferSize; i++) {
+              data[i] = Math.random() * 2 - 1;
+            }
+            const noise = ctx.createBufferSource();
+            noise.buffer = buffer;
+            const filter = ctx.createBiquadFilter();
+            filter.type = 'bandpass';
+            filter.frequency.value = 1300;
+            const noiseGain = ctx.createGain();
+            
+            // Decays
+            gain.gain.setValueAtTime(0.05, ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.05);
+            
+            gain2.gain.setValueAtTime(0.03, ctx.currentTime);
+            gain2.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.015);
+            
+            noiseGain.gain.setValueAtTime(0.018, ctx.currentTime);
+            noiseGain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.01);
+            
+            // Connect and launch
+            osc.connect(gain);
+            osc2.connect(gain2);
+            noise.connect(filter);
+            filter.connect(noiseGain);
+            
+            gain.connect(ctx.destination);
+            gain2.connect(ctx.destination);
+            noiseGain.connect(ctx.destination);
+            
+            osc.start();
+            osc2.start();
+            noise.start();
+            
+            osc.stop(ctx.currentTime + 0.05);
+            osc2.stop(ctx.currentTime + 0.015);
+            noise.stop(ctx.currentTime + 0.01);
+          } catch(e) {}
+        }
+
         function enter() {
           if (entered) return; entered = true;
           sessionStorage.setItem('entry-gate-skipped', 'true');
@@ -4032,17 +4100,52 @@ tailwind.config = {
           var typedEl = document.getElementById('entry-typed');
           var enterBtn = document.getElementById('entry-enter');
           var NAME = 'Hissein Ali';
+          const QUOTE = 'Mastering the logic of machines to unlock the freedom of human potential.';
+          
           if (window.lenis) window.lenis.stop(); else document.documentElement.style.overflow = 'hidden';
 
           function showEnter() { if (enterBtn) enterBtn.style.opacity = '1'; }
-          if (reduce) { typedEl.textContent = NAME; showEnter(); }
+          
+          if (reduce) { 
+            typedEl.textContent = NAME; 
+            document.getElementById('entry-quote').textContent = QUOTE;
+            showEnter(); 
+          }
           else {
             var i = 0;
-            (function type() {
-              typedEl.textContent = NAME.slice(0, i);
-              if (i++ <= NAME.length) setTimeout(type, 95);
-              else showEnter();
+            var j = 0;
+            const quoteEl = document.getElementById('entry-quote');
+            const quoteCursor = document.getElementById('quote-cursor');
+            const nameCursor = document.getElementById('entry-cursor');
+            
+            // Stage 1: Type name
+            (function typeName() {
+              if (i <= NAME.length) {
+                typedEl.textContent = NAME.slice(0, i);
+                if (i > 0 && NAME[i-1] !== ' ') playPremiumClick();
+                i++;
+                setTimeout(typeName, 95 + Math.random() * 25); // Premium organic randomized keyboard taps
+              } else {
+                // Name finished: toggle cursors and initiate quote sequence
+                if (nameCursor) nameCursor.style.display = 'none';
+                if (quoteCursor) quoteCursor.style.display = 'inline-block';
+                setTimeout(typeQuote, 400); // Elegant narrative pause before quote typing
+              }
             })();
+            
+            // Stage 2: Type quote
+            function typeQuote() {
+              if (j <= QUOTE.length) {
+                quoteEl.textContent = QUOTE.slice(0, j);
+                if (j > 0 && QUOTE[j-1] !== ' ' && QUOTE[j-1] !== '"' && QUOTE[j-1] !== '.') playPremiumClick(); // mute on non-tapped chars
+                j++;
+                setTimeout(typeQuote, 45 + Math.random() * 15); // Faster smooth organic typing sequence
+              } else {
+                // Quote finished: hide cursor and fade-in ENTER CTA
+                if (quoteCursor) quoteCursor.style.display = 'none';
+                showEnter();
+              }
+            }
           }
 
           gate.addEventListener('click', enter);

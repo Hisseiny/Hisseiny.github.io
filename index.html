@@ -245,23 +245,12 @@ body {
 /* --- Cards --- */
 .card {
   position: relative;
-  background: var(--color-bg-card);
-  border: 1px solid var(--color-border);
+  background: linear-gradient(var(--color-bg-card), var(--color-bg-card)) padding-box,
+              radial-gradient(circle 130px at var(--mouse-x, -999px) var(--mouse-y, -999px), rgba(250, 204, 21, 0.45), rgba(255, 255, 255, 0.08) 50%, var(--color-border) 100%) border-box;
+  border: 1px solid transparent;
   padding: var(--space-8);
-  transition: all var(--transition-slow);
+  transition: transform var(--transition-slow), box-shadow var(--transition-slow);
   overflow: hidden;
-}
-
-.card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--color-accent-glow), transparent);
-  transform: scaleX(0);
-  transition: transform 700ms ease;
 }
 
 .card::after {
@@ -275,12 +264,10 @@ body {
 }
 
 .card:hover {
-  border-color: var(--color-accent-dim);
   transform: translateY(-3px);
   box-shadow: var(--shadow-lg), 0 0 30px rgba(250,204,21,0.05);
 }
 
-.card:hover::before { transform: scaleX(1); }
 .card:hover::after { opacity: 1; }
 
 /* Focus visible for keyboard nav */
@@ -4472,12 +4459,20 @@ tailwind.config = {
                     // Move glare light source
                     glare.style.setProperty('--glare-x', `${(x / rect.width) * 100}%`);
                     glare.style.setProperty('--glare-y', `${(y / rect.height) * 100}%`);
+                    
+                    // Update dynamic coordinate-tracking custom variables for laser border tracing
+                    card.style.setProperty('--mouse-x', `${x}px`);
+                    card.style.setProperty('--mouse-y', `${y}px`);
                 });
                 
                 card.addEventListener('mouseleave', () => {
                     // Smooth transition back to neutral state
                     card.style.transition = 'transform 500ms cubic-bezier(0.16, 1, 0.3, 1), border-color 300ms ease, box-shadow 300ms ease';
                     card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+                    
+                    // Clear coordinate-tracking properties to return border to neutral state
+                    card.style.removeProperty('--mouse-x');
+                    card.style.removeProperty('--mouse-y');
                 });
             });
         }

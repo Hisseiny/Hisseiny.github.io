@@ -231,32 +231,32 @@ a:focus-visible, button:focus-visible {
 .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 6px; }
 
 .mod-card {
-  background: var(--color-bg-card); padding: 32px 28px; cursor: pointer;
-  transition: all var(--transition-slow); position: relative; overflow: hidden;
-  border: 1px solid var(--color-border); user-select: none;
+  cursor: pointer;
+  background: linear-gradient(var(--color-bg-card), var(--color-bg-card)) padding-box,
+              radial-gradient(circle 130px at var(--mouse-x, -999px) var(--mouse-y, -999px), rgba(201, 168, 76, 0.45), rgba(255, 255, 255, 0.08) 50%, var(--color-border) 100%) border-box;
+  border: 1px solid transparent;
+  padding: 32px 28px;
+  transition: transform var(--transition-slow), box-shadow var(--transition-slow);
+  position: relative;
+  overflow: hidden;
+  user-select: none;
 }
-.mod-card::before {
-  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
-  background: linear-gradient(90deg, transparent, var(--color-accent-glow), transparent);
-  transform: scaleX(0); transition: transform 700ms ease;
-}
+
 .mod-card::after {
   content: ''; position: absolute; inset: 0;
   background: linear-gradient(135deg, rgba(201,168,76,0.04), transparent 50%);
   opacity: 0; transition: opacity var(--transition-base); pointer-events: none;
 }
 .mod-card:hover {
-  border-color: var(--color-accent-dim);
   transform: translateY(-3px);
-  box-shadow: var(--shadow-lg), 0 0 30px rgba(201,168,76,0.05);
+  box-shadow: var(--shadow-lg), 0 0 30px rgba(250,204,21,0.05);
 }
-.mod-card:hover::before { transform: scaleX(1); }
 .mod-card:hover::after { opacity: 1; }
 .mod-card.active {
-  border-color: var(--color-accent-dim);
-  background: var(--color-surface);
+  background: linear-gradient(var(--color-surface), var(--color-surface)) padding-box,
+              linear-gradient(var(--color-accent), var(--color-accent)) border-box;
+  border: 1px solid transparent;
 }
-.mod-card.active::before { transform: scaleX(1); }
 
 .mod-num {
   font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; font-weight: 700;
@@ -1435,11 +1435,19 @@ function init3DTilt(elements) {
       
       glare.style.setProperty('--glare-x', `${(x / rect.width) * 100}%`);
       glare.style.setProperty('--glare-y', `${(y / rect.height) * 100}%`);
+      
+      // Update dynamic coordinate-tracking custom variables for laser border tracing
+      card.style.setProperty('--mouse-x', `${x}px`);
+      card.style.setProperty('--mouse-y', `${y}px`);
     });
     
     card.addEventListener('mouseleave', () => {
       card.style.transition = 'transform 500ms cubic-bezier(0.16, 1, 0.3, 1), border-color 300ms ease, box-shadow 300ms ease';
       card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+      
+      // Clear coordinate-tracking properties to return border to neutral state
+      card.style.removeProperty('--mouse-x');
+      card.style.removeProperty('--mouse-y');
     });
   });
 }

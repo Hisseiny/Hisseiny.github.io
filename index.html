@@ -1916,6 +1916,27 @@ tailwind.config = {
          EXPERIENCE SECTION
          ========================================== -->
     <section class="py-24 bg-[#050505] relative" id="experience">
+        <!-- Airbnb-Style Dynamic Glowing Scroll SVG Timeline Circuit -->
+        <svg id="timeline-svg" class="absolute inset-0 w-full h-full pointer-events-none" style="z-index: 1; overflow: visible;">
+            <path id="timeline-bg-path" fill="none" stroke="rgba(255, 255, 255, 0.04)" stroke-width="2.5" stroke-dasharray="6,5" stroke-linecap="round" />
+            <path id="timeline-fg-path" fill="none" stroke="var(--color-accent, #FACC15)" stroke-width="2.5" stroke-linecap="round" filter="url(#timeline-glow)" style="transition: stroke-dashoffset 80ms ease-out;" />
+            
+            <circle id="timeline-node-1" r="5.5" fill="#050505" stroke="rgba(255,255,255,0.08)" stroke-width="2" style="transition: stroke 300ms ease, filter 300ms ease;" />
+            <circle id="timeline-node-2" r="5.5" fill="#050505" stroke="rgba(255,255,255,0.08)" stroke-width="2" style="transition: stroke 300ms ease, filter 300ms ease;" />
+            <circle id="timeline-node-3" r="5.5" fill="#050505" stroke="rgba(255,255,255,0.08)" stroke-width="2" style="transition: stroke 300ms ease, filter 300ms ease;" />
+            
+            <defs>
+                <filter id="timeline-glow" x="-50%" y="-50%" width="200%" height="200%">
+                    <feGaussianBlur stdDeviation="3.5" result="blur" />
+                    <feMerge>
+                        <feMergeNode in="blur" />
+                        <feMergeNode in="blur" />
+                        <feMergeNode in="SourceGraphic" />
+                    </feMerge>
+                </filter>
+            </defs>
+        </svg>
+
         <div class="px-6 lg:px-12 max-w-7xl mx-auto relative z-10">
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 mb-16 items-end">
@@ -2830,23 +2851,124 @@ tailwind.config = {
             });
         });
 
-        // ---- Career Progress Bar ----
+        // ---- Career Progress Bar & Airbnb-Style SVG Scrolling Timeline ----
         var expSection = document.getElementById('experience');
         var careerFill = document.getElementById('career-fill');
         var stages = ['stage-rd', 'stage-po', 'stage-ai', 'stage-next'];
+        
+        var fgPath = document.getElementById('timeline-fg-path');
+        var bgPath = document.getElementById('timeline-bg-path');
+        var pathLen = 0;
+        
+        function updateTimelineGeometry() {
+            if (!expSection || !fgPath || !bgPath) return;
+            var cards = document.querySelectorAll('#experience .exp-card');
+            if (cards.length < 3) return;
+            
+            var parentRect = expSection.getBoundingClientRect();
+            
+            var c1 = {
+                x: cards[0].getBoundingClientRect().left - parentRect.left + cards[0].offsetWidth / 2,
+                y: cards[0].getBoundingClientRect().top - parentRect.top + cards[0].offsetHeight / 2,
+                bottom: cards[0].getBoundingClientRect().bottom - parentRect.top,
+                top: cards[0].getBoundingClientRect().top - parentRect.top,
+                left: cards[0].getBoundingClientRect().left - parentRect.left,
+                width: cards[0].offsetWidth,
+                height: cards[0].offsetHeight
+            };
+            
+            var c2 = {
+                x: cards[1].getBoundingClientRect().left - parentRect.left + cards[1].offsetWidth / 2,
+                y: cards[1].getBoundingClientRect().top - parentRect.top + cards[1].offsetHeight / 2,
+                bottom: cards[1].getBoundingClientRect().bottom - parentRect.top,
+                top: cards[1].getBoundingClientRect().top - parentRect.top,
+                left: cards[1].getBoundingClientRect().left - parentRect.left,
+                width: cards[1].offsetWidth,
+                height: cards[1].offsetHeight
+            };
+            
+            var c3 = {
+                x: cards[2].getBoundingClientRect().left - parentRect.left + cards[2].offsetWidth / 2,
+                y: cards[2].getBoundingClientRect().top - parentRect.top + cards[2].offsetHeight / 2,
+                bottom: cards[2].getBoundingClientRect().bottom - parentRect.top,
+                top: cards[2].getBoundingClientRect().top - parentRect.top,
+                left: cards[2].getBoundingClientRect().left - parentRect.left,
+                width: cards[2].offsetWidth,
+                height: cards[2].offsetHeight
+            };
+            
+            var isMobile = Math.abs(c1.left - c2.left) < 15;
+            
+            var pathD = "";
+            if (isMobile) {
+                // Mobile continuous vertical timeline path
+                pathD = "M " + c1.x + " " + c1.y + " L " + c1.x + " " + c1.bottom + " L " + c2.x + " " + c2.top + " L " + c2.x + " " + c2.bottom + " L " + c3.x + " " + c3.top + " L " + c3.x + " " + c3.y;
+            } else {
+                // Desktop continuous Z-circuit winding path
+                var bendY = c2.bottom + 20;
+                pathD = "M " + c1.x + " " + c1.y + " L " + c2.x + " " + c2.y + " L " + c2.x + " " + c2.bottom + " L " + c2.x + " " + bendY + " L " + c3.x + " " + bendY + " L " + c3.x + " " + c3.y;
+            }
+            
+            bgPath.setAttribute('d', pathD);
+            fgPath.setAttribute('d', pathD);
+            
+            pathLen = fgPath.getTotalLength();
+            fgPath.style.strokeDasharray = pathLen;
+            fgPath.style.strokeDashoffset = pathLen;
+            
+            // Nodes positioning
+            var n1 = document.getElementById('timeline-node-1');
+            var n2 = document.getElementById('timeline-node-2');
+            var n3 = document.getElementById('timeline-node-3');
+            
+            if (n1) { n1.setAttribute('cx', c1.x); n1.setAttribute('cy', c1.y); }
+            if (n2) { n2.setAttribute('cx', c2.x); n2.setAttribute('cy', c2.y); }
+            if (n3) { n3.setAttribute('cx', c3.x); n3.setAttribute('cy', c3.y); }
+        }
+
+        function updateTimelineScroll(progress) {
+            if (!fgPath || pathLen === 0) return;
+            var adjustedProgress = Math.min(1, Math.max(0, (progress - 0.05) / 0.90));
+            var offset = pathLen * (1 - adjustedProgress);
+            fgPath.style.strokeDashoffset = offset;
+            
+            var n1 = document.getElementById('timeline-node-1');
+            var n2 = document.getElementById('timeline-node-2');
+            var n3 = document.getElementById('timeline-node-3');
+            
+            if (n1) {
+                var active = adjustedProgress > 0.01;
+                n1.style.stroke = active ? 'var(--color-accent, #FACC15)' : 'rgba(255,255,255,0.08)';
+                n1.style.filter = active ? 'drop-shadow(0 0 4px rgba(250,204,21,0.5))' : 'none';
+            }
+            if (n2) {
+                var active = adjustedProgress > 0.45;
+                n2.style.stroke = active ? 'var(--color-accent, #FACC15)' : 'rgba(255,255,255,0.08)';
+                n2.style.filter = active ? 'drop-shadow(0 0 4px rgba(250,204,21,0.5))' : 'none';
+            }
+            if (n3) {
+                var active = adjustedProgress > 0.95;
+                n3.style.stroke = active ? 'var(--color-accent, #FACC15)' : 'rgba(255,255,255,0.08)';
+                n3.style.filter = active ? 'drop-shadow(0 0 4px rgba(250,204,21,0.5))' : 'none';
+            }
+        }
 
         if (expSection && careerFill) {
             window.addEventListener('scroll', function() {
                 var rect = expSection.getBoundingClientRect();
                 var sectionHeight = expSection.offsetHeight;
                 var viewH = window.innerHeight;
-                // Calculate progress through the experience section (0 to 1)
                 var progress = 0;
                 if (rect.top < viewH && rect.bottom > 0) {
                     progress = Math.min(1, Math.max(0, (viewH - rect.top) / (sectionHeight + viewH * 0.5)));
                 }
-                // Update fill bar
+                
+                // Sync career progress bar
                 careerFill.style.width = (progress * 100) + '%';
+                
+                // Sync timeline path scroll drawing
+                updateTimelineScroll(progress);
+                
                 // Update stages
                 var activeIndex = Math.floor(progress * stages.length);
                 stages.forEach(function(id, i) {
@@ -2857,6 +2979,14 @@ tailwind.config = {
                     else if (i === activeIndex) el.classList.add('active');
                 });
             }, { passive: true });
+            
+            // Recalculate timeline geometry on interaction events
+            window.addEventListener('resize', updateTimelineGeometry);
+            window.addEventListener('load', updateTimelineGeometry);
+            document.addEventListener('DOMContentLoaded', updateTimelineGeometry);
+            // Trigger drawing initial frames
+            setTimeout(updateTimelineGeometry, 200);
+            setTimeout(updateTimelineGeometry, 800);
         }
 
         // ---- Particle Background ----

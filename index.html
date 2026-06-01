@@ -1261,6 +1261,215 @@ button:focus-visible {
   letter-spacing: 0.03em;
   margin-bottom: var(--space-2);
 }
+
+/* ==========================================================================
+   ELITE PREMIUM EXTENSIONS (REVOLUT, AIRBNB, PERPLEXITY STYLES)
+   ========================================================================== */
+
+/* --- Premium Noise & Bento Layer --- */
+.premium-noise {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* --- Revolut-Style 3D Tilt Card & Glare System --- */
+.card, .exp-card {
+  transform-style: preserve-3d;
+  will-change: transform;
+  transform: perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1);
+  transition: transform 500ms cubic-bezier(0.16, 1, 0.3, 1), border-color 300ms ease, box-shadow 300ms ease;
+}
+
+.glare-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 5;
+  opacity: 0;
+  mix-blend-mode: screen;
+  background: radial-gradient(circle 220px at var(--glare-x, 50%) var(--glare-y, 50%), rgba(255, 255, 255, 0.12), transparent 75%);
+  transition: opacity 400ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card:hover .glare-overlay, .exp-card:hover .glare-overlay {
+  opacity: 1;
+}
+
+.card > *, .exp-card > * {
+  transform: translateZ(20px);
+}
+
+/* --- Airbnb-Style Journey Dot Tracker --- */
+#journey-sidebar {
+  position: fixed;
+  left: 2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  z-index: 45;
+}
+
+.journey-track-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.5rem 0;
+}
+
+.journey-track-line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.1), transparent);
+  z-index: 1;
+}
+
+.journey-bubble {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  border: 1px solid var(--color-accent);
+  background: rgba(250, 204, 21, 0.05);
+  border-radius: 50%;
+  z-index: 2;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  transition: top 600ms cubic-bezier(0.25, 1, 0.2, 1), transform 400ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  pointer-events: none;
+  box-shadow: 0 0 12px var(--color-accent-glow);
+}
+
+.journey-bubble.active {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.journey-dot {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+}
+
+/* --- Perplexity-Style Citation Engine --- */
+.citation-box {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px dashed rgba(255, 255, 255, 0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.citation-header {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.citation-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.citation-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--color-accent);
+  background: rgba(250, 204, 21, 0.04);
+  border: 1px solid rgba(250, 204, 21, 0.12);
+  padding: 3px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 200ms ease;
+  user-select: none;
+}
+
+.citation-pill:hover {
+  background: var(--color-accent);
+  color: var(--color-bg);
+  border-color: var(--color-accent);
+  transform: translateY(-1px);
+  box-shadow: 0 0 8px var(--color-accent-glow);
+}
+
+/* --- Perplexity-Style Voice Waveform Visualizer --- */
+.voice-wave-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  height: 20px;
+  padding: 0 8px;
+}
+
+.voice-wave-bar {
+  width: 2px;
+  height: 4px;
+  background: var(--color-accent);
+  border-radius: 99px;
+  transition: height 100ms ease;
+}
+
+/* --- Command Palette Auto-suggest Dropdown inside Chatbot --- */
+.chatbot-cmd-dropdown {
+  position: absolute;
+  bottom: 100%;
+  left: 16px;
+  right: 16px;
+  background: rgba(8, 8, 8, 0.98);
+  border: 1px solid var(--color-border);
+  border-bottom: none;
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 1010;
+  display: none;
+  box-shadow: 0 -10px 25px rgba(0, 0, 0, 0.5);
+}
+
+.chatbot-cmd-dropdown.open {
+  display: block;
+}
+
+.chatbot-cmd-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: all 150ms ease;
+}
+
+.chatbot-cmd-item:hover, .chatbot-cmd-item.active {
+  background: rgba(250, 204, 21, 0.08);
+  color: var(--color-text-primary);
+}
+
+.chatbot-cmd-item .cmd-name {
+  color: var(--color-accent);
+  font-weight: 600;
+}
 </style>
 
 <script>
@@ -2871,6 +3080,79 @@ tailwind.config = {
             synth.speak(utter);
         }
 
+        // ---- Citations Engine (Perplexity-Style) ----
+        function addCitations(msgEl, text) {
+            const citations = [
+                { keys: [/accenture/i, /airbus/i], name: "Accenture & Airbus Digital Continuity", id: "#experience", icon: "lucide:plane" },
+                { keys: [/bt group/i, /london/i, /product owner/i], name: "BT Group London Backlog", id: "#experience", icon: "lucide:briefcase" },
+                { keys: [/cnrs/i, /lab-sticc/i, /spacewire/i], name: "CNRS SpaceWire Pipeline", id: "#experience", icon: "lucide:atom" },
+                { keys: [/dust\.tt/i, /dust/i], name: "1st Place Dust.tt Hackathon", id: "#projects", icon: "lucide:trophy" },
+                { keys: [/payfit/i], name: "3rd Place Payfit Hackathon", id: "#projects", icon: "lucide:medal" },
+                { keys: [/rag pdf/i, /rag chatbot/i, /langchain/i], name: "LangChain RAG Document QA", id: "#projects", icon: "lucide:brain" },
+                { keys: [/1nf/i, /1nfluence/i], name: "1NF SaaS Creator Deals", id: "#projects", icon: "lucide:layout" },
+                { keys: [/levelo/i, /marseille/i], name: "LeVelo Serverless Data Pipeline", id: "#projects", icon: "lucide:database" },
+                { keys: [/eugenia/i, /mines/i, /ubo/i, /education/i], name: "Education & MSc AI", id: "#education", icon: "lucide:graduation-cap" },
+                { keys: [/azure/i], name: "Azure Cloud Capabilities", id: "#skills", icon: "simple-icons:microsoftazure" },
+                { keys: [/calendar/i, /book a call/i, /appointment/i], name: "Google Calendar", id: "https://calendar.app.google/u17KUo8ARR6UC9hP6", icon: "lucide:calendar", external: true },
+                { keys: [/email/i, /contact/i], name: "Direct Email", id: "mailto:hisseinali.pro@gmail.com", icon: "lucide:mail", external: true }
+            ];
+            
+            const matched = [];
+            citations.forEach(cit => {
+                const matches = cit.keys.some(regex => regex.test(text));
+                if (matches) matched.push(cit);
+            });
+            
+            if (matched.length === 0) return;
+            
+            // Check if citations already exist in the message block to prevent duplication
+            if (msgEl.querySelector('.citation-box')) return;
+            
+            const box = document.createElement('div');
+            box.className = 'citation-box';
+            
+            const header = document.createElement('div');
+            header.className = 'citation-header';
+            header.textContent = 'Sources & Links';
+            box.appendChild(header);
+            
+            const list = document.createElement('div');
+            list.className = 'citation-list';
+            
+            matched.forEach((cit, idx) => {
+                const pill = document.createElement('div');
+                pill.className = 'citation-pill';
+                pill.innerHTML = `<iconify-icon icon="${cit.icon}" width="11"></iconify-icon> [${idx + 1}] ${cit.name}`;
+                
+                pill.addEventListener('click', () => {
+                    if (cit.external) {
+                        window.open(cit.id, '_blank');
+                    } else {
+                        const target = document.querySelector(cit.id);
+                        if (target) {
+                            closeTerminal();
+                            setTimeout(() => {
+                                if (window.lenis) window.lenis.scrollTo(target, { offset: -70 });
+                                else target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                                
+                                // Trigger Airbnb layout highlights
+                                target.classList.add('flash');
+                                setTimeout(() => target.classList.remove('flash'), 1000);
+                            }, 300);
+                        }
+                    }
+                });
+                
+                list.appendChild(pill);
+            });
+            
+            box.appendChild(list);
+            msgEl.appendChild(box);
+            
+            // Auto scroll container
+            msgsEl.scrollTop = msgsEl.scrollHeight;
+        }
+
         // ---- Messages ----
         function addMsg(role, text, isStream) {
             var msg = document.createElement('div');
@@ -2917,7 +3199,11 @@ tailwind.config = {
             
             var body = document.createElement('div');
             body.className = 'msg-content';
-            if (!isStream) body.textContent = text;
+            if (!isStream) {
+                body.textContent = text;
+                // Add citations for offline static welcome messages
+                setTimeout(() => addCitations(msg, text), 50);
+            }
             msg.appendChild(body);
             msgsEl.appendChild(msg);
             msgsEl.scrollTop = msgsEl.scrollHeight;
@@ -2991,6 +3277,8 @@ tailwind.config = {
                     }
                 }
                 history.push({ role:'assistant', content: full });
+                // Append citations dynamically upon stream completion
+                setTimeout(() => addCitations(el.parentNode, full), 50);
             } catch(e) {
                 isOnline = false;
                 statusEl.className = 'terminal-status offline';
@@ -3000,6 +3288,8 @@ tailwind.config = {
                 var el2 = addMsg('ai','',true);
                 await typeText(el2, fallback);
                 history.push({ role:'assistant', content: fallback });
+                // Append citations dynamically upon offline fallback typing completion
+                setTimeout(() => addCitations(el2.parentNode, fallback), 50);
                 if (fallback.indexOf('Goodbye!') === 0) setTimeout(closeTerminal, 2000);
             }
         }
@@ -3076,6 +3366,16 @@ tailwind.config = {
         // ---- Send Message ----
         async function sendMsg(text) {
             if (streaming || !text.trim()) return;
+            
+            // Check clear command first
+            if (text.trim().toLowerCase() === '/clear') {
+                msgsEl.innerHTML = '';
+                history = [];
+                inp.value = '';
+                showWelcome();
+                return;
+            }
+            
             streaming = true;
             var t = text.trim();
             inp.value = '';
@@ -3107,6 +3407,8 @@ tailwind.config = {
                 var el = addMsg('ai','',true);
                 await typeText(el, resp);
                 history.push({ role:'assistant', content: resp });
+                // Append citations dynamically upon local searchKB typing completion
+                setTimeout(() => addCitations(el.parentNode, resp), 50);
                 if (resp.indexOf('Goodbye!') === 0) setTimeout(closeTerminal, 2000);
             }
             updateSug(t);
@@ -3172,22 +3474,60 @@ tailwind.config = {
         sendBtn.addEventListener('click', function() { sendMsg(inp.value); });
         document.addEventListener('keydown', function(e) { if (e.key === 'Escape' && isOpen) closeTerminal(); });
 
-        // ---- Speech Recognition (Oppy STT Voice Integration) ----
+        // ---- Speech Recognition (Oppy STT Voice Integration) & Waveform Visualizer ----
         var recognition = null;
         var isRecording = false;
+        var waveInterval = null;
+
+        function startWaveformAnimation() {
+            // Render 12 undulating bars representing audio waves
+            var html = '<span style="margin-right:8px;font-family:\'JetBrains Mono\',monospace;font-size:10px;color:var(--color-accent);">[LISTENING]</span><div class="voice-wave-container">';
+            for (var i = 0; i < 12; i++) {
+                html += '<div class="voice-wave-bar" id="wv-bar-' + i + '"></div>';
+            }
+            html += '</div>';
+            statusEl.innerHTML = html;
+            
+            waveInterval = setInterval(function() {
+                for (var i = 0; i < 12; i++) {
+                    var bar = document.getElementById('wv-bar-' + i);
+                    if (bar) {
+                        var h = 3 + Math.random() * 15;
+                        bar.style.height = h + 'px';
+                    }
+                }
+            }, 80);
+        }
+
+        function stopWaveformAnimation() {
+            if (waveInterval) {
+                clearInterval(waveInterval);
+                waveInterval = null;
+            }
+            statusEl.innerHTML = '<span class="status-dot-ai"></span><span class="status-text"></span>';
+            // Restore status
+            if (isOnline) {
+                statusEl.className = 'terminal-status online';
+                statusEl.querySelector('.status-text').textContent = 'gemini \u00b7 online';
+            } else {
+                statusEl.className = 'terminal-status offline';
+                statusEl.querySelector('.status-text').textContent = 'smart mode \u00b7 local';
+            }
+        }
 
         function initRecognition() {
             var SR = window.SpeechRecognition || window.webkitSpeechRecognition;
             if (!SR) return null;
             var rec = new SR();
-            rec.lang = (window.PORTFOLIO_LANG === 'fr' ? 'fr-FR' : 'en-US'); // Will support billing switcher lang automatically!
+            rec.lang = (window.PORTFOLIO_LANG === 'fr' ? 'fr-FR' : 'en-US');
             rec.continuous = false;
             rec.interimResults = false;
             rec.onstart = function() {
                 isRecording = true;
                 micBtn.classList.add('recording');
                 micBtn.innerHTML = '<iconify-icon icon="lucide:mic-off" width="16"></iconify-icon>';
-                inp.placeholder = (window.PORTFOLIO_LANG === 'fr' ? 'Écoute en cours... Parlez' : 'Listening... Speak now');
+                inp.placeholder = (window.PORTFOLIO_LANG === 'fr' ? 'Écoute en cours...' : 'Listening... Speak now');
+                startWaveformAnimation();
             };
             rec.onresult = function(e) {
                 var transcript = e.results[0][0].transcript;
@@ -3218,6 +3558,7 @@ tailwind.config = {
                 micBtn.innerHTML = '<iconify-icon icon="lucide:mic" width="16"></iconify-icon>';
             }
             if (inp) inp.placeholder = (window.PORTFOLIO_LANG === 'fr' ? 'Posez-moi une question...' : 'Ask me anything...');
+            stopWaveformAnimation();
             try { if (recognition) recognition.stop(); } catch(e){}
         }
 
@@ -3229,6 +3570,110 @@ tailwind.config = {
                 micBtn.addEventListener('click', toggleRecording);
             }
         }
+
+        // ==========================================
+        // 4. CHATBOT SLASH COMMANDS AUTO-SUGGEST
+        // ==========================================
+        const CMDS = [
+            { name: '/projects', desc: 'Featured works & hackathons', icon: 'lucide:layout-grid', text: 'projects' },
+            { name: '/experience', desc: 'Career timeline & Airbus work', icon: 'lucide:briefcase', text: 'experience' },
+            { name: '/skills', desc: 'Technical capabilities & cloud stack', icon: 'lucide:brain', text: 'skills' },
+            { name: '/education', desc: 'Degrees & certifications', icon: 'lucide:graduation-cap', text: 'education' },
+            { name: '/hire', desc: 'Deploy Hissein to your team (sudo mode)', icon: 'lucide:terminal', text: 'sudo hire' },
+            { name: '/talk', desc: 'Book Google Calendar appointment slot', icon: 'lucide:calendar', text: 'book a call' },
+            { name: '/contact', desc: 'Direct email & social profiles', icon: 'lucide:mail', text: 'contact' },
+            { name: '/clear', desc: 'Clear conversation history', icon: 'lucide:trash', text: '/clear' },
+            { name: '/help', desc: 'List all available commands', icon: 'lucide:help-circle', text: 'help' }
+        ];
+
+        // Inject command dropdown div
+        const dropdown = document.createElement('div');
+        dropdown.className = 'chatbot-cmd-dropdown';
+        dropdown.id = 'chatbot-cmd-dropdown';
+        terminal.insertBefore(dropdown, terminal.querySelector('.terminal-input-wrap'));
+
+        let activeCmdIdx = -1;
+        let filteredCmds = [];
+
+        function renderCmdDropdown(list) {
+            filteredCmds = list;
+            if (activeCmdIdx >= filteredCmds.length) activeCmdIdx = filteredCmds.length - 1;
+            
+            if (list.length === 0) {
+                dropdown.classList.remove('open');
+                return;
+            }
+            
+            dropdown.innerHTML = list.map((cmd, idx) => {
+                const activeClass = idx === activeCmdIdx ? ' active' : '';
+                return `<div class="chatbot-cmd-item${activeClass}" data-index="${idx}">
+                    <iconify-icon icon="${cmd.icon}" width="12" style="color:var(--color-text-muted);"></iconify-icon>
+                    <span class="cmd-name">${cmd.name}</span>
+                    <span style="color:var(--color-text-muted);margin:0 4px;">&middot;</span>
+                    <span style="font-size:10px;flex-grow:1;">${cmd.desc}</span>
+                </div>`;
+            }).join('');
+            
+            dropdown.classList.add('open');
+            
+            // Add click events to dropdown items
+            dropdown.querySelectorAll('.chatbot-cmd-item').forEach(item => {
+                item.addEventListener('click', () => {
+                    const idx = parseInt(item.getAttribute('data-index'));
+                    selectCommand(idx);
+                });
+            });
+        }
+
+        function selectCommand(idx) {
+            if (idx >= 0 && idx < filteredCmds.length) {
+                const cmd = filteredCmds[idx];
+                inp.value = cmd.text;
+                dropdown.classList.remove('open');
+                inp.focus();
+                sendMsg(cmd.text);
+            }
+        }
+
+        // Add auto-suggest listener to input
+        inp.addEventListener('input', () => {
+            const val = inp.value.trim();
+            if (val.startsWith('/')) {
+                const matches = CMDS.filter(cmd => cmd.name.toLowerCase().startsWith(val.toLowerCase()));
+                activeCmdIdx = matches.length ? 0 : -1;
+                renderCmdDropdown(matches);
+            } else {
+                dropdown.classList.remove('open');
+            }
+        });
+
+        // Dropdown keyboard support
+        inp.addEventListener('keydown', e => {
+            if (!dropdown.classList.contains('open')) return;
+            
+            if (e.key === 'ArrowDown') {
+                e.preventDefault();
+                activeCmdIdx = (activeCmdIdx + 1) % filteredCmds.length;
+                renderCmdDropdown(filteredCmds);
+            } else if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                activeCmdIdx = (activeCmdIdx - 1 + filteredCmds.length) % filteredCmds.length;
+                renderCmdDropdown(filteredCmds);
+            } else if (e.key === 'Enter') {
+                e.preventDefault();
+                selectCommand(activeCmdIdx);
+            } else if (e.key === 'Escape') {
+                e.preventDefault();
+                dropdown.classList.remove('open');
+            }
+        });
+
+        // Close dropdown on click outside
+        document.addEventListener('click', e => {
+            if (!e.target.closest('#ai-terminal')) {
+                dropdown.classList.remove('open');
+            }
+        });
 
         // ---- Draggable (desktop) ----
         var dragging = false, dx = 0, dy = 0;
@@ -3877,10 +4322,66 @@ tailwind.config = {
     })();
     </script>
 
-    <!-- Storytelling Journey Scroll Spy Script -->
+    <!-- Storytelling Journey Scroll Spy & Revolut Card Tilt & Perplexity Extensions -->
     <script>
     (function() {
         'use strict';
+
+        // ==========================================
+        // 1. REVOLUT-STYLE 3D TILT & GLARE EFFECT
+        // ==========================================
+        const isTouch = window.matchMedia('(pointer: coarse)').matches;
+        
+        if (!isTouch) {
+            const cards = document.querySelectorAll('.card, .exp-card');
+            
+            cards.forEach(card => {
+                // Prevent duplicate containers
+                if (card.querySelector('.glare-overlay')) return;
+                
+                // Inject premium noise layer
+                const noise = document.createElement('div');
+                noise.className = 'premium-noise';
+                card.appendChild(noise);
+                
+                // Inject glare overlay
+                const glare = document.createElement('div');
+                glare.className = 'glare-overlay';
+                card.appendChild(glare);
+                
+                card.addEventListener('mousemove', e => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    
+                    // Normalize position to range [-0.5, 0.5]
+                    const normX = (x / rect.width) - 0.5;
+                    const normY = (y / rect.height) - 0.5;
+                    
+                    // Calculate rotation angles (max 10 degrees)
+                    const rotateX = -normY * 10;
+                    const rotateY = normX * 10;
+                    
+                    // Instant transform on mousemove (no lag transitions)
+                    card.style.transition = 'transform 100ms cubic-bezier(0.16, 1, 0.3, 1), border-color 300ms ease, box-shadow 300ms ease';
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+                    
+                    // Move glare light source
+                    glare.style.setProperty('--glare-x', `${(x / rect.width) * 100}%`);
+                    glare.style.setProperty('--glare-y', `${(y / rect.height) * 100}%`);
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    // Smooth transition back to neutral state
+                    card.style.transition = 'transform 500ms cubic-bezier(0.16, 1, 0.3, 1), border-color 300ms ease, box-shadow 300ms ease';
+                    card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+                });
+            });
+        }
+
+        // ==========================================
+        // 2. AIRBNB NARRATIVE VERTICAL SPY INDICATOR
+        // ==========================================
         const dots = document.querySelectorAll('.journey-dot');
         const sections = [
             document.getElementById('hero'),
@@ -3889,6 +4390,39 @@ tailwind.config = {
             document.getElementById('projects'),
             document.getElementById('learning')
         ];
+
+        // Restructure sidebar dynamically to append rails and bubble
+        const sidebar = document.getElementById('journey-sidebar');
+        let bubble = null;
+        let dotsContainer = null;
+        
+        if (sidebar) {
+            dotsContainer = sidebar.querySelector('.flex-col');
+            if (dotsContainer) {
+                dotsContainer.style.position = 'relative';
+                
+                // Add vertical rails
+                const rails = document.createElement('div');
+                rails.className = 'journey-track-line';
+                dotsContainer.appendChild(rails);
+                
+                // Add sliding active bubble
+                bubble = document.createElement('div');
+                bubble.className = 'journey-bubble';
+                dotsContainer.appendChild(bubble);
+            }
+        }
+
+        function updateBubblePosition() {
+            if (!dotsContainer || !bubble) return;
+            const activeDot = dotsContainer.querySelector('.journey-dot.active');
+            if (activeDot) {
+                bubble.style.top = activeDot.offsetTop + (activeDot.offsetHeight / 2) + 'px';
+                bubble.classList.add('active');
+            } else {
+                bubble.classList.remove('active');
+            }
+        }
 
         // Dynamic active state scroll tracking
         function updateActiveDot() {
@@ -3906,6 +4440,8 @@ tailwind.config = {
                     }
                 }
             });
+            
+            updateBubblePosition();
         }
 
         // Smooth scroll implementation
@@ -3914,13 +4450,23 @@ tailwind.config = {
                 e.preventDefault();
                 const targetSec = sections[index];
                 if (targetSec) {
-                    targetSec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    if (window.lenis) window.lenis.scrollTo(targetSec, { offset: -70 });
+                    else targetSec.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
             });
         });
 
         window.addEventListener('scroll', updateActiveDot, { passive: true });
-        updateActiveDot(); // Trigger initially
+        
+        // Let Lenis scroll updates trigger dot updates immediately
+        if (window.lenis) {
+            window.lenis.on('scroll', updateActiveDot);
+        }
+        
+        // Initial triggers
+        setTimeout(() => {
+            updateActiveDot();
+        }, 100);
     })();
     </script>
     <!-- Cloudflare Web Analytics -->

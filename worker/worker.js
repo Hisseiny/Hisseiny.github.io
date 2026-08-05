@@ -57,7 +57,7 @@ export default {
     const url = new URL(request.url);
     if (url.pathname === '/api/tags' && request.method === 'GET') {
       return new Response(JSON.stringify({
-        models: [{ name: 'gemini-2.0-flash', modified_at: new Date().toISOString() }]
+        models: [{ name: 'gemini-2.5-flash', modified_at: new Date().toISOString() }]
       }), {
         headers: { 'Content-Type': 'application/json', ...cors }
       });
@@ -126,7 +126,7 @@ export default {
         });
       }
 
-      const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:streamGenerateContent?alt=sse&key=${apiKey}`;
+      const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:streamGenerateContent?alt=sse&key=${apiKey}`;
 
       let geminiRes;
       try {

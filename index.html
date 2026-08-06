@@ -42,7 +42,7 @@
         <a href="#about" data-i18n="nav-about">About</a>
         <a href="#work" data-i18n="nav-work">Work</a>
         <a href="#experience" data-i18n="nav-experience">Experience</a>
-        <a href="#notes" data-i18n="nav-notes">Notes</a>
+        <a href="#notes" data-i18n="nav-notes">Perspective</a>
       </nav>
 
       <div class="header-actions">
@@ -55,6 +55,7 @@
         <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu"><span></span><span></span></button>
       </div>
     </div>
+    <div class="journey-progress" aria-hidden="true"><span id="journey-progress-bar"></span></div>
   </header>
 
   <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
@@ -62,7 +63,7 @@
       <a href="#about" data-i18n="nav-about">About</a>
       <a href="#work" data-i18n="nav-work">Work</a>
       <a href="#experience" data-i18n="nav-experience">Experience</a>
-      <a href="#notes" data-i18n="nav-notes">Notes</a>
+      <a href="#notes" data-i18n="nav-notes">Perspective</a>
       <a href="#contact" data-i18n="nav-contact">Contact</a>
     </nav>
   </div>
@@ -104,18 +105,18 @@
     <section class="section container" id="work">
       <div class="section-label"><span>02</span><span data-i18n="work-label">Selected work</span></div>
       <div class="section-intro">
-        <h2 data-i18n="work-title">Things I have built</h2>
-        <p data-i18n="work-intro">A short selection of projects where an idea became something people could use.</p>
+        <h2 data-i18n="work-title">I build to understand.</h2>
+        <p data-i18n="work-intro">Each project began with a human problem. The technology came second.</p>
       </div>
 
       <div class="project-list">
-        <article class="project-row">
+        <article class="project-featured">
           <div class="project-media video-media">
             <video muted loop playsinline preload="none" poster="images/thumbs/oppy.jpg" aria-label="Oppy voice assistant demonstration"><source src="videos/oppy-hackathon.mp4" type="video/mp4"></video>
             <button class="video-control" type="button" aria-label="Play Oppy demonstration"><span>Play</span></button>
           </div>
           <div class="project-copy">
-            <p class="project-number">01 · GEMINI HACKATHON</p>
+            <p class="project-number"><span data-i18n="featured-build">Featured build</span> · GEMINI HACKATHON</p>
             <h3 data-i18n="oppy-title">Oppy: Voice-first AI assistant</h3>
             <p data-i18n="oppy-copy">A wake-word assistant that reads urgency across Gmail and Calendar, then responds like a direct mentor. Built to make a busy digital life easier to act on.</p>
             <ul><li>Gemini</li><li>Voice AI</li><li>FastAPI</li></ul>
@@ -123,38 +124,31 @@
           </div>
         </article>
 
-        <article class="project-row">
-          <div class="project-media"><img src="images/thumbs/rag.png" width="800" height="450" alt="RAG PDF chatbot interface" loading="lazy"></div>
-          <div class="project-copy">
+        <div class="project-grid" aria-label="More selected projects">
+          <a class="project-card" href="https://github.com/Hisseiny/RAG_AI_Project" target="_blank" rel="noreferrer">
             <p class="project-number">02 · DOCUMENT INTELLIGENCE</p>
+            <p class="project-question handwritten" data-i18n="rag-question">How do we make AI answer from evidence?</p>
             <h3 data-i18n="rag-title">RAG PDF Chatbot</h3>
             <p data-i18n="rag-copy">A document question-and-answer system designed around reliable retrieval, visible sources, and resisting hallucination.</p>
-            <ul><li>Python</li><li>LangChain</li><li>ChromaDB</li></ul>
-            <a class="simple-link" href="https://github.com/Hisseiny/RAG_AI_Project" target="_blank" rel="noreferrer"><span data-i18n="view-project">View project</span><span>↗</span></a>
-          </div>
-        </article>
+            <div class="project-card-footer"><span>Python · LangChain · ChromaDB</span><span aria-hidden="true">↗</span></div>
+          </a>
 
-        <article class="project-row">
-          <div class="project-media"><img src="images/thumbs/1nf.png" width="800" height="450" alt="1NF creator deal platform interface" loading="lazy"></div>
-          <div class="project-copy">
+          <a class="project-card" href="https://github.com/Hisseiny/1nfluence" target="_blank" rel="noreferrer">
             <p class="project-number">03 · PRODUCT EXPERIMENT</p>
+            <p class="project-question handwritten" data-i18n="one-question">How can creators see the risk before they sign?</p>
             <h3 data-i18n="one-title">1NF: Creator Deal Platform</h3>
             <p data-i18n="one-copy">A product helping creators understand contract risk, negotiate deliberately, and follow the life of a brand deal.</p>
-            <ul><li>React</li><li>TypeScript</li><li>Product design</li></ul>
-            <a class="simple-link" href="https://github.com/Hisseiny/1nfluence" target="_blank" rel="noreferrer"><span data-i18n="view-project">View project</span><span>↗</span></a>
-          </div>
-        </article>
+            <div class="project-card-footer"><span>React · TypeScript · Product design</span><span aria-hidden="true">↗</span></div>
+          </a>
 
-        <article class="project-row">
-          <div class="project-media"><img src="images/thumbs/levelo.png" width="800" height="450" alt="LeVélo Marseille data tracker interface" loading="lazy"></div>
-          <div class="project-copy">
+          <a class="project-card" href="https://github.com/Hisseiny/levelo-marseille-tracker" target="_blank" rel="noreferrer">
             <p class="project-number">04 · DATA ENGINEERING</p>
+            <p class="project-question handwritten" data-i18n="bike-question">What can a city learn from a moving system?</p>
             <h3 data-i18n="bike-title">LeVélo Marseille Tracker</h3>
             <p data-i18n="bike-copy">A serverless data pipeline turning live bicycle availability into useful geographic and operational signals.</p>
-            <ul><li>Python</li><li>Supabase</li><li>GitHub Actions</li></ul>
-            <a class="simple-link" href="https://github.com/Hisseiny/levelo-marseille-tracker" target="_blank" rel="noreferrer"><span data-i18n="view-project">View project</span><span>↗</span></a>
-          </div>
-        </article>
+            <div class="project-card-footer"><span>Python · Supabase · GitHub Actions</span><span aria-hidden="true">↗</span></div>
+          </a>
+        </div>
       </div>
 
       <div class="more-work">
@@ -166,22 +160,35 @@
     <section class="section container" id="experience">
       <div class="section-label"><span>03</span><span data-i18n="experience-label">Experience</span></div>
       <div class="section-intro">
-        <h2 data-i18n="experience-title">Where I have worked</h2>
-        <p data-i18n="experience-intro">Roles that taught me to move between research, products, and transformation.</p>
+        <h2 data-i18n="experience-title">Where I learned to bridge worlds.</h2>
+        <p data-i18n="experience-intro">Product in London. Research in Brest. AI transformation in Paris.</p>
       </div>
 
       <div class="experience-list">
-        <article>
-          <div class="experience-date"><span data-i18n="date-current">Oct 2025 to present</span><small>Paris</small></div>
-          <div><p class="company">Accenture × Airbus</p><h3 data-i18n="accenture-role">Apprentice Consultant, Digital Transformation & GenAI</h3><p data-i18n="accenture-copy">Integrating Gemini into engineering workflows, supporting digital continuity, and helping complex technology earn real adoption.</p></div>
+        <article class="experience-card">
+          <div class="experience-brand experience-brand-dark">
+            <div class="dual-brand" aria-label="Accenture and Airbus"><img src="images/logos/accenture.svg" alt="Accenture"><span>×</span><img src="images/logos/airbus.svg" alt="Airbus"></div>
+          </div>
+          <div class="experience-body">
+            <div class="experience-meta"><span class="duration"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3v3M17 3v3M4 9h16M5 5h14a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Z"/></svg><strong data-duration data-start="2025-10-01" data-current="true">10 months and counting</strong></span><span><span data-i18n="date-current">Oct 2025 to present</span> · <span data-i18n="location-paris">Paris</span></span></div>
+            <p class="company">Accenture × Airbus</p><h3 data-i18n="accenture-role">Apprentice Consultant, Digital Transformation & GenAI</h3><p data-i18n="accenture-copy">Integrating Gemini into engineering workflows, supporting digital continuity, and helping complex technology earn real adoption.</p>
+          </div>
         </article>
-        <article>
-          <div class="experience-date"><span>Mar to Jun 2025</span><small>Brest</small></div>
-          <div><p class="company">Lab-STICC · CNRS</p><h3 data-i18n="lab-role">R&D Engineer Intern</h3><p data-i18n="lab-copy">Built an automated SpaceWire simulation pipeline and studied latency and throughput for embedded systems.</p></div>
+        <article class="experience-card">
+          <div class="experience-brand experience-brand-research">
+            <div class="research-brand"><img src="https://labsticc.fr/img/labsticc_logo.png?version=d788779e" alt="Lab-STICC" loading="lazy" referrerpolicy="no-referrer"><img src="https://labsticc.fr/mediacenter/uploads/s/logo-cnrs.png" alt="CNRS" loading="lazy" referrerpolicy="no-referrer"></div>
+          </div>
+          <div class="experience-body">
+            <div class="experience-meta"><span class="duration"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3v3M17 3v3M4 9h16M5 5h14a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Z"/></svg><strong data-duration data-months="4">4 months</strong></span><span><span data-i18n="date-lab">Mar to Jun 2025</span> · <span data-i18n="location-brest">Brest</span></span></div>
+            <p class="company">Lab-STICC · CNRS</p><h3 data-i18n="lab-role">R&D Engineer Intern</h3><p data-i18n="lab-copy">Built an automated SpaceWire simulation pipeline and studied latency and throughput for embedded systems.</p>
+          </div>
         </article>
-        <article>
-          <div class="experience-date"><span>Apr to Aug 2024</span><small>London</small></div>
-          <div><p class="company">BT Group</p><h3 data-i18n="bt-role">Product Owner Intern</h3><p data-i18n="bt-copy">Worked between developers and business teams, shaping a backlog around user feedback and business impact.</p></div>
+        <article class="experience-card">
+          <div class="experience-brand experience-brand-dark"><img class="bt-logo" src="images/logos/bt.svg" alt="BT Group"></div>
+          <div class="experience-body">
+            <div class="experience-meta"><span class="duration"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3v3M17 3v3M4 9h16M5 5h14a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Z"/></svg><strong data-duration data-months="5">5 months</strong></span><span><span data-i18n="date-bt">Apr to Aug 2024</span> · <span data-i18n="location-london">London</span></span></div>
+            <p class="company">BT Group</p><h3 data-i18n="bt-role">Product Owner Intern</h3><p data-i18n="bt-copy">Worked between developers and business teams, shaping a backlog around user feedback and business impact.</p>
+          </div>
         </article>
       </div>
 
@@ -193,7 +200,7 @@
     </section>
 
     <section class="section container" id="notes">
-      <div class="section-label"><span>04</span><span data-i18n="notes-label">Notes</span></div>
+      <div class="section-label"><span>04</span><span data-i18n="notes-label">Perspective</span></div>
       <div class="notes-layout">
         <div>
           <p class="handwritten notes-hand" data-i18n="notes-hand">What I return to</p>

@@ -2,7 +2,7 @@ const copy = {
   en: {
     "page-title": "Hissein Ali | AI Solution Engineer",
     "menu-open": "Open menu", "menu-close": "Close menu", skip: "Skip to content",
-    "nav-about": "About", "nav-work": "Work", "nav-experience": "Experience", "nav-notes": "Notes", "nav-contact": "Contact",
+    "nav-about": "About", "nav-work": "Work", "nav-experience": "Experience", "nav-notes": "Perspective", "nav-contact": "Contact",
     "entry-enter": "Enter", "entry-hint": "Press Enter or click anywhere",
     "assistant-label": "Ask me anything", "assistant-title": "Ask about my work", "assistant-checking": "Checking connection", "assistant-input-label": "Your question", "assistant-send": "Send", "assistant-placeholder": "Ask me anything...",
     "hero-hello": "Hello, I’m Hissein.",
@@ -16,18 +16,18 @@ const copy = {
     "approach-1": "Understand the real problem", "approach-1-copy": "Start with people, constraints, and purpose, not the tool.",
     "approach-2": "Make the idea visible", "approach-2-copy": "Use a prototype to create a shared object teams can question.",
     "approach-3": "Bring people with me", "approach-3-copy": "Translate clearly, listen closely, and improve through evidence.",
-    "work-label": "Selected work", "work-title": "Things I have built", "work-intro": "A short selection of projects where an idea became something people could use.",
+    "work-label": "Selected work", "work-title": "I build to understand.", "work-intro": "Each project began with a human problem. The technology came second.", "featured-build": "Featured build",
     "oppy-title": "Oppy: Voice-first AI assistant", "oppy-copy": "A wake-word assistant that reads urgency across Gmail and Calendar, then responds like a direct mentor. Built to make a busy digital life easier to act on.",
-    "rag-title": "RAG PDF Chatbot", "rag-copy": "A document question-and-answer system designed around reliable retrieval, visible sources, and resisting hallucination.",
-    "one-title": "1NF: Creator Deal Platform", "one-copy": "A product helping creators understand contract risk, negotiate deliberately, and follow the life of a brand deal.",
-    "bike-title": "LeVélo Marseille Tracker", "bike-copy": "A serverless data pipeline turning live bicycle availability into useful geographic and operational signals.",
+    "rag-title": "RAG PDF Chatbot", "rag-question": "How do we make AI answer from evidence?", "rag-copy": "A document question-and-answer system designed around reliable retrieval, visible sources, and resisting hallucination.",
+    "one-title": "1NF: Creator Deal Platform", "one-question": "How can creators see the risk before they sign?", "one-copy": "A product helping creators understand contract risk, negotiate deliberately, and follow the life of a brand deal.",
+    "bike-title": "LeVélo Marseille Tracker", "bike-question": "What can a city learn from a moving system?", "bike-copy": "A serverless data pipeline turning live bicycle availability into useful geographic and operational signals.",
     "view-project": "View project", "more-work": "Also built: MIRA, a merchant operations cockpit; a Dust.tt multi-agent architecture; and an agentic SEO workflow that placed third at the Payfit Hackathon.", "github-link": "Browse GitHub",
-    "experience-label": "Experience", "experience-title": "Where I have worked", "experience-intro": "Roles that taught me to move between research, products, and transformation.", "date-current": "Oct 2025 to present",
+    "experience-label": "Experience", "experience-title": "Where I learned to bridge worlds.", "experience-intro": "Product in London. Research in Brest. AI transformation in Paris.", "date-current": "Oct 2025 to present", "date-lab": "Mar to Jun 2025", "date-bt": "Apr to Aug 2024", "location-paris": "Paris", "location-brest": "Brest", "location-london": "London",
     "accenture-role": "Apprentice Consultant, Digital Transformation & GenAI", "accenture-copy": "Integrating Gemini into engineering workflows, supporting digital continuity, and helping complex technology earn real adoption.",
     "lab-role": "R&D Engineer Intern", "lab-copy": "Built an automated SpaceWire simulation pipeline and studied latency and throughput for embedded systems.",
     "bt-role": "Product Owner Intern", "bt-copy": "Worked between developers and business teams, shaping a backlog around user feedback and business impact.",
     "education-label": "Education", "current-label": "Currently learning",
-    "notes-label": "Notes", "notes-hand": "What I return to", "notes-title": "Technology needs judgment.",
+    "notes-label": "Perspective", "notes-hand": "What I return to", "notes-title": "Technology needs judgment.",
     "notes-copy": "Technology tells us what is becoming possible. Philosophy asks what is worth doing. I return to thinkers who write about responsibility, freedom, character, and meaning: Socrates, Marcus Aurelius, Camus, Nietzsche, and Dostoevsky.",
     "notes-final": "They remind me that intelligence without judgment is incomplete.",
     "learning-label": "Interactive learning project", "learning-title": "Leadership & Entrepreneurship", "learning-copy": "A self-directed course I built to organize and share what I am learning.",
@@ -36,7 +36,7 @@ const copy = {
   fr: {
     "page-title": "Hissein Ali | AI Solution Engineer",
     "menu-open": "Ouvrir le menu", "menu-close": "Fermer le menu", skip: "Aller au contenu",
-    "nav-about": "À propos", "nav-work": "Projets", "nav-experience": "Expérience", "nav-notes": "Notes", "nav-contact": "Contact",
+    "nav-about": "À propos", "nav-work": "Projets", "nav-experience": "Expérience", "nav-notes": "Perspective", "nav-contact": "Contact",
     "entry-enter": "Entrer", "entry-hint": "Appuyez sur Entrée ou cliquez",
     "assistant-label": "Posez-moi une question", "assistant-title": "Parlons de mon travail", "assistant-checking": "Vérification de la connexion", "assistant-input-label": "Votre question", "assistant-send": "Envoyer", "assistant-placeholder": "Posez-moi une question...",
     "hero-hello": "Bonjour, moi c’est Hissein.",
@@ -50,18 +50,18 @@ const copy = {
     "approach-1": "Comprendre le vrai problème", "approach-1-copy": "Commencer par les personnes, les contraintes et le but, pas par l’outil.",
     "approach-2": "Rendre l’idée visible", "approach-2-copy": "Créer un prototype que les équipes peuvent observer et questionner ensemble.",
     "approach-3": "Emmener les autres avec moi", "approach-3-copy": "Traduire clairement, écouter et progresser grâce aux preuves.",
-    "work-label": "Projets choisis", "work-title": "Ce que j’ai construit", "work-intro": "Une sélection courte de projets où une idée est devenue quelque chose d’utilisable.",
+    "work-label": "Projets choisis", "work-title": "Je construis pour comprendre.", "work-intro": "Chaque projet est parti d’un problème humain. La technologie est venue ensuite.", "featured-build": "Projet phare",
     "oppy-title": "Oppy : assistant IA vocal", "oppy-copy": "Un assistant activé par mot-clé qui lit l’urgence dans Gmail et Calendar, puis répond comme un mentor direct. Conçu pour faciliter le passage à l’action.",
-    "rag-title": "Chatbot RAG pour PDF", "rag-copy": "Un système documentaire de questions-réponses pensé pour la fiabilité, la visibilité des sources et la résistance aux hallucinations.",
-    "one-title": "1NF : plateforme de contrats créateurs", "one-copy": "Un produit aidant les créateurs à comprendre les risques contractuels, négocier et suivre la vie d’un accord.",
-    "bike-title": "Suivi LeVélo Marseille", "bike-copy": "Un pipeline serverless transformant la disponibilité des vélos en signaux géographiques et opérationnels utiles.",
+    "rag-title": "Chatbot RAG pour PDF", "rag-question": "Comment faire répondre l’IA à partir de preuves ?", "rag-copy": "Un système documentaire de questions-réponses pensé pour la fiabilité, la visibilité des sources et la résistance aux hallucinations.",
+    "one-title": "1NF : plateforme de contrats créateurs", "one-question": "Comment voir le risque avant de signer ?", "one-copy": "Un produit aidant les créateurs à comprendre les risques contractuels, négocier et suivre la vie d’un accord.",
+    "bike-title": "Suivi LeVélo Marseille", "bike-question": "Que peut apprendre une ville d’un système en mouvement ?", "bike-copy": "Un pipeline serverless transformant la disponibilité des vélos en signaux géographiques et opérationnels utiles.",
     "view-project": "Voir le projet", "more-work": "Autres réalisations : MIRA, un cockpit d’opérations marchandes ; une architecture multi-agents Dust.tt ; et un workflow SEO agentique classé troisième au hackathon Payfit.", "github-link": "Parcourir GitHub",
-    "experience-label": "Expérience", "experience-title": "Où j’ai travaillé", "experience-intro": "Des rôles qui m’ont appris à évoluer entre recherche, produit et transformation.", "date-current": "Depuis oct 2025",
+    "experience-label": "Expérience", "experience-title": "Là où j’ai appris à relier les mondes.", "experience-intro": "Le produit à Londres. La recherche à Brest. La transformation IA à Paris.", "date-current": "Depuis oct 2025", "date-lab": "Mars à juin 2025", "date-bt": "Avr à août 2024", "location-paris": "Paris", "location-brest": "Brest", "location-london": "Londres",
     "accenture-role": "Consultant apprenti, Transformation numérique & GenAI", "accenture-copy": "Intégration de Gemini dans des processus d’ingénierie, soutien à la continuité numérique et accompagnement de l’adoption technologique.",
     "lab-role": "Stagiaire ingénieur R&D", "lab-copy": "Construction d’un pipeline automatisé de simulation SpaceWire et étude de la latence et du débit de systèmes embarqués.",
     "bt-role": "Stagiaire Product Owner", "bt-copy": "Travail entre développeurs et équipes métier, avec un backlog guidé par les retours utilisateurs et l’impact business.",
     "education-label": "Formation", "current-label": "En cours",
-    "notes-label": "Notes", "notes-hand": "Les idées auxquelles je reviens", "notes-title": "La technologie exige du jugement.",
+    "notes-label": "Perspective", "notes-hand": "Les idées auxquelles je reviens", "notes-title": "La technologie exige du jugement.",
     "notes-copy": "La technologie nous dit ce qui devient possible. La philosophie demande ce qui mérite d’être fait. Je reviens aux penseurs qui écrivent sur la responsabilité, la liberté, le caractère et le sens : Socrate, Marc Aurèle, Camus, Nietzsche et Dostoïevski.",
     "notes-final": "Ils me rappellent que l’intelligence sans jugement reste incomplète.",
     "learning-label": "Projet d’apprentissage interactif", "learning-title": "Leadership & Entrepreneuriat", "learning-copy": "Un cours autodidacte que j’ai construit pour organiser et partager ce que j’apprends.",
@@ -94,7 +94,26 @@ function setLanguage(language) {
   const assistantInput = document.querySelector("#assistant-input");
   if (assistantInput) assistantInput.placeholder = copy[lang]["assistant-placeholder"];
   localStorage.setItem("portfolio-language", lang);
+  renderDurations();
   if (assistantLanguageReady) refreshAssistantLanguage();
+}
+
+function renderDurations() {
+  document.querySelectorAll("[data-duration]").forEach((element) => {
+    let months = Number(element.dataset.months || 0);
+    const ongoing = element.dataset.current === "true";
+    if (ongoing && element.dataset.start) {
+      const start = new Date(`${element.dataset.start}T00:00:00`);
+      const now = new Date();
+      months = Math.max(1, (now.getFullYear() - start.getFullYear()) * 12 + now.getMonth() - start.getMonth());
+    }
+    if (activeLanguage === "fr") {
+      element.textContent = ongoing ? `${months} mois, en cours` : `${months} mois`;
+    } else {
+      const unit = months === 1 ? "month" : "months";
+      element.textContent = ongoing ? `${months} ${unit} and counting` : `${months} ${unit}`;
+    }
+  });
 }
 
 function setMenu(open) {
@@ -111,7 +130,48 @@ mobileMenu.querySelectorAll("a").forEach((link) => link.addEventListener("click"
 document.addEventListener("keydown", (event) => { if (event.key === "Escape") setMenu(false); });
 setLanguage(localStorage.getItem("portfolio-language") || "en");
 
-window.addEventListener("scroll", () => document.querySelector(".site-header").classList.toggle("scrolled", window.scrollY > 8), { passive: true });
+const siteHeader = document.querySelector(".site-header");
+const journeyProgressBar = document.querySelector("#journey-progress-bar");
+const journeyLinks = [...document.querySelectorAll(".desktop-nav a")];
+const journeySections = journeyLinks.map((link) => document.querySelector(link.getAttribute("href"))).filter(Boolean);
+
+function updateJourney() {
+  siteHeader.classList.toggle("scrolled", window.scrollY > 8);
+  const scrollable = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+  journeyProgressBar.style.transform = `scaleX(${Math.min(1, window.scrollY / scrollable)})`;
+  const marker = window.scrollY + window.innerHeight * 0.35;
+  const current = journeySections.filter((section) => section.offsetTop <= marker).at(-1)?.id;
+  journeyLinks.forEach((link) => {
+    const active = link.getAttribute("href") === `#${current}`;
+    link.classList.toggle("active", active);
+    if (active) link.setAttribute("aria-current", "location");
+    else link.removeAttribute("aria-current");
+  });
+}
+
+window.addEventListener("scroll", updateJourney, { passive: true });
+window.addEventListener("resize", updateJourney, { passive: true });
+updateJourney();
+
+const revealTargets = document.querySelectorAll(".section-label, .section-intro, .two-column > *, .approach-list article, .project-featured > *, .project-card, .experience-card, .education-line > div, .notes-layout > *, .learning-link, .contact-inner > *");
+revealTargets.forEach((element, index) => {
+  element.classList.add("reveal");
+  element.style.setProperty("--reveal-delay", `${(index % 3) * 70}ms`);
+});
+document.documentElement.classList.add("motion-ready");
+
+if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || !("IntersectionObserver" in window)) {
+  revealTargets.forEach((element) => element.classList.add("revealed"));
+} else {
+  const revealObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add("revealed");
+      observer.unobserve(entry.target);
+    });
+  }, { rootMargin: "0px 0px -10%", threshold: 0.08 });
+  revealTargets.forEach((element) => revealObserver.observe(element));
+}
 
 document.querySelectorAll(".video-media").forEach((wrapper) => {
   const video = wrapper.querySelector("video");

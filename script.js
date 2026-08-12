@@ -282,7 +282,7 @@ const assistantText = {
 };
 
 function cleanAssistantText(value) {
-  return value.replaceAll(String.fromCodePoint(8212), ",").replaceAll(["&", "mdash", ";"].join(""), ",");
+  return value.replace(/[^\S\r\n]*(?:—|&mdash;)[^\S\r\n]*/g, ", ");
 }
 
 function setAssistantStatus(kind, label) {
@@ -356,6 +356,7 @@ async function streamAssistantAnswer() {
   const reader = response.body.getReader();
   const decoder = new TextDecoder();
   let buffer = "";
+  let raw = "";
   let answer = "";
   while (true) {
     const { value, done } = await reader.read();
@@ -366,7 +367,8 @@ async function streamAssistantAnswer() {
       if (!line.trim()) continue;
       const event = JSON.parse(line);
       if (event.message?.content) {
-        answer = cleanAssistantText(answer + event.message.content);
+        raw += event.message.content;
+        answer = cleanAssistantText(raw);
         message.textContent = answer;
         assistantMessages.scrollTop = assistantMessages.scrollHeight;
       }
